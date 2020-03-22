@@ -106,15 +106,16 @@ Image applyFilter(Image &image, Matrix &filter, int times)
     return newImage;
 }
 
-int main()
+int main(int agrc, char *argv[])
 {
-    Matrix filter = getGaussian(5, 5, 10.0);
+
+    Matrix filter = getGaussian(10, 10, 50.0);
 
     cout << "Loading image..." << endl;
-    Image image = loadImage("image.png");
+    Image image = loadImage(argv[1]);
     cout << "Applying filter..." << endl;
     Image newImage = applyFilter(image, filter);
     cout << "Saving image..." << endl;
-    saveImage(newImage, "newImage.png");
+    saveImage(newImage, "modifyImage.png");
     cout << "Done!" << endl;
 }
