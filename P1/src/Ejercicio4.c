@@ -46,13 +46,3 @@ int main(int argc, char **argv)
   } 
   rc = MPI_Finalize();
 }
-
-
-
-
-
-Include “/etc/nginx/modsec/modsec/main.conf”
-SecRule REQUEST_URI “@endsWith /articles” “id:1,deny,status:403,log”
-sudo systemctl restart nginx
-
-
