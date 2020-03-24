@@ -211,7 +211,6 @@ int main(int argc, char **argv)
             // Calculamos el elemento final que tiene que calcular el otro proceso
             int sendFinalHeight = newImageHeightNode * elemento;
 
-            cout << "Elemento: " << i << " Su elemento final es: " << sendFinalHeight << endl;
             // Enviar un mensaje a otro proceso
             rc = MPI_Send(&sendFinalHeight, 13, MPI_INT, i, tag, MPI_COMM_WORLD);
         }
@@ -235,8 +234,6 @@ int main(int argc, char **argv)
 
         // Calculamos el valores Iniciales del proceso Actual
         int recvInitHeight = (recvFinalHeight - (recvFinalHeight / (rank + 1))) + 1;
-
-        cout << "Nodo: " << rank << " Elemento Inicial: " << recvInitHeight << endl;
 
         Matrix filter = getGaussian(10, 10, 50.0);
 
