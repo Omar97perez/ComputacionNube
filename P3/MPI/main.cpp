@@ -42,7 +42,7 @@ Matrix getGaussian(int height, int width, double sigma)
     return kernel;
 }
 
-// Funcion que nos permite cargar la imagen
+// Funcion que nos permite cargar la imagen.
 Image loadImage(string filename)
 {
     png::image<png::rgb_pixel> image(filename);
@@ -62,7 +62,7 @@ Image loadImage(string filename)
     return imageMatrix;
 }
 
-// Funcion que nos permite guardar la Imagen Final
+// Funcion que nos permite guardar la Imagen Final.
 void saveImage(Image &image, string filename)
 {
     assert(image.size() == 3);
@@ -85,10 +85,12 @@ void saveImage(Image &image, string filename)
     imageFile.write(filename);
 }
 
-// Funcin que aplica un filtro dado un un tamaño inicial y final
+// Funcin que aplica un filtro dado un un tamaño inicial y final. Además, solo devuelve ese trozo calculado.
 Image applyFilter(Image &image, Matrix &filter, int initHeight, int recvFinalHeight)
 {
     assert(image.size() == 3 && filter.size() != 0);
+
+    int heightFinal = recvFinalHeight - initHeight;
 
     int height = image[0].size();
     int width = image[0][0].size();
@@ -97,7 +99,9 @@ Image applyFilter(Image &image, Matrix &filter, int initHeight, int recvFinalHei
     int newImageHeight = height - filterHeight + 1;
     int newImageWidth = width - filterWidth + 1;
 
-    Image newImage(3, Matrix(newImageHeight, Array(newImageWidth)));
+    Image newImage(3, Matrix(heightFinal, Array(newImageWidth)));
+
+    int x = 0;
 
     for (int d = 0; d < 3; d++)
     {
@@ -109,17 +113,19 @@ Image applyFilter(Image &image, Matrix &filter, int initHeight, int recvFinalHei
                 {
                     for (int w = j; w < j + filterWidth; w++)
                     {
-                        newImage[d][i][j] += filter[h - i][w - j] * image[d][h][w];
+                        newImage[d][x][j] += filter[h - i][w - j] * image[d][h][w];
                     }
                 }
             }
+            x++;
         }
+        x = 0;
     }
 
     return newImage;
 }
 
-// Funcion que nos permite cargar la imagen
+// Funcion que nos permite unificar dos imagenes
 Image joinImage(Image &image1, Image &image2)
 {
 
@@ -170,13 +176,13 @@ int main(int argc, char **argv)
 
     if (rank == 0)
     {
-        strcpy(message, "Hello, world");
-        cout << "El nodo principal empieza a enviar la informacion" << endl;
-
+        // Calculamos los valores del filtro deseado
         Matrix filter = getGaussian(10, 10, 50.0);
-        cout << "Cargando Imagen..." << endl;
+
+        // Cargamos la iamagen
         Image image = loadImage(argv[1]);
 
+        // Calculamos los valores necesarios para poder aplicart el filtrado
         int height = image[0].size();
         int width = image[0][0].size();
         int filterHeight = filter.size();
@@ -185,8 +191,9 @@ int main(int argc, char **argv)
         int newImageWidth = width - filterWidth + 1;
         int newImageHeightNode = newImageHeight / (size - 1);
 
+        //Mostramos los valores del filtrado
         cout << endl;
-        cout << "--- Informacion Imagen---" << endl;
+        cout << "--- Informacion de la Imagen---" << endl;
         cout << "height: " << height << endl;
         cout << "width: " << width << endl;
         cout << "filterHeight: " << filterHeight << endl;
@@ -198,31 +205,17 @@ int main(int argc, char **argv)
 
         for (int i = 1; i < size; i++)
         {
+            // Calculamos el elemento final que tiene que calcular el otro proceso
             int sendFinalHeight = newImageHeightNode * i;
             // Enviar un mensaje a otro proceso
             rc = MPI_Send(&sendFinalHeight, 13, MPI_INT, i, tag, MPI_COMM_WORLD);
         }
-
-        // for (int i = 1; i < size; i++) {
-        //   Image newImageRecv;
-        //   rc = MPI_Recv(&newImageRecv, 13, MPI_BYTE, i, tag, MPI_COMM_WORLD, &status);
-        //   cout << "---------------------------------------------------------------" << endl;
-        //   cout << "Nodo: " << i << endl;
-        //   image = joinImage(image, newImageRecv);
-        //   saveImage(image, "FinalImage.png");
-        // }
-
-        // Prueba envio imagen fallida
-        //  for (int i = 1; i < size; i++) {
-        //   Image image;
-        //   rc = MPI_Recv(&image, 1200*630*50, MPI_LONG_DOUBLE, i, tag, MPI_COMM_WORLD, &status);
-        //   cout << "Recibiendo del Nodo: " << endl;
-        // }
     }
     else
     {
         int recvFinalHeight = 0;
 
+        // Generamos el nombre del fichero 
         stringstream ss;
         ss << rank;
         string str = ss.str();
@@ -231,34 +224,21 @@ int main(int argc, char **argv)
         //Recibir un mensaje de otro proceso
         rc = MPI_Recv(&recvFinalHeight, 13, MPI_INT, 0, tag, MPI_COMM_WORLD, &status);
 
+        // Calculamos el balores Inicial del proceso Actual
         int recvInitHeight = recvFinalHeight - (recvFinalHeight / rank);
-        cout << "El nodo " << rank << " ha recibido como inicial " << recvInitHeight << " y como final " << recvFinalHeight << endl;
 
         Matrix filter = getGaussian(10, 10, 50.0);
 
-        cout << "Loading image..." << endl;
         Image image = loadImage(argv[1]);
-        cout << "Applying filter..." << endl;
         Image newImage = applyFilter(image, filter, recvInitHeight, recvFinalHeight);
-        cout << "Saving image..." << endl;
         saveImage(newImage, ficheroEnviar);
-        cout << "Done!" << endl;
-
-        //  Prueba Envio de imagen
-        cout << "Se esta enviando Nodo: " << rank << endl;
-        rc = MPI_Send(&newImage, 13, MPI_BYTE, 0, tag, MPI_COMM_WORLD);
-        cout << "Se envio en teoria" << endl;
-
-        // // Prueba envio imagen fallida
-        //   Image image = loadImage(argv[1]);
-        //   cout << "Se esta enviando Nodo: " << rank << endl;
-        //   rc = MPI_Send(&image, 1200*630*50,  MPI_LONG_DOUBLE, 0, tag, MPI_COMM_WORLD);
     }
 
-    //Prueba union de imagenes
+    // Cuando todos los proce4sos han acabado
     MPI_Barrier(MPI_COMM_WORLD);
     if (rank == 0)
     {
+        // Inicializamos el valor al primer fichero
         string ficheroEnviar = "./src/1.png";
         Image imageFinal = loadImage(ficheroEnviar.data());
         for (int i = 2; i < size; i++)
@@ -268,19 +248,22 @@ int main(int argc, char **argv)
             string str = ss.str();
             ficheroEnviar = "./src/" + str + ".png";
 
-            cout << "Fichero : " << ficheroEnviar << " " << i << std::endl;
-
+            // Cargamos la sección de la imagen
             Image image = loadImage(ficheroEnviar);
+            // Unimos las imagenes
             imageFinal = joinImage(imageFinal, image);
         }
+
+        // Guardamos la imagen final
         saveImage(imageFinal, "imageFinal.png");
+
+        auto t2 = std::chrono::high_resolution_clock::now();
+
+        auto duration = std::chrono::duration_cast<std::chrono::seconds>(t2 - t1).count();
+
+        // Imprimimos el valor del tiempo de ejecución
+        cout << "Tiempo de ejecución " << duration << " sec" << endl;
     }
-
-    auto t2 = std::chrono::high_resolution_clock::now();
-
-    auto duration = std::chrono::duration_cast<std::chrono::seconds>(t2 - t1).count();
-
-    cout << "Tiempo de ejecuccion " << duration << " sec" << endl;
 
     // Finaliza la comunicación paralela entre los procesos
     rc = MPI_Finalize();
