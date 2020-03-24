@@ -122,39 +122,6 @@ Image applyFilter(Image &image, Matrix &filter)
     return newImage;
 }
 
-// Funcion que nos permite unificar dos imagenes
-Image joinImage(Image &image1, Image &image2)
-{
-
-    assert(image1.size() == 3);
-    assert(image2.size() == 3);
-
-    int height = image1[0].size() + image2[0].size();
-    int width = image1[0][0].size();
-
-    Image newImage(3, Matrix(height, Array(width)));
-
-    for (int d = 0; d < 3; d++)
-    {
-        for (int i = 0; i < height; i++)
-        {
-            for (int j = 0; j < width; j++)
-            {
-                if (i < image1[0].size())
-                {
-                    newImage[d][i][j] += image1[d][i][j];
-                }
-                else
-                {
-                    newImage[d][i][j] += image2[d][i - image1[0].size()][j];
-                }
-            }
-        }
-    }
-
-    return newImage;
-}
-
 int main(int argc, char **argv)
 {
     int rank, size, tag, rc;
