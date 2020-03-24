@@ -189,7 +189,7 @@ int main(int argc, char **argv)
         int filterWidth = filter[0].size();
         int newImageHeight = height - filterHeight + 1;
         int newImageWidth = width - filterWidth + 1;
-        int newImageHeightNode = newImageHeight / (size - 1);
+        int newImageHeightNode = newImageHeight / size;
 
         //Mostramos los valores del filtrado
         cout << endl;
@@ -207,11 +207,17 @@ int main(int argc, char **argv)
 
         for (int i = 1; i < size; i++)
         {
+            int elemento = i + 1;
             // Calculamos el elemento final que tiene que calcular el otro proceso
-            int sendFinalHeight = newImageHeightNode * i;
+            int sendFinalHeight = newImageHeightNode * elemento;
+
+            cout << "Elemento: " << i << " Su elemento final es: " << sendFinalHeight << endl;
             // Enviar un mensaje a otro proceso
             rc = MPI_Send(&sendFinalHeight, 13, MPI_INT, i, tag, MPI_COMM_WORLD);
         }
+
+        Image newImage = applyFilter(image, filter, 0, newImageHeightNode);
+        saveImage(newImage, "./src/0.png");
     }
     else
     {
@@ -226,8 +232,11 @@ int main(int argc, char **argv)
         //Recibir un mensaje de otro proceso
         rc = MPI_Recv(&recvFinalHeight, 13, MPI_INT, 0, tag, MPI_COMM_WORLD, &status);
 
-        // Calculamos el balores Inicial del proceso Actual
-        int recvInitHeight = recvFinalHeight - (recvFinalHeight / rank);
+
+        // Calculamos el valores Iniciales del proceso Actual
+        int recvInitHeight = (recvFinalHeight - (recvFinalHeight / (rank + 1))) + 1;
+
+        cout << "Nodo: " << rank << " Elemento Inicial: " << recvInitHeight << endl;
 
         Matrix filter = getGaussian(10, 10, 50.0);
 
@@ -241,9 +250,9 @@ int main(int argc, char **argv)
     if (rank == 0)
     {
         // Inicializamos el valor al primer fichero
-        string ficheroEnviar = "./src/1.png";
+        string ficheroEnviar = "./src/0.png";
         Image imageFinal = loadImage(ficheroEnviar.data());
-        for (int i = 2; i < size; i++)
+        for (int i = 1; i < size; i++)
         {
             stringstream ss;
             ss << i;
