@@ -1,6 +1,6 @@
 // OpenMP -- paraomp.c 
 
-#inlude <stdio.h>
+#include <stdio.h>
 #include <omp.h>
 int main ()  {
 
