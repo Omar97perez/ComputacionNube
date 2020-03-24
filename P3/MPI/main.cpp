@@ -177,7 +177,7 @@ int main(int argc, char **argv)
     if (rank == 0)
     {
         // Calculamos los valores del filtro deseado
-        Matrix filter = getGaussian(5, 5, 50.0);
+        Matrix filter = getGaussian(10, 10, 50.0);
 
         // Cargamos la iamagen
         Image image = loadImage(argv[1]);
@@ -235,7 +235,7 @@ int main(int argc, char **argv)
         // Calculamos el valores Iniciales del proceso Actual
         int recvInitHeight = (recvFinalHeight - (recvFinalHeight / (rank + 1))) + 1;
 
-        Matrix filter = getGaussian(5, 5, 50.0);
+        Matrix filter = getGaussian(10, 10, 50.0);
 
         Image image = loadImage(argv[1]);
         Image newImage = applyFilter(image, filter, recvInitHeight, recvFinalHeight);
