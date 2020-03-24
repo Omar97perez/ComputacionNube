@@ -193,7 +193,7 @@ int main(int argc, char **argv)
 
         //Mostramos los valores del filtrado
         cout << endl;
-        cout << "--- Informacion de la Imagen---" << endl;
+        cout << "--- Información de la Imagen---" << endl;
         cout << "height: " << height << endl;
         cout << "width: " << width << endl;
         cout << "filterHeight: " << filterHeight << endl;
@@ -202,6 +202,8 @@ int main(int argc, char **argv)
         cout << "newImageWidth: " << newImageWidth << endl;
         cout << "newImageHeightNode: " << newImageHeightNode << endl;
         cout << endl;
+
+        cout << "Cargando..." << endl;
 
         for (int i = 1; i < size; i++)
         {
