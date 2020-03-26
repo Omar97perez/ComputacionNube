@@ -101,9 +101,9 @@ Image applyFilter(Image &image, Matrix &filter)
 
     int x = 0;
 
-    #pragma omp parallel for 
     for (int d = 0; d < 3; d++)
     {
+        #pragma omp parallel for 
         for (int i = 0; i < newImageHeight; i++)
         {
             for (int j = 0; j < newImageWidth; j++)
