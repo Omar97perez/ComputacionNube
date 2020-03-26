@@ -205,6 +205,12 @@ int main(int argc, char **argv)
 
         cout << "Cargando..." << endl;
 
+        for (int i = 1; i < size; i++)
+        {
+            // Enviar un mensaje a otro proceso
+            rc = MPI_Send(&image.data(), height * width * 3, MPI_BYTE, i, tag, MPI_COMM_WORLD);
+        }
+
         Image newImage = applyFilter(image, filter, 0, newImageHeightNode);
         saveImage(newImage, "./src/0.png");
     }
@@ -221,8 +227,9 @@ int main(int argc, char **argv)
         // Calculamos el valores Iniciales del proceso Actual
         int recvInitHeight = (recvFinalHeight - (recvFinalHeight / (rank + 1))) + 1;
 
-        Image image = loadImage(argv[1]);
-        Image newImage = applyFilter(image, filter, recvInitHeight, recvFinalHeight);
+        rc = MPI_Recv(image, height * width * 3, MPI_BYTE, 0, tag, MPI_COMM_WORLD, &status);
+
+        Image newImage = applyFilter(&image, filter, recvInitHeight, recvFinalHeight);
         saveImage(newImage, ficheroEnviar);
     }
 
