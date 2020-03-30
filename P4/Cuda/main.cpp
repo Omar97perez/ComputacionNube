@@ -3,6 +3,12 @@
 #include <assert.h>
 #include <cmath>
 #include <png++/png.hpp>
+#include "mpi.h"
+#include "stdio.h"
+#include "string.h"
+#include <string>
+#include <sstream>
+#include <chrono>
 
 using namespace std;
 
@@ -99,6 +105,7 @@ __global__ Image applyFilter(Image &image, Matrix &filter){
 
 int main(int agrc, char *argv[])
 {
+    auto t1 = std::chrono::high_resolution_clock::now();
     Matrix filter = getGaussian(10, 10, 50.0);
 
     cout << "Cargando Imagen..." << endl;
@@ -112,6 +119,13 @@ int main(int agrc, char *argv[])
     Image newImage = applyFilter<<<NOSE, NOSE>>>(image, filter);
 
     cout << "Guardando imagen..." << endl;
-    saveImage(newImage, "modifyImage.png");
+    saveImage(newImage, "FinalImage.png");
     cout << "Trabajo Finalizado" << endl;
+
+    auto t2 = std::chrono::high_resolution_clock::now();
+
+    auto duration = std::chrono::duration_cast<std::chrono::seconds>(t2 - t1).count();
+
+    // Imprimimos el valor del tiempo de ejecución
+    cout << "Tiempo de ejecución " << duration << " sec" << endl;
 }
