@@ -218,10 +218,10 @@ int main(int argc, char **argv)
             exit(0);
         }
 
-        // Calculamos los valores necesarios para poder aplicart el filtrado
+        // Calculamos los valores necesarios para poder aplicar el filtrado
         int newImageHeightNode = userHeight/size;
 
-        // Enviar un mensaje a otro proceso
+        // Enviamos la sección de la imagen a todos los procesos
         int firstHeight = 0;
         int finalHeight = 0;
         for(int n = 1; n < size; n++){
@@ -234,13 +234,16 @@ int main(int argc, char **argv)
             firstHeight += newImageHeightNode;
         }
 
+        // El proceso actual aplica el filtro
         Image imageNodo0 = applyFilter(image, filter, finalHeight);
 
         Image finalImage;
 
+        // Calculamos los el tamaño de los valores que nos bva a envíar cada proceso
         int recvImageHeight = newImageHeightNode - filter.size() + 1;
         int newImageWidth = image[0][0].size() - filter[0].size() + 1;
 
+        // Recogemos los valores y unificamos la Imagen
         for(int n = 1; n < size; n++){
             Image newImageNode(3, Matrix(recvImageHeight, Array(newImageWidth)));
             for (int j = 0; j < 3; j++){
@@ -258,8 +261,10 @@ int main(int argc, char **argv)
             }
         }
 
+        // Unimos la Imagen del nodo principal
         finalImage = joinImage(finalImage,imageNodo0);
 
+        // Guardamos la Imagen
         saveImage(finalImage, "./FinalImage.png");
 
         auto t2 = std::chrono::high_resolution_clock::now();
