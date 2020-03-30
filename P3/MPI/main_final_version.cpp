@@ -86,28 +86,26 @@ void saveImage(Image &image, string filename)
 }
 
 // Funcin que aplica un filtro dado un un tamaño inicial y final. Además, solo devuelve ese trozo calculado.
-Image applyFilter(Image &image, Matrix &filter, int initHeight, int recvFinalHeight)
+Image applyFilter(Image &image, Matrix &filter, int initHeight)
 {
     assert(image.size() == 3 && filter.size() != 0);
 
-    int heightFinal = recvFinalHeight - initHeight;
+    int heightFinal = image[0].size() - initHeight;
 
     int height = image[0].size();
     int width = image[0][0].size();
     int filterHeight = filter.size();
     int filterWidth = filter[0].size();
-    int newImageHeight = height - filterHeight + 1;
-    int newImageWidth = width - filterWidth + 1;
 
-    Image newImage(3, Matrix(heightFinal, Array(newImageWidth)));
+    Image newImage(3, Matrix(heightFinal, Array(width)));
 
     int x = 0;
 
     for (int d = 0; d < 3; d++)
     {
-        for (int i = initHeight; i < recvFinalHeight; i++)
+        for (int i = initHeight; i < height; i++)
         {
-            for (int j = 0; j < newImageWidth; j++)
+            for (int j = 0; j < width; j++)
             {
                 for (int h = i; h < i + filterHeight; h++)
                 {
@@ -120,6 +118,31 @@ Image applyFilter(Image &image, Matrix &filter, int initHeight, int recvFinalHei
             x++;
         }
         x = 0;
+    }
+    return newImage;
+}
+
+Image applyFilter(Image &image, Matrix &filter){
+    assert(image.size()==3 && filter.size()!=0);
+
+    int height = image[0].size();
+    int width = image[0][0].size();
+    int filterHeight = filter.size();
+    int filterWidth = filter[0].size();
+    int d,i,j,h,w;
+
+    Image newImage(3, Matrix(height, Array(width)));
+
+    for (d=0 ; d<3 ; d++) {
+        for (i=0 ; i<height ; i++) {
+            for (j=0 ; j<width ; j++) {
+                for (h=i ; h<i+filterHeight ; h++) {
+                    for (w=j ; w<j+filterWidth ; w++) {
+                        newImage[d][i][j] += filter[h-i][w-j]*image[d][h][w];
+                    }
+                }
+            }
+        }
     }
 
     return newImage;
@@ -162,7 +185,6 @@ int main(int argc, char **argv)
 {
     int rank, size, tag, rc;
     MPI_Status status;
-    char message[20];
 
     auto t1 = std::chrono::high_resolution_clock::now();
 
@@ -177,84 +199,67 @@ int main(int argc, char **argv)
     // Calculamos los valores del filtro deseado
     Matrix filter = getGaussian(10, 10, 50.0);
 
-    // Cargamos la iamagen
-    Image image = loadImage(argv[1]);
-
-    // Calculamos los valores necesarios para poder aplicart el filtrado
-    int height = image[0].size();
-    int width = image[0][0].size();
-    int filterHeight = filter.size();
-    int filterWidth = filter[0].size();
-    int newImageHeight = height - filterHeight + 1;
-    int newImageWidth = width - filterWidth + 1;
-    int newImageHeightNode = newImageHeight / size;
+    int userHeight = atoi(argv[2]);
+    int userWidth = atoi(argv[3]);
+    int newImageHeightNode = userHeight / size;
 
     if (rank == 0)
     {
-        //Mostramos los valores del filtrado
-        cout << endl;
-        cout << "--- Información de la Imagen---" << endl;
-        cout << "height: " << height << endl;
-        cout << "width: " << width << endl;
-        cout << "filterHeight: " << filterHeight << endl;
-        cout << "filterWidth: " << filterWidth << endl;
-        cout << "newImageHeight: " << newImageHeight << endl;
-        cout << "newImageWidth: " << newImageWidth << endl;
-        cout << "newImageHeightNode: " << newImageHeightNode << endl;
-        cout << endl;
+        // Cargamos la iamagen
+        Image image = loadImage(argv[1]);
 
-        cout << "Cargando..." << endl;
-
-        for (int i = 1; i < size; i++)
+        if(userHeight != image[0].size() || userWidth != image[0][0].size())
         {
-            // Enviar un mensaje a otro proceso
-            rc = MPI_Send(&image.data(), height * width * 3, MPI_BYTE, i, tag, MPI_COMM_WORLD);
+            cout << "Los tamaños son incorectos. Altura = " << image[0].size() << " Anchura= " << image[0][0].size() << endl;
+            exit(1);
         }
 
-        Image newImage = applyFilter(image, filter, 0, newImageHeightNode);
-        saveImage(newImage, "./src/0.png");
-    }
-    else
-    {
-        // Generamos el nombre del fichero 
-        stringstream ss;
-        ss << rank;
-        string str = ss.str();
-        string ficheroEnviar = "./src/" + str + ".png";
+        // Calculamos los valores necesarios para poder aplicart el filtrado
+        int newImageHeightNode = userHeight/size;
 
-        int elemento = rank + 1;
-        int recvFinalHeight = newImageHeightNode * elemento;
-        // Calculamos el valores Iniciales del proceso Actual
-        int recvInitHeight = (recvFinalHeight - (recvFinalHeight / (rank + 1))) + 1;
-
-        rc = MPI_Recv(image, height * width * 3, MPI_BYTE, 0, tag, MPI_COMM_WORLD, &status);
-
-        Image newImage = applyFilter(&image, filter, recvInitHeight, recvFinalHeight);
-        saveImage(newImage, ficheroEnviar);
-    }
-
-    // Cuando todos los proce4sos han acabado
-    MPI_Barrier(MPI_COMM_WORLD);
-    if (rank == 0)
-    {
-        // Inicializamos el valor al primer fichero
-        string ficheroEnviar = "./src/0.png";
-        Image imageFinal = loadImage(ficheroEnviar.data());
-        for (int i = 1; i < size; i++)
-        {
-            stringstream ss;
-            ss << i;
-            string str = ss.str();
-            ficheroEnviar = "./src/" + str + ".png";
-
-            // Cargamos la sección de la imagen
-            Image image = loadImage(ficheroEnviar);
-            // Unimos las imagenes
-            imageFinal = joinImage(imageFinal, image);
+        cout << "Se están enviando los datos" << endl;
+        // Enviar un mensaje a otro proceso
+        int firstHeight = 0;
+        int finalHeight = 0;
+        for(int n = 1; n < size; n++){
+            finalHeight = newImageHeightNode * n;
+            for (int j = 0; j < 3; j++){
+                for (int i = firstHeight; i < finalHeight; i++){
+                    rc = MPI_Send(&image[j][i][0], userWidth, MPI_DOUBLE, n, tag, MPI_COMM_WORLD);
+                }
+            }
+            firstHeight += newImageHeightNode;
         }
 
-        // Guardamos la imagen final
-        saveImage(imageFinal, "imageFinal.png");
+        cout << "Se está aplicando el filtro" << endl;
+        Image imageNodo0 = applyFilter(image, filter, finalHeight);
+
+        Image finalImage;
+
+        cout << "Se está trayendo las imagenes" << endl;
+        firstHeight = 0;
+        finalHeight = 0;
+        for(int n = 1; n < size; n++){
+            Image newImageNode(3, Matrix(newImageHeightNode + 1, Array(userWidth)));
+            for (int j = 0; j < 3; j++){
+                for (int i = 0; i < 149; i++){
+                    rc = MPI_Recv(&newImageNode[j][i][0], userWidth, MPI_DOUBLE, n, tag, MPI_COMM_WORLD, &status);
+                }
+            }
+            if(n == 1)
+            {
+                finalImage = newImageNode;
+            }
+            else
+            {
+                finalImage = joinImage(finalImage,newImageNode);
+            }
+        }
+
+        cout << "último Join" << endl;
+        finalImage = joinImage(finalImage,imageNodo0);
+
+        saveImage(finalImage, "./FinalImage.png");
 
         auto t2 = std::chrono::high_resolution_clock::now();
 
@@ -263,7 +268,36 @@ int main(int argc, char **argv)
         // Imprimimos el valor del tiempo de ejecución
         cout << "Tiempo de ejecución " << duration << " sec" << endl;
     }
+    else
+    {
+        // Creamos la Imagen Vacía
+        Image newImage(3, Matrix(newImageHeightNode + 1, Array(userWidth)));
+
+        // Recibimos la Imagen
+        for (int j = 0; j < 3; j++){
+            for (int i = 0; i < newImage[0].size() - 1; i++){
+                rc = MPI_Recv(&newImage[j][i][0], newImage[0][0].size(), MPI_DOUBLE, 0, tag, MPI_COMM_WORLD, &status);
+            }
+        }
+
+        cout << "Nodo: " << rank << " Acabo de recibir" << endl;
+        // Aplicamos el filtrado
+        Image finalImage = applyFilter(newImage, filter);
+
+        cout << "Nodo: " << rank << " Acabo su filtrado" << endl;
+
+        // Reenviamos al nodo 0
+        for (int j = 0; j < 3; j++){
+            for (int i = 0; i < finalImage[0].size(); i++){
+                rc = MPI_Send(&finalImage[j][i][0], finalImage[0][0].size(), MPI_DOUBLE, 0, tag, MPI_COMM_WORLD);
+            }
+        }
+
+        cout << "Nodo: " << rank << " Acabo su envío" << endl;
+
+    }
 
     // Finaliza la comunicación paralela entre los procesos
     rc = MPI_Finalize();
+    exit(1);
 }

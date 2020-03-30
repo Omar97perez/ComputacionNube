@@ -205,71 +205,134 @@ int main(int argc, char **argv)
 
         cout << "Cargando..." << endl;
 
-        for (int i = 1; i < size; i++)
-        {
-            int elemento = i + 1;
-            // Calculamos el elemento final que tiene que calcular el otro proceso
-            int sendFinalHeight = newImageHeightNode * elemento;
+        // for (int i = 1; i < size; i++)
+        // {
+        //     int elemento = i + 1;
+        //     // Calculamos el elemento final que tiene que calcular el otro proceso
+        //     int sendFinalHeight = newImageHeightNode * elemento;
 
-            // Enviar un mensaje a otro proceso
-            rc = MPI_Send(&sendFinalHeight, 13, MPI_INT, i, tag, MPI_COMM_WORLD);
+        //     // Enviar un mensaje a otro proceso
+        //     rc = MPI_Send(&sendFinalHeight, 13, MPI_INT, i, tag, MPI_COMM_WORLD);
+        // }
+
+        // Image newImage = applyFilter(image, filter, 0, newImageHeightNode);
+        // saveImage(newImage, "./src/0.png");
+
+        // int size = 0;
+        // for (int i = 0; i < filter.size(); i++){
+        //     size += filter[i].size();
+        // }
+
+        // vector<int> prueba;
+        
+        // for (int i = 0; i < 5; i++){
+        //     prueba.push_back(i);
+        // }
+
+        // int valorMult = filter.size() * filter[0].size();
+        // cout << "Size: " << size << endl;
+        // cout << "filter.size(): " << filter.size() << endl;
+        // cout << "filter[0].size(): " << filter[0].size() << endl;
+        // cout << "valorMult: " << valorMult << endl;
+        // cout << "Filter: " << &filter[0][0] << endl;
+
+        // Enviar un mensaje a otro proceso
+        // rc = MPI_Send(&prueba[0], 5, MPI_INT, 1, 0, MPI_COMM_WORLD);
+
+        // Enviar un mensaje a otro proceso
+        // for (int i = 0; i < 10; i++){
+        //     rc = MPI_Send(&filter[i][0], 10, MPI_DOUBLE, 1, 0, MPI_COMM_WORLD);
+        // }
+
+        // Enviar un mensaje a otro proceso
+        for (int j = 0; j < 3; j++){
+            for (int i = 0; i < 630; i++){
+                rc = MPI_Send(&image[j][i][0], 1200, MPI_DOUBLE, 1, 0, MPI_COMM_WORLD);
+            }
         }
-
-        Image newImage = applyFilter(image, filter, 0, newImageHeightNode);
-        saveImage(newImage, "./src/0.png");
     }
     else
     {
-        int recvFinalHeight = 0;
+        // int recvFinalHeight = 0;
 
-        // Generamos el nombre del fichero 
-        stringstream ss;
-        ss << rank;
-        string str = ss.str();
-        string ficheroEnviar = "./src/" + str + ".png";
+        // // Generamos el nombre del fichero 
+        // stringstream ss;
+        // ss << rank;
+        // string str = ss.str();
+        // string ficheroEnviar = "./src/" + str + ".png";
 
-        //Recibir un mensaje de otro proceso
-        rc = MPI_Recv(&recvFinalHeight, 13, MPI_INT, 0, tag, MPI_COMM_WORLD, &status);
+        // Matrix filter = getGaussian(10, 10, 50.0);
 
+        // int size = 0;
+        // for (int i = 0; i < filter.size(); i++){
+        //     size += filter[i].size();
+        // }
 
-        // Calculamos el valores Iniciales del proceso Actual
-        int recvInitHeight = (recvFinalHeight - (recvFinalHeight / (rank + 1))) + 1;
+        // vector<int> prueba2;
+        // prueba2.resize(5);
 
-        Matrix filter = getGaussian(10, 10, 50.0);
+        // if(rank == 1){
+        //     // //Recibir un mensaje de otro proceso
+        //     rc = MPI_Recv(&prueba2[0], 5, MPI_INT, 0, 0, MPI_COMM_WORLD, &status);
+        // }
 
-        Image image = loadImage(argv[1]);
-        Image newImage = applyFilter(image, filter, recvInitHeight, recvFinalHeight);
-        saveImage(newImage, ficheroEnviar);
+        Image newImage(3, Matrix(630, Array(1200)));
+
+        if(rank == 1){
+            // //Recibir un mensaje de otro proceso
+            // for (int i = 0; i < 10; i++){
+            //     MPI_Recv(&filter[i][0], 10, MPI_DOUBLE, 0, 0, MPI_COMM_WORLD, &status);
+            // }
+
+            // Enviar un mensaje a otro proceso
+            for (int j = 0; j < 3; j++){
+                for (int i = 0; i < newImage[0].size(); i++){
+                    rc = MPI_Recv(&newImage[j][i][0], newImage[0][0].size(), MPI_DOUBLE, 0, 0, MPI_COMM_WORLD, &status);
+                }
+            }
+
+            saveImage(newImage, "./src/123456.png");
+
+        }
+
+        // // Calculamos el valores Iniciales del proceso Actual
+        // int recvInitHeight = (recvFinalHeight - (recvFinalHeight / (rank + 1))) + 1;
+
+        // Matrix filter = getGaussian(10, 10, 50.0);
+
+        // Image image = loadImage(argv[1]);
+        // Image newImage = applyFilter(image, filter, recvInitHeight, recvFinalHeight);
+        // saveImage(newImage, ficheroEnviar);
     }
 
     // Cuando todos los proce4sos han acabado
     MPI_Barrier(MPI_COMM_WORLD);
     if (rank == 0)
     {
-        // Inicializamos el valor al primer fichero
-        string ficheroEnviar = "./src/0.png";
-        Image imageFinal = loadImage(ficheroEnviar.data());
-        for (int i = 1; i < size; i++)
-        {
-            stringstream ss;
-            ss << i;
-            string str = ss.str();
-            ficheroEnviar = "./src/" + str + ".png";
+    //     // Inicializamos el valor al primer fichero
+    //     string ficheroEnviar = "./src/0.png";
+    //     Image imageFinal = loadImage(ficheroEnviar.data());
+    //     for (int i = 1; i < size; i++)
+    //     {
+    //         stringstream ss;
+    //         ss << i;
+    //         string str = ss.str();
+    //         ficheroEnviar = "./src/" + str + ".png";
 
-            // Cargamos la sección de la imagen
-            Image image = loadImage(ficheroEnviar);
-            // Unimos las imagenes
-            imageFinal = joinImage(imageFinal, image);
-        }
+    //         // Cargamos la sección de la imagen
+    //         Image image = loadImage(ficheroEnviar);
+    //         // Unimos las imagenes
+    //         imageFinal = joinImage(imageFinal, image);
+    //     }
 
-        // Guardamos la imagen final
-        saveImage(imageFinal, "imageFinal.png");
+    //     // Guardamos la imagen final
+    //     saveImage(imageFinal, "imageFinal.png");
 
         auto t2 = std::chrono::high_resolution_clock::now();
 
         auto duration = std::chrono::duration_cast<std::chrono::seconds>(t2 - t1).count();
 
-        // Imprimimos el valor del tiempo de ejecución
+    //     // Imprimimos el valor del tiempo de ejecución
         cout << "Tiempo de ejecución " << duration << " sec" << endl;
     }
 
