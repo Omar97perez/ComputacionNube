@@ -96,16 +96,18 @@ Image applyFilter(Image &image, Matrix &filter, int initHeight)
     int width = image[0][0].size();
     int filterHeight = filter.size();
     int filterWidth = filter[0].size();
+    int newImageHeight = height - filterHeight;
+    int newImageWidth = width - filterWidth;
 
-    Image newImage(3, Matrix(heightFinal, Array(width)));
+    Image newImage(3, Matrix(heightFinal, Array(newImageWidth)));
 
     int x = 0;
 
     for (int d = 0; d < 3; d++)
     {
-        for (int i = initHeight; i < height; i++)
+        for (int i = initHeight; i < newImageHeight; i++)
         {
-            for (int j = 0; j < width; j++)
+            for (int j = 0; j < newImageWidth; j++)
             {
                 for (int h = i; h < i + filterHeight; h++)
                 {
@@ -129,13 +131,15 @@ Image applyFilter(Image &image, Matrix &filter){
     int width = image[0][0].size();
     int filterHeight = filter.size();
     int filterWidth = filter[0].size();
+    int newImageHeight = height - filterHeight + 1;
+    int newImageWidth = width - filterWidth + 1;
     int d,i,j,h,w;
 
-    Image newImage(3, Matrix(height, Array(width)));
+    Image newImage(3, Matrix(newImageHeight, Array(newImageWidth)));
 
     for (d=0 ; d<3 ; d++) {
-        for (i=0 ; i<height ; i++) {
-            for (j=0 ; j<width ; j++) {
+        for (i=0 ; i<newImageHeight ; i++) {
+            for (j=0 ; j<newImageWidth ; j++) {
                 for (h=i ; h<i+filterHeight ; h++) {
                     for (w=j ; w<j+filterWidth ; w++) {
                         newImage[d][i][j] += filter[h-i][w-j]*image[d][h][w];
@@ -145,6 +149,7 @@ Image applyFilter(Image &image, Matrix &filter){
         }
     }
 
+    saveImage(newImage, "./prueba.png");
     return newImage;
 }
 
@@ -197,7 +202,7 @@ int main(int argc, char **argv)
     tag = 100;
 
     // Calculamos los valores del filtro deseado
-    Matrix filter = getGaussian(10, 10, 50.0);
+    Matrix filter = getGaussian(5, 5, 50.0);
 
     int userHeight = atoi(argv[2]);
     int userWidth = atoi(argv[3]);
@@ -239,11 +244,16 @@ int main(int argc, char **argv)
         cout << "Se está trayendo las imagenes" << endl;
         firstHeight = 0;
         finalHeight = 0;
+
+        int recvImageHeight = newImageHeightNode - filter.size() + 2;
+        int newImageWidth = image[0][0].size() - filter[0].size() + 1;
+
+        cout << "recvImageHeight: " << recvImageHeight << endl;
         for(int n = 1; n < size; n++){
             Image newImageNode(3, Matrix(newImageHeightNode + 1, Array(userWidth)));
             for (int j = 0; j < 3; j++){
-                for (int i = 0; i < 149; i++){
-                    rc = MPI_Recv(&newImageNode[j][i][0], userWidth, MPI_DOUBLE, n, tag, MPI_COMM_WORLD, &status);
+                for (int i = 0; i < recvImageHeight; i++){
+                    rc = MPI_Recv(&newImageNode[j][i][0], newImageWidth, MPI_DOUBLE, n, tag, MPI_COMM_WORLD, &status);
                 }
             }
             if(n == 1)
@@ -285,6 +295,8 @@ int main(int argc, char **argv)
         Image finalImage = applyFilter(newImage, filter);
 
         cout << "Nodo: " << rank << " Acabo su filtrado" << endl;
+        cout << "Nodo " << rank << "finalImage[0][0].size(): " << finalImage[0][0].size() << endl;
+
 
         // Reenviamos al nodo 0
         for (int j = 0; j < 3; j++){
