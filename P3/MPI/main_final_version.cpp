@@ -90,7 +90,7 @@ Image applyFilter(Image &image, Matrix &filter, int initHeight)
 {
     assert(image.size() == 3 && filter.size() != 0);
 
-    int heightFinal = image[0].size() - initHeight;
+    int heightFinal = image[0].size() + 1 - initHeight;
 
     int height = image[0].size();
     int width = image[0][0].size();
@@ -149,7 +149,6 @@ Image applyFilter(Image &image, Matrix &filter){
         }
     }
 
-    saveImage(newImage, "./prueba.png");
     return newImage;
 }
 
@@ -202,7 +201,7 @@ int main(int argc, char **argv)
     tag = 100;
 
     // Calculamos los valores del filtro deseado
-    Matrix filter = getGaussian(5, 5, 50.0);
+    Matrix filter = getGaussian(4, 4, 10.0);
 
     int userHeight = atoi(argv[2]);
     int userWidth = atoi(argv[3]);
@@ -216,13 +215,12 @@ int main(int argc, char **argv)
         if(userHeight != image[0].size() || userWidth != image[0][0].size())
         {
             cout << "Los tamaños son incorectos. Altura = " << image[0].size() << " Anchura= " << image[0][0].size() << endl;
-            exit(1);
+            exit(0);
         }
 
         // Calculamos los valores necesarios para poder aplicart el filtrado
         int newImageHeightNode = userHeight/size;
 
-        cout << "Se están enviando los datos" << endl;
         // Enviar un mensaje a otro proceso
         int firstHeight = 0;
         int finalHeight = 0;
@@ -236,21 +234,15 @@ int main(int argc, char **argv)
             firstHeight += newImageHeightNode;
         }
 
-        cout << "Se está aplicando el filtro" << endl;
         Image imageNodo0 = applyFilter(image, filter, finalHeight);
 
         Image finalImage;
 
-        cout << "Se está trayendo las imagenes" << endl;
-        firstHeight = 0;
-        finalHeight = 0;
-
-        int recvImageHeight = newImageHeightNode - filter.size() + 2;
+        int recvImageHeight = newImageHeightNode - filter.size() + 1;
         int newImageWidth = image[0][0].size() - filter[0].size() + 1;
 
-        cout << "recvImageHeight: " << recvImageHeight << endl;
         for(int n = 1; n < size; n++){
-            Image newImageNode(3, Matrix(newImageHeightNode + 1, Array(userWidth)));
+            Image newImageNode(3, Matrix(recvImageHeight, Array(newImageWidth)));
             for (int j = 0; j < 3; j++){
                 for (int i = 0; i < recvImageHeight; i++){
                     rc = MPI_Recv(&newImageNode[j][i][0], newImageWidth, MPI_DOUBLE, n, tag, MPI_COMM_WORLD, &status);
@@ -266,7 +258,6 @@ int main(int argc, char **argv)
             }
         }
 
-        cout << "último Join" << endl;
         finalImage = joinImage(finalImage,imageNodo0);
 
         saveImage(finalImage, "./FinalImage.png");
@@ -281,22 +272,17 @@ int main(int argc, char **argv)
     else
     {
         // Creamos la Imagen Vacía
-        Image newImage(3, Matrix(newImageHeightNode + 1, Array(userWidth)));
+        Image newImage(3, Matrix(newImageHeightNode, Array(userWidth)));
 
         // Recibimos la Imagen
         for (int j = 0; j < 3; j++){
-            for (int i = 0; i < newImage[0].size() - 1; i++){
+            for (int i = 0; i < newImage[0].size(); i++){
                 rc = MPI_Recv(&newImage[j][i][0], newImage[0][0].size(), MPI_DOUBLE, 0, tag, MPI_COMM_WORLD, &status);
             }
         }
 
-        cout << "Nodo: " << rank << " Acabo de recibir" << endl;
         // Aplicamos el filtrado
         Image finalImage = applyFilter(newImage, filter);
-
-        cout << "Nodo: " << rank << " Acabo su filtrado" << endl;
-        cout << "Nodo " << rank << "finalImage[0][0].size(): " << finalImage[0][0].size() << endl;
-
 
         // Reenviamos al nodo 0
         for (int j = 0; j < 3; j++){
@@ -304,12 +290,10 @@ int main(int argc, char **argv)
                 rc = MPI_Send(&finalImage[j][i][0], finalImage[0][0].size(), MPI_DOUBLE, 0, tag, MPI_COMM_WORLD);
             }
         }
-
-        cout << "Nodo: " << rank << " Acabo su envío" << endl;
-
     }
 
+    MPI_Barrier(MPI_COMM_WORLD);
     // Finaliza la comunicación paralela entre los procesos
     rc = MPI_Finalize();
-    exit(1);
+    exit(0);
 }
