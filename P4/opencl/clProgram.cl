@@ -1,8 +1,9 @@
 #pragma OPENCL EXTENSION cl_khr_fp64 : enable
 
-kernel void applyFilter(global double *image, global double *filter, global double *newImage, int height, int width, int filterHeight, int filterWidth)
+kernel void applyFilter(global double *image, global double *filter, 
+                        global double *newImage, int height, int width, 
+                        int filterHeight, int filterWidth)
 {
-
     int newImageHeight = height - filterHeight + 1;
     int newImageWidth = width - filterWidth + 1;
     int d, j, h, w;
@@ -28,3 +29,6 @@ kernel void applyFilter(global double *image, global double *filter, global doub
         }
     }
 }
+
+
+

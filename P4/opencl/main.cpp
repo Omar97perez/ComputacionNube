@@ -122,44 +122,45 @@ int main(int agrc, char *argv[])
     int newImageWidth = width - filterWidth + 1;
 
     // --------------- INICIALIZACION DE OPENCL ------------------
-    std::vector<cl::Platform> all_platforms;
-    cl::Platform::get(&all_platforms);
-
-    if ( all_platforms.size() == 0 ) {
-        printf("No se han encontrado plataformas para ejecutar OpenCL");
-        exit(1);
-    }
-
-    cl::Platform default_platform = all_platforms[0];
-    std::cout << "Using platform: "<< default_platform.getInfo<CL_PLATFORM_NAME>() << "\n";
-
-    std::vector<cl::Device> all_devices;
     
-    default_platform.getDevices(CL_DEVICE_TYPE_ALL, &all_devices);
+                std::vector<cl::Platform> all_platforms;
+                cl::Platform::get(&all_platforms);
 
-    if (all_devices.size() == 0 ) {
-        printf("No se han encontrado dispositivos para ejecutar OpenCL");
-        exit(1);
-    }
+                if ( all_platforms.size() == 0 ) {
+                    printf("No se han encontrado plataformas para ejecutar OpenCL");
+                    exit(1);
+                }
 
-    cl::Device default_device = all_devices[0];
-    std::cout << "Using device: " << default_device.getInfo<CL_DEVICE_NAME>() << "\n";
+                cl::Platform default_platform = all_platforms[0];
+                std::cout << "Using platform: "<< default_platform.getInfo<CL_PLATFORM_NAME>() << "\n";
 
-    cl::Context context({default_device});
+                std::vector<cl::Device> all_devices;
+                
+                default_platform.getDevices(CL_DEVICE_TYPE_ALL, &all_devices);
 
-    cl::Program::Sources sources;
+                if (all_devices.size() == 0 ) {
+                    printf("La plataforma escogida no es compatible con OpenCL");
+                    exit(1);
+                }
 
-    int size = 0;
-    char *kernel_code = readCLSource("clProgram.cl", size);
+                cl::Device default_device = all_devices[0];
+                std::cout << "Using device: " << default_device.getInfo<CL_DEVICE_NAME>() << "\n";
 
-    sources.push_back({kernel_code, size});
+                cl::Context context({default_device});
 
-    cl::Program program(context, sources);
+                cl::Program::Sources sources;
 
-    if( program.build({default_device})!=CL_SUCCESS ) {
-        std::cout <<" Error building: " << program.getBuildInfo<CL_PROGRAM_BUILD_LOG>(default_device) << "\n";
-        exit(1);
-    }
+                int size = 0;
+                char *kernel_code = readCLSource("clProgram.cl", size);
+
+                sources.push_back({kernel_code, size});
+
+                cl::Program program(context, sources);
+
+                if( program.build({default_device})!=CL_SUCCESS ) {
+                    std::cout <<" Error building: " << program.getBuildInfo<CL_PROGRAM_BUILD_LOG>(default_device) << "\n";
+                    exit(1);
+                }
 
     // --------------- PREPARACION DATOS PARA OPENCL ------------------
 
