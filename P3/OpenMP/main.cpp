@@ -86,7 +86,7 @@ void saveImage(Image &image, string filename)
 }
 
 // Funcin que aplica un filtro dado un un tamaño inicial y final. Además, solo devuelve ese trozo calculado.
-Image applyFilter(Image &image, Matrix &filter)
+Image applyFilter(Image &image, Matrix &filter, int numThreads)
 {
     assert(image.size() == 3 && filter.size() != 0);
 
@@ -100,10 +100,12 @@ Image applyFilter(Image &image, Matrix &filter)
     Image newImage(3, Matrix(newImageHeight, Array(newImageWidth)));
 
     int x = 0;
+const int a = 1;
+const int b = 3;
 
     for (int d = 0; d < 3; d++)
     {
-        #pragma omp parallel for 
+        #pragma omp parallel for num_threads(numThreads)
         for (int i = 0; i < newImageHeight; i++)
         {
             for (int j = 0; j < newImageWidth; j++)
@@ -150,14 +152,14 @@ int main(int argc, char **argv)
     cout << endl;
 
     cout << "Cargando..." << endl;
+	
 
-    Image newImage = applyFilter(image, filter);
+
+    Image newImage = applyFilter(image, filter, atoi(argv[2]));
     saveImage(newImage, "./imageFinal.png");
 
     auto t2 = std::chrono::high_resolution_clock::now();
 
-    auto duration = std::chrono::duration_cast<std::chrono::seconds>(t2 - t1).count();
-
-    // Imprimimos el valor del tiempo de ejecución
-    cout << "Tiempo de ejecución " << duration << " sec" << endl;
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count();
+    std::cout << "Tiempo de ejecucion: " << (float) (duration / 1000.0) << " sec" << std::endl;
 }

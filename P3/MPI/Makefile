@@ -12,4 +12,4 @@ runOld:
 	mpiexec -np 4 mpi_Old_version image.png
 
 runFinal:
-	mpiexec -np 4 mpi_Final_version image.png 630 1200
+	mpiexec -np 4 mpi_Final_version image.png 1440 2560

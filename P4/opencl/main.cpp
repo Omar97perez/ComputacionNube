@@ -235,10 +235,8 @@ int main(int agrc, char *argv[])
 
     auto t2 = std::chrono::high_resolution_clock::now();
 
-    auto duration = std::chrono::duration_cast<std::chrono::seconds>(t2 - t1).count();
-
-    // // Imprimimos el valor del tiempo de ejecución
-    cout << "Tiempo de ejecución " << duration << " sec" << endl;
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count();
+    std::cout << "Tiempo de ejecucion: " << (float) (duration / 1000.0) << " sec" << std::endl;
 
     return 0;
 }
