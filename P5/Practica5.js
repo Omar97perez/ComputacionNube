@@ -7,13 +7,25 @@ var server = restify.createServer();
 
 server.get('/api/productos/all',(req,res,next) =>
 {
-	var conts = fs.readFileSync("data.json"); 
-	var jsonCont = JSON.parse(conts);
 
-	res.json(jsonCont);
+	const exec = require('child_process').exec;
+	exec('make runSecuencial', (err, stdout, stderr) => {
+	if (err) {
+		console.error(`exec error: ${err}`);
+		return;
+	}
+		console.log(`stdout: ${stdout}`);
+		console.log(`stderr: ${stderr}`);
 
+		console.log("Se conecto");
+		var conts = fs.readFileSync("data.json"); 
+		var jsonCont = JSON.parse(conts);
+
+		res.json(jsonCont);
+	});
 
 	next();
+
 });
 
 server.get('/api/productos/add/:valor',(req,res,next) =>
