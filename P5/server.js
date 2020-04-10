@@ -22,7 +22,7 @@ const upload = multer({storage});
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-app.post('/api/UploadImg', upload.single('file'), (req, res) => {
+app.post('/api/Upload/Img', upload.single('file'), (req, res) => {
 	return res.send(req.file);
 })
 
