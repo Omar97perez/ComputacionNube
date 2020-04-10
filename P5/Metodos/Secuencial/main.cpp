@@ -3,7 +3,12 @@
 #include <assert.h>
 #include <cmath>
 #include <png++/png.hpp>
+#include "stdio.h"
+#include "string.h"
+#include <string>
+#include <sstream>
 #include <chrono>
+#include <omp.h>
 
 using namespace std;
 
@@ -50,7 +55,7 @@ Image loadImage(const char *filename)
     return imageMatrix;
 }
 
-void saveImage(Image &image, const char *filename)
+void saveImage(Image &image, string filename)
 {
     assert(image.size()==3);
 
@@ -118,7 +123,14 @@ int main(int agrc, char *argv[])
     cout << "Applying filter..." << endl;
     Image newImage = applyFilter(image, filter);
     cout << "Saving image..." << endl;
-    saveImage(newImage, "./img/Final/FinalImageSecuencial.png");
+
+    // Generamos el nombre del fichero 
+    stringstream ss;
+    ss << argv[2];
+    string str = ss.str();
+    string ficheroGuardar = "./img/Final/Secuencial-" + str;
+    
+    saveImage(newImage, ficheroGuardar);
     cout << "Done!" << endl;
 
     auto t2 = std::chrono::high_resolution_clock::now();

@@ -153,10 +153,14 @@ int main(int argc, char **argv)
 
     cout << "Cargando..." << endl;
 	
-
+    // Generamos el nombre del fichero 
+    stringstream ss;
+    ss << argv[3];
+    string str = ss.str();
+    string ficheroGuardar = "./img/Final/OpenMP-" + str;
 
     Image newImage = applyFilter(image, filter, atoi(argv[2]));
-    saveImage(newImage, "./img/Final/FinalImageOpenMP.png");
+    saveImage(newImage, ficheroGuardar);
 
     auto t2 = std::chrono::high_resolution_clock::now();
 

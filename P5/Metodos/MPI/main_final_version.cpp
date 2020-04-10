@@ -265,7 +265,14 @@ int main(int argc, char **argv)
         finalImage = joinImage(finalImage,imageNodo0);
 
         // Guardamos la Imagen
-        saveImage(finalImage, "./img/Final/FinalImageMPI.png");
+
+        // Generamos el nombre del fichero 
+        stringstream ss;
+        ss << argv[4];
+        string str = ss.str();
+        string ficheroGuardar = "./img/Final/MPI-" + str;
+
+        saveImage(finalImage, ficheroGuardar);
 
         auto t2 = std::chrono::high_resolution_clock::now();
 
