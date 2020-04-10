@@ -6,3 +6,6 @@ runOpenMP:
 
 runSecuencial:
 	./Metodos/Secuencial/a.out ./img/Original/$(img) $(img)
+
+runGraficas:
+	python ./Metodos/Graficas/Programa.py ./HojaCalculo/Original/$(dataEntry) 0 $(elementoX) $(elementoY) $(tipoRepresentacion) $(tipoGrafica) $(dataExit)
