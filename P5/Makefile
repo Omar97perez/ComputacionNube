@@ -1,8 +1,8 @@
 runMPI:
-	mpiexec -np 4 ./MPI/mpi_Final_version image.png 630 1200
+	mpiexec -np 4 ./Metodos/MPI/mpi_Final_version ./img/Original/image.png 630 1200
 
 runOpenMP:
-	./OpenMP/OpenMP_version image.png 4
+	./Metodos/OpenMP/OpenMP_version ./img/Original/image.png 4
 
 runSecuencial:
-	./Secuencial/a.out image.png
+	./Metodos/Secuencial/a.out ./img/Original/image.png
