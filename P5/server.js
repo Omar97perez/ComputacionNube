@@ -19,7 +19,7 @@ let storage = multer.diskStorage({
 
 const upload = multer({storage});
 
-let storageHC = multer.diskStorage({
+storage = multer.diskStorage({
 	destination:(req, file, cb) => {
 		cb(null, './HojaCalculo/Original')
 	},
@@ -28,7 +28,7 @@ let storageHC = multer.diskStorage({
 	}
 });
 
-const uploadHC = multer({storageHC});
+const uploadHC = multer({storage});
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
