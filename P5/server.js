@@ -52,7 +52,7 @@ app.get('/api/Get/Img/Final/:name',(req,res) =>
 });
 
 app.get('/', function(req, res) {
-    res.send('Hola Mundo!');
+	res.sendFile('./index.html', { root: __dirname });
 });
 
 app.get('/api/Secuencial/:name',(req,res) =>
@@ -137,5 +137,5 @@ app.get('/api/Grafica/:dataEntry/:elementoX/:elementoY/:tipoRepresentacion/:tipo
 });
 
 app.listen(8000, function() {
-    console.log('API Aplicar Filtros a Imágenes, escuchando el puerto 8000!\n');
+    console.log('API Computación en la Nube, escuchando el puerto 8000!\n');
 });
