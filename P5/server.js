@@ -8,6 +8,7 @@ app.use(express.static('public'));
 const path = require('path');
 const multer = require('multer');
 
+// Permite Subir Imagenes
 let storage = multer.diskStorage({
 	destination:(req, file, cb) => {
 		cb(null, './img/Original')
@@ -19,6 +20,7 @@ let storage = multer.diskStorage({
 
 const upload = multer({storage});
 
+// Permite Subir Hojas de Cálculo
 storage = multer.diskStorage({
 	destination:(req, file, cb) => {
 		cb(null, './HojaCalculo/Original')
@@ -33,28 +35,46 @@ const uploadHC = multer({storage});
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
+// Permite devolver El archivo HTML de explicación
+app.get('/', function(req, res) {
+	res.sendFile('./index.html', { root: __dirname });
+});
+
+// Permite subir Imágenes
 app.post('/api/Upload/Img', upload.single('file'), (req, res) => {
 	return res.send(req.file);
 })
 
+// Permite subir Hojas de Cálculo
 app.post('/api/Upload/HojaCalculo', uploadHC.single('file'), (req, res) => {
 	return res.send(req.file);
 })
  
+// Permite recoger Imágenes Originales (sin modificar)
 app.get('/api/Get/Img/Original/:name',(req,res) =>
 {
 	res.sendFile('./img/Original/' + req.params.name, { root: __dirname });
 });
 
+// Permite recoger Imágenes Procesadas 
 app.get('/api/Get/Img/Final/:name',(req,res) =>
 {
 	res.sendFile('./img/Final/' + req.params.name, { root: __dirname });
 });
 
-app.get('/', function(req, res) {
-	res.sendFile('./index.html', { root: __dirname });
+// Permite recoger Hojas de Cálculo Originales
+app.get('/api/Get/HojaCalculo/Original/:name',(req,res) =>
+{
+	res.sendFile('./HojaCalculo/Original/' + req.params.name, { root: __dirname });
 });
 
+// Permite recoger Gráficas Procesadas previamente
+app.get('/api/Get/HojaCalculo/Final/:name',(req,res) =>
+{
+	res.sendFile('./HojaCalculo/Final/' + req.params.name, { root: __dirname });
+});
+
+// Permite procesar una Imagen con algoritmo Secuencial
 app.get('/api/Secuencial/:name',(req,res) =>
 {
 	const exec = require('child_process').exec;
@@ -69,6 +89,7 @@ app.get('/api/Secuencial/:name',(req,res) =>
 	});
 });
 
+// Permite procesar una Imagen con algoritmo Pararlelo (OpenMP)
 app.get('/api/OpenMP/:name',(req,res) =>
 {
 
@@ -84,6 +105,7 @@ app.get('/api/OpenMP/:name',(req,res) =>
 	});
 });
 
+// Permite procesar una Imagen con algoritmo Pararlelo (MPI)
 app.get('/api/MPI/:name/:height/:width',(req,res) =>
 {
 	const exec = require('child_process').exec;
@@ -98,6 +120,7 @@ app.get('/api/MPI/:name/:height/:width',(req,res) =>
 	});
 });
 
+// Permite devolver una Gráfica (Imagen en formato .png)
 app.get('/api/Grafica/:dataEntry/:elementoX/:elementoY/:tipoRepresentacion/:tipoGrafica',(req,res) =>
 {
 	const exec = require('child_process').exec;
@@ -136,6 +159,7 @@ app.get('/api/Grafica/:dataEntry/:elementoX/:elementoY/:tipoRepresentacion/:tipo
 	});
 });
 
+// Emite el servidor por el Puerto 8000
 app.listen(8000, function() {
     console.log('API Computación en la Nube, escuchando el puerto 8000!\n');
 });
