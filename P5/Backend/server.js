@@ -159,7 +159,7 @@ app.get('/api/Grafica/:dataEntry/:elementoX/:elementoY/:tipoRepresentacion/:tipo
 	});
 });
 
-// Emite el servidor por el Puerto 8000
-app.listen(8000, function() {
-    console.log('API Computación en la Nube, escuchando el puerto 8000!\n');
+// Emite el servidor por el Puerto 80
+app.listen(80, function() {
+    console.log('API Computación en la Nube, escuchando el puerto 80!\n');
 });

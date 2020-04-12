@@ -12,76 +12,63 @@
     <meta http-equiv="Cache-Control" content="no-cache">
     <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
     <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="#">API Computación en la Nube</a>
-        </div>
-    </nav>
-     <!-- Modal Subida Imágenes -->
-        <div class="modal fade" id="ModalSubidaImagenes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h3 class="modal-title" id="exampleModalLabel">Subida Imágenes</h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                </div>
-                <div class="modal-body" align="left">
-                    <form action="/IniciarSesion" method="POST">
-                        <form action="/IniciarSesion" method="POST">
-                            <div class="form-group" align="left">
-                                <label class="font-weight-bold" for="exampleInputEmail1">Seleccionar Archivo</label>
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="customFileLang" lang="es">
-                                    <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
-                                </div>
-                            </div>
-                        </form>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Enviar</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                </div>
-            </div>
-            </div>
-        </div>
 
-        <!-- Modal Subida Hoja Cálculo -->
-        <div class="modal fade" id="ModalSubidaHojaCalculo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h3 class="modal-title" id="exampleModalLabel">Subir Hoja Cálculo</h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                </div>
-                <div class="modal-body" align="left">
-                <form action="/IniciarSesion" method="POST">
-                    <form action="/IniciarSesion" method="POST">
-                        <div class="form-group" align="left">
-                            <label class="font-weight-bold" for="exampleInputEmail1">Seleccionar Archivo</label>
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="customFileLang" lang="es">
-                                <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#">API Computación en la Nube</a>
+            </div>
+        </nav>
+
+        <!-- Modal Cargar Imagen -->
+        <div class="modal fade bd-example-modal-lg" id="ModalCargaImagen" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="exampleModalLabel">Visualizar Imagen</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" >
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-border" role="status">
+                              <span class="sr-only">Loading...</span>
                             </div>
                         </div>
-                    </form>
-                </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" rel="myimage" class="btn btn-primary">Descargar</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Enviar</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                </div>
-            </div>
             </div>
         </div>
 
-        <!-- Modal Recuperar Imagenes Originales -->
-        <div class="modal fade" id="ModalRecuperarImagenesOriginales" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <!-- Modal Ver Imágenes -->
+        <div class="modal fade bd-example-modal-lg" id="ModalVerImagen" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="exampleModalLabel">Visualizar Imagen</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" >
+                        <image class="img-fluid" id="myimage"/>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" rel="myimage" class="btn btn-primary">Descargar</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Recuperar Archivos -->
+        <div class="modal fade" id="ModalRecuperarArchivo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -91,227 +78,47 @@
                 </button>
                 </div>
                 <div class="modal-body" align="center">
-                    <form action="/IniciarSesion" method="POST">
+                    <form action="/RecuperarImagenesOriginales" method="POST">
                         <div class="form-group" align="left">
                             <label class="font-weight-bold" for="exampleInputEmail1">Nombre Imagen</label>
-                            <input type="email" name="email" placeholder="Escriba el nombre de la Imagen" class="form-control">
+                            <input type="text" name="imageName" id="imageName" class="form-control">
                         </div>
                     </form>
                 </div>
-                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="RecuperarImagenesOriginales()">Enviar</button>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="VisualizarImagen()">Enviar</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
             </div>
         </div>
 
-        <!-- Modal Recuperar Imágenes Procesadaso -->
-        <div class="modal fade" id="ModalRecuperarImagenesProcesadas" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <!-- Modal Métodos -->
+        <div class="modal fade" id="ModalMetodos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                <h3 class="modal-title" id="exampleModalLabel">Recuperar Imágenes Procesadas</h3>
+                <h3 class="modal-title" id="exampleModalLabel">Recuperar Imagen Original</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
                 </div>
                 <div class="modal-body" align="center">
-                    <form action="/IniciarSesion" method="POST">
+                    <form action="/RecuperarImagenesOriginales" method="POST">
                         <div class="form-group" align="left">
                             <label class="font-weight-bold" for="exampleInputEmail1">Nombre Imagen</label>
-                            <input type="email" name="email" placeholder="Escriba el nombre de la Imagen" class="form-control">
+                            <input type="text" name="imageNameMethod" id="imageNameMethod" class="form-control">
                         </div>
                     </form>
                 </div>
-                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Enviar</button>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="RealizarMetodo()">Enviar</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
-            </div>
-        </div>
-
-        <!-- Modal Recuperar Hojas Cálculo Originales -->
-        <div class="modal fade" id="ModalRecuperarHojasCalculoOriginales" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h3 class="modal-title" id="exampleModalLabel">Recuperar Hojas  de Cálculo Originales</h3>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    </div>
-                    <div class="modal-body" align="center">
-                        <form action="/IniciarSesion" method="POST">
-                            <div class="form-group" align="left">
-                                <label class="font-weight-bold" for="exampleInputEmail1">Nombre Imagen</label>
-                                <input type="email" name="email" placeholder="Escriba el nombre de la Imagen" class="form-control">
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">Enviar</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                    </div>
-                </div>
             </div>
         </div>
         
-        <!-- Modal Recuperar Hojas Cálculo Procesadas -->
-        <div class="modal fade" id="ModalRecuperarHojasCalculoProcesadas" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h3 class="modal-title" id="exampleModalLabel">Recuperar Hojas  de Cálculo Procesadas</h3>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    </div>
-                    <div class="modal-body" align="center">
-                        <form action="/IniciarSesion" method="POST">
-                            <div class="form-group" align="left">
-                                <label class="font-weight-bold" for="exampleInputEmail1">Nombre Imagen</label>
-                                <input type="email" name="email" placeholder="Escriba el nombre de la Imagen" class="form-control">
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">Enviar</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal Recuperar Filtrado Secuencial -->
-        <div class="modal fade" id="ModalRecuperarFiltradoSecuencial" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h3 class="modal-title" id="exampleModalLabel">Filtrado Secuencial</h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                </div>
-                <div class="modal-body" align="center">
-                    <form action="/IniciarSesion" method="POST">
-                        <div class="form-group" align="left">
-                            <label class="font-weight-bold" for="exampleInputEmail1">Nombre Imagen</label>
-                            <input type="email" name="email" placeholder="Escriba el nombre de la Imagen" class="form-control">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Enviar</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                </div>
-            </div>
-            </div>
-        </div>
-
-        <!-- Modal Recuperar Filtrado OpenMp -->
-        <div class="modal fade" id="ModalRecuperarFiltradoOpenMp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3 class="modal-title" id="exampleModalLabel">Filtrado OpenMp</h3>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body" align="center">
-                        <form action="/IniciarSesion" method="POST">
-                            <div class="form-group" align="left">
-                                <label class="font-weight-bold" for="exampleInputEmail1">Nombre Imagen</label>
-                                <input type="email" name="email" placeholder="Escriba el nombre de la Imagen" class="form-control">
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">Enviar</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal Recuperar Filtrado MPI -->
-        <div class="modal fade" id="ModalRecuperarFiltradoMPI" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3 class="modal-title" id="exampleModalLabel">Filtrado MPI</h3>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body" align="center">
-                        <form action="/IniciarSesion" method="POST">
-                            <div class="form-group" align="left">
-                                <label class="font-weight-bold" for="exampleInputEmail1">Nombre Imagen</label>
-                                <input type="email" name="email" placeholder="Escriba el nombre de la Imagen" class="form-control">
-                            </div>
-                            <div class="form-group" align="left">
-                                <label class="font-weight-bold" for="exampleInputEmail1">Altura</label>
-                                <input type="email" name="email" placeholder="Escriba la altura de la Imagen" class="form-control">
-                            </div>
-                            <div class="form-group" align="left">
-                                <label class="font-weight-bold" for="exampleInputEmail1">Anchura</label>
-                                <input type="email" name="email" placeholder="Escriba la anchura de la Imagen" class="form-control">
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">Enviar</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-            <!-- Modal Recuperar Filtrado MPI -->
-        <div class="modal fade" id="ModalRecuperarGraficas" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h3 class="modal-title" id="exampleModalLabel">Inicio Sesión</h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                </div>
-                <div class="modal-body" align="center">
-                    <form action="/IniciarSesion" method="POST">
-                        <div class="form-group" align="left">
-                            <label class="font-weight-bold" for="exampleInputEmail1">Nombre Hoja de Cáculo</label>
-                            <input type="email" name="email" placeholder="Escriba el nombre de la Hoja de Cálculo de Entrada" class="form-control">
-                        </div>
-                        <div class="form-group" align="left">
-                            <label class="font-weight-bold" for="exampleInputEmail1">Elemento eje X</label>
-                            <input type="email" name="email" placeholder="Escriba el elemento del Elemento eje X" class="form-control">
-                        </div>
-                        <div class="form-group" align="left">
-                            <label class="font-weight-bold" for="exampleInputEmail1">Elemento eje Y</label>
-                            <input type="email" name="email" placeholder="Escriba el Elemento del Eje Y" class="form-control">
-                        </div>
-                        <div class="form-group" align="left">
-                            <label class="font-weight-bold" for="exampleInputEmail1">Tipo Representación</label>
-                            <input type="email" name="email" placeholder="Escriba el tipo de representación" class="form-control">
-                        </div>
-                        <div class="form-group" align="left">
-                            <label class="font-weight-bold" for="exampleInputEmail1">Tipo Gráfica</label>
-                            <input type="email" name="email" placeholder="Escriba el tipo de Gráfica" class="form-control">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Enviar</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                </div>
-            </div>
-            </div>
-        </div>
-
 
         <div class="container">
             <div class="mt-5" align="center">
@@ -433,7 +240,7 @@
                         </tbody>
                     </table>    
                     <div align="center">
-                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#ModalRecuperarImagenesOriginales">Probar</button>
+                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#ModalRecuperarArchivo" onclick="SelectURL('/api/Get/Img/Original/')">Probar</button>
                     </div>                     
 
                     <h4 class="font-weight-bold mt-3">2.1.2 Procesadas.</h4>
@@ -451,7 +258,7 @@
                             </tr>
                             <tr>
                                 <td class="font-weight-bold">URL</td>
-                                <td>/api/Get/Img/Original/:name</td>
+                                <td>/api/Get/Img/Final/:name</td>
                             </tr>
                             <tr>
                                 <td class="font-weight-bold">Parámetros</td>
@@ -464,7 +271,7 @@
                         </tbody>
                     </table>     
                     <div align="center">
-                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#ModalRecuperarImagenesProcesadas">Probar</button>
+                        <button type="button" class="btn btn-dark" data-toggle="modal" onclick="SelectURL('/api/Get/Img/Final/')" data-target="#ModalRecuperarArchivo">Probar</button>
                     </div>                       
                 </div>
 
@@ -498,7 +305,7 @@
                         </tbody>
                     </table>  
                     <div align="center">
-                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#ModalRecuperarHojasCalculoOriginales">Probar</button>
+                        <button type="button" class="btn btn-dark" data-toggle="modal" onclick="SelectURL('/api/Get/HojaCalculo/Original/')" data-target="#ModalRecuperarArchivo">Probar</button>
                     </div>             
 
                     <h3 class="font-weight-bold">2.2.2 Procesadas.</h3>
@@ -516,7 +323,7 @@
                             </tr>
                             <tr>
                                 <td class="font-weight-bold">URL</td>
-                                <td>/api/Get/Img/HojaCalculo/:name</td>
+                                <td>/api/Get/Img/HojaCalculo/Final/:name</td>
                             </tr>
                             <tr>
                                 <td class="font-weight-bold">Parámetros</td>
@@ -529,7 +336,7 @@
                         </tbody>
                     </table>   
                     <div align="center">
-                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#ModalRecuperarHojasCalculoProcesadas">Probar</button>
+                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#ModalRecuperarArchivo" onclick="SelectURL('/api/Get/HojaCalculo/Final/')" >Probar</button>
                     </div>                        
                 </div>
             </div>
@@ -569,7 +376,7 @@
                         </tbody>
                     </table>                    
                     <div align="center">
-                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#ModalRecuperarFiltradoSecuencial">Probar</button>
+                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#ModalMetodos" onclick="SelectURLPost('localhost:80/api/Secuencial/', 'localhost:80/api/Get/Img/Final/Secuencial-')">Probar</button>
                     </div>    
                 </div>
                 
@@ -606,7 +413,7 @@
                         </tbody>
                     </table>   
                     <div align="center">
-                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#ModalRecuperarFiltradoOpenMp">Probar</button>
+                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#ModalMetodos" onclick="SelectURLPost('localhost:80/api/OpenMP/', 'localhost:80/api/Get/Img/Final/OpenMP-')">Probar</button>
                     </div>                     
                 </div>
 
@@ -645,7 +452,7 @@
                         </tbody>
                     </table>    
                     <div align="center">
-                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#ModalRecuperarFiltradoMPI">Probar</button>
+                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#ModalMetodos" onclick="SelectURLPost(_urlPost, _urlGet)">Probar</button>
                     </div>                    
                 </div>
             </div>
@@ -710,65 +517,141 @@
                     </div>             
                 </div>
             </div>
-        </div>
+        </div> 
 
+        <footer class="mt-5 page-footer font-small pt-4 bg-dark bg-dark text-white footer">
+            <div class="container">
+            <div class="container-fluid text-center text-md-left">
+                <div class="row">
+                    <div class="col-md-6 mt-md-0 mt-3">
+                    <h5 class="text-uppercase">Práctica 5</h5>
+                    <p>Práctica 5 desarrollado para la asignatura de Computación Nube.</p>
+                    <h5 class="text-uppercase">Datos de contácto</h5>
+                        <h6><b>Autor: </b>Omar Pérez Znakar</h6>
+                        <h6><b>Correo: </b>alu0100945645@ull.edu.es</h6>
+                    </div>
+                    <div class="col-md-6 mb-md-0 mb-3">
+                    <h5 class="text-uppercase">API</h5>
+                    <ul class="list-unstyled">
+                        
+                        <li>
+                            <a style="color:white">1. Subida Archivos.</a>
+                        </li>
+                        
+                        <li>
+                            <a style="color:white">2. Recuperar Archivos.</a>
+                        </li>
 
-    <footer class="mt-5 page-footer font-small pt-4 bg-dark bg-dark text-white footer">
-        <div class="container">
-          <div class="container-fluid text-center text-md-left">
-              <div class="row">
-                <div class="col-md-6 mt-md-0 mt-3">
-                  <h5 class="text-uppercase">Práctica 5</h5>
-                  <p>Práctica 5 desarrollado para la asignatura de Computación Nube.</p>
-                  <h5 class="text-uppercase">Datos de contácto</h5>
-                      <h6><b>Autor: </b>Omar Pérez Znakar</h6>
-                      <h6><b>Correo: </b>alu0100945645@ull.edu.es</h6>
+                        <li>
+                            <a style="color:white">3. Filtrado Imágenes.</a>
+                        </li>
+
+                        <li>
+                            <a style="color:white">4. Gráficas.</a>
+                        </li>
+                        
+                    </ul>
+                    </div>
                 </div>
-                <div class="col-md-6 mb-md-0 mb-3">
-                  <h5 class="text-uppercase">API</h5>
-                  <ul class="list-unstyled">
-                      
-                    <li>
-                        <a style="color:white">1. Subida Archivos.</a>
-                    </li>
-                    
-                    <li>
-                        <a style="color:white">2. Recuperar Archivos.</a>
-                    </li>
-
-                    <li>
-                        <a style="color:white">3. Filtrado Imágenes.</a>
-                    </li>
-
-                    <li>
-                        <a style="color:white">4. Gráficas.</a>
-                    </li>
-                    
-                  </ul>
-                </div>
-              </div>
-                      <!-- Footer Links -->
-              <!-- Copyright -->
-              <div class="footer-copyright text-center py-3">Práctica 5 realizada por <b>Omar Pérez Znakar</b>
-                </div>
+                        <!-- Footer Links -->
                 <!-- Copyright -->
+                <div class="footer-copyright text-center py-3">Práctica 5 realizada por <b>Omar Pérez Znakar</b>
+                    </div>
+                    <!-- Copyright -->
+                </div>
             </div>
-        </div>
-      </footer>
+        </footer>
 
-      <script>
+        <script>
+            var url = null;
+            var urlPost = null;
+            var urlGet = null;
 
-        function RecuperarImagenesOriginales(){
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    alert(this.responseText);
+            function RealizarMetodo(){
+                $("#ModalCargaImagen").modal();
+                var imageNameMethod = document.getElementById('imageNameMethod').value;
+                urlPost = urlPost + imageNameMethod;
+                urlGet = urlGet + imageNameMethod;
+                $( document ).ready(function() {
+                    $.get(urlPost, function(respuesta, status){
+                        if (status == 'success'){
+                            SelectURL(urlGet);
+                            $("#ModalCargaImagen").modal('hide');
+                            VisualizarImagen();                        }
+                    })
+                });
+            }
+
+            function SelectURLPost(_urlPost, _urlGet) {
+                urlPost = "http://" + _urlPost;
+                urlGet = "http://" + _urlGet;
+            }
+
+            function SelectURL(urlOrigin) {
+                url = urlOrigin;
+            }
+
+            function VisualizarImagen() {
+                var imageName = document.getElementById('imageName').value;
+                var URLImage = url + imageName;
+                document.getElementById('myimage').src = URLImage;
+                $('body').removeClass('ModalRecuperarImagenesOriginales');
+                $("#ModalVerImagen").modal();
+            }
+
+            function DownloadImage(imageURL) {
+                    var oImage = document.getElementById(imageURL);
+                    var canvas = document.createElement("canvas");
+                    document.body.appendChild(canvas);
+                    if (typeof canvas.getContext == "undefined" || !canvas.getContext) {
+                        alert("browser does not support this action, sorry");
+                        return false;
+                    }
+
+                    try {
+                        var context = canvas.getContext("2d");
+                        var width = oImage.width;
+                        var height = oImage.height;
+                        canvas.width = width;
+                        canvas.height = height;
+                        canvas.style.width = width + "px";
+                        canvas.style.height = height + "px";
+                        context.drawImage(oImage, 0, 0, width, height);
+                        var rawImageData = canvas.toDataURL("image/png;base64");
+                        rawImageData = rawImageData.replace("image/png", "image/octet-stream");
+                        document.location.href = rawImageData;
+                        document.body.removeChild(canvas);
+                    }
+                    catch (err) {
+                        document.body.removeChild(canvas);
+                        alert("Sorry, can't download");
+                    }
+
+                    return true;
+                }
+            
+            window.onload = function() {
+                var arrButtons = document.getElementsByTagName("button");
+                for (var i = 0; i < arrButtons.length; i++) {
+                    var oButton = arrButtons[i];
+                    var sRelatedImage = oButton.getAttribute("rel");
+                    if (sRelatedImage && sRelatedImage.length > 0) {
+                        oButton.onclick = function() {
+                            HandleRelatedImage(this, sRelatedImage);
+                        }
+                    }
                 }
             };
-            xhttp.open("POST", "http://10.6.129.230/api/Get/Img/Original/image.png", true);
-            xhttp.setRequestHeader("Content-type", "application/json");
-            xhttp.send("Your JSON Data Here");
-        } 
-    </script>
-  </body>
+
+            function HandleRelatedImage(oButton, sRelatedImage) {
+                var oImage = document.getElementById(sRelatedImage);
+                if (!oImage) {
+                    alert("related image '" + sRelatedImage + "' does not exist");
+                    return false;
+                }
+
+                return DownloadImage(sRelatedImage);
+            }
+        </script>
+    </body>
 </html>
