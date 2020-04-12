@@ -92,6 +92,32 @@
             </div>
         </div>
 
+        <!-- Modal Recuperar Hoja de Cálulo -->
+        <div class="modal fade" id="ModalRecuperarHC" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">Recuperar Hoja Cáculo</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body" align="center">
+                    <form action="/RecuperarImagenesOriginales" method="POST">
+                        <div class="form-group" align="left">
+                            <label class="font-weight-bold" for="exampleInputEmail1">Nombre Hoja de Cáculo</label>
+                            <input type="text" name="nameHC" id="nameHC" class="form-control">
+                        </div>
+                    </form>
+                </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="DescargarHojaCalculo()">Enviar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+            </div>
+        </div>
+
         <!-- Modal Métodos -->
         <div class="modal fade" id="ModalMetodos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -377,7 +403,7 @@
                         </tbody>
                     </table>  
                     <div align="center">
-                        <button type="button" class="btn btn-dark" data-toggle="modal" onclick="SelectURL('/api/Get/HojaCalculo/Original/')" data-target="#ModalRecuperarArchivo">Probar</button>
+                        <button type="button" class="btn btn-dark" data-toggle="modal" onclick="SelectURL('api/Get/HojaCalculo/Original/')" data-target="#ModalRecuperarHC">Probar</button>
                     </div>             
 
                     <h3 class="font-weight-bold">2.2.2 Procesadas.</h3>
@@ -638,6 +664,15 @@
             var url = null;
             var urlPost = null;
             var urlGet = null;
+
+            function DescargarHojaCalculo() 
+            {
+                var nameHC = document.getElementById('nameHC').value;
+                var link = document.createElement("a");
+                link.download = nameHC;
+                link.href = url + nameHC;
+                link.click();
+            }
 
             function RealizarMetodo(){
                 $("#ModalCargaImagen").modal();
