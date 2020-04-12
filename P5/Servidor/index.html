@@ -20,6 +20,55 @@
             </div>
         </nav>
 
+        <!-- Modal Visualizar Datos Subida -->
+        <div class="modal fade" id="ModalVisualizarDatosSubida" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="exampleModalLabel">Resultado Subida Imagen</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" >
+                        <div align="center">
+                            <h5 class="font-weight-bold">Json Devuelto</h5>
+                        </div>
+                        <pre id="respuestaSubirFichero"></pre>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modal Visualizar Datos Subida -->
+        <div class="modal fade bd-example-modal-lg" id="ModalSubirArchivo" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="exampleModalLabel">Resultado Subida Imagen</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" >
+                        <form action="/RecuperarImagenesOriginales" method="POST">
+                            <label class="font-weight-bold">Subir Imagen</label>
+                        </form>
+                        <input type="file" id="file" onchange="mostrar()">
+                        <img class="img-fluid mt-3" id="img"/>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="uploadFile()">Subir</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Modal Cargar Imagen -->
         <div class="modal fade bd-example-modal-lg" id="ModalCargaImagen" role="dialog" aria-labelledby="exampleModalLabel">
             <div class="modal-dialog modal-lg" role="document">
@@ -56,7 +105,7 @@
                         </button>
                     </div>
                     <div class="modal-body" align="center">
-                        <image class="img-fluid" id="myimage"/>
+                        <img class="img-fluid" id="myimage"/>
                     </div>
                     <div class="modal-footer">
                         <button type="button" rel="myimage" class="btn btn-primary">Descargar</button>
@@ -261,7 +310,7 @@
                         </tbody>
                     </table>  
                     <div align="center">
-                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#ModalSubidaImagenes">Probar</button>
+                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#ModalSubirArchivo" onclick="SelectURL('/api/Upload/Img')">Probar</button>
                     </div>                  
                 </div>
                 
@@ -301,7 +350,7 @@
                         </tbody>
                     </table>     
                     <div align="center">
-                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#ModalSubidaHojaCalculo">Probar</button>
+                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#ModalSubirArchivo" onclick="SelectURL('/api/Upload/HojaCalculo')">Probar</button>
                     </div>                       
                 </div>
             </div>
@@ -665,6 +714,28 @@
             var urlPost = null;
             var urlGet = null;
 
+            function uploadFile() {
+                var blobFile = document.getElementById("file").files[0];
+                var formData = new FormData();
+                formData.append("file", blobFile);
+
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        document.getElementById('respuestaSubirFichero').innerHTML = JSON.stringify(response, undefined, 2);
+                        $("#ModalSubirArchivo").modal('hide');
+                        $("#ModalVisualizarDatosSubida").modal();
+                    },
+                    error: function(jqXHR, textStatus, errorMessage) {
+                        console.log(errorMessage); // Opcional
+                    }
+                });
+            }
+
             function DescargarHojaCalculo() 
             {
                 var nameHC = document.getElementById('nameHC').value;
@@ -672,6 +743,21 @@
                 link.download = nameHC;
                 link.href = url + nameHC;
                 link.click();
+            }
+
+            function mostrar(){
+                var archivo = document.getElementById("file").files[0];
+                console.log(archivo.type);
+                var  parte = archivo.type.split('/');
+                if(parte[0] == "image"){
+                    var reader = new FileReader();
+                    if (file) {
+                        reader.readAsDataURL(archivo );
+                        reader.onloadend = function () {
+                            document.getElementById("img").src = reader.result;
+                        }
+                    }
+                }
             }
 
             function RealizarMetodo(){
