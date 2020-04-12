@@ -1,5 +1,5 @@
 runMPI:
-	mpiexec -np 4 ./Metodos/MPI/mpi_Final_version ./img/Original/$(img) $(height) $(width) $(img)
+	mpiexec --allow-run-as-root -np 4 ./Metodos/MPI/mpi_Final_version ./img/Original/$(img) $(height) $(width) $(img) 
 
 runOpenMP:
 	./Metodos/OpenMP/OpenMP_version ./img/Original/$(img) 4 $(img)

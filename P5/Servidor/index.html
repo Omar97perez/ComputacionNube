@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link rel="icon" type="image/png" href="Icon.png" />  </head>
-
-    <meta charset="utf-8">
-    <title>Explicación API</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <meta http-equiv="Cache-Control" content="no-cache">
-    <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
-    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <head>
+        <link rel="icon" type="image/png" href="https://images.vexels.com/media/users/3/131733/isolated/preview/c1d4154810e0275e30ab53a1e81a8c47---lbum-de-fotos-icono-de-c--rculo-by-vexels.png" />  
+        <meta charset="utf-8">
+        <title>Explicación API</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <meta http-equiv="Cache-Control" content="no-cache">
+        <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+        <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
@@ -56,7 +55,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body" >
+                    <div class="modal-body" align="center">
                         <image class="img-fluid" id="myimage"/>
                     </div>
                     <div class="modal-footer">
@@ -118,11 +117,84 @@
             </div>
             </div>
         </div>
+
+        <!-- Modal Métodos -->
+        <div class="modal fade" id="ModalMetodoMPI" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLabel">Recuperar Imagen Original</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body" align="center">
+                        <form action="/RecuperarImagenesOriginales" method="POST">
+                            <div class="form-group" align="left">
+                                <label class="font-weight-bold" for="exampleInputEmail1">Nombre Imagen</label>
+                                <input type="text" name="imageNameMPI" id="imageNameMPI" class="form-control">
+                                <label class="font-weight-bold" for="exampleInputEmail1">Altura</label>
+                                <input type="number" name="alturaMPI" id="alturaMPI" class="form-control">
+                                <label class="font-weight-bold" for="exampleInputEmail1">Anchura</label>
+                                <input type="number" name="anchuraMPI" id="anchuraMPI" class="form-control">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="RealizarMetodoMPI()">Enviar</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         
+        <!-- Modal Recuperar Gráficas -->
+        <div class="modal fade" id="ModalRecuperarGraficas" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">Inicio Sesión</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body" align="center">
+                    <form action="/IniciarSesion" method="POST">
+                        <div class="form-group" align="left">
+                            <label class="font-weight-bold" for="exampleInputEmail1">Nombre Hoja de Cáculo</label>
+                            <input type="text" name="NombreHC" id="NombreHC" placeholder="Escriba el nombre de la Hoja de Cálculo de Entrada" class="form-control">
+                        </div>
+                        <div class="form-group" align="left">
+                            <label class="font-weight-bold" for="exampleInputEmail1">Elemento eje X</label>
+                            <input type="number" name="ElementoXHC" id="ElementoXHC" placeholder="Escriba el elemento del Elemento eje X" class="form-control">
+                        </div>
+                        <div class="form-group" align="left">
+                            <label class="font-weight-bold" for="exampleInputEmail1">Elemento eje Y</label>
+                            <input type="number" name="ElementoYHC" id="ElementoYHC" placeholder="Escriba el Elemento del Eje Y" class="form-control">
+                        </div>
+                        <div class="form-group" align="left">
+                            <label class="font-weight-bold" for="exampleInputEmail1">Tipo Representación</label>
+                            <input type="number" name="TRepresentacionHC" id="TRepresentacionHC" placeholder="Escriba el tipo de representación" class="form-control">
+                        </div>
+                        <div class="form-group" align="left">
+                            <label class="font-weight-bold" for="exampleInputEmail1">Tipo Gráfica</label>
+                            <input type="number" name="TGraficaHC" id="TGraficaHC" placeholder="Escriba el tipo de Gráfica" class="form-control">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="RealizarMetodoGrafica()">Enviar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+            </div>
+        </div>
 
         <div class="container">
             <div class="mt-5" align="center">
-                <h1 class="mt-5"><img src="img/icono.png" alt="icono" width="75" height="75"> Práctica 5 Computación en la Nube</h1>
+                <h1 class="mt-5"><img src="https://images.vexels.com/media/users/3/131733/isolated/preview/c1d4154810e0275e30ab53a1e81a8c47---lbum-de-fotos-icono-de-c--rculo-by-vexels.png" alt="icono" width="75" height="75"> 
+                    Práctica 5 Computación en la Nube
+                </h1>
             </div>
             
             <div class="mt-5">
@@ -452,7 +524,7 @@
                         </tbody>
                     </table>    
                     <div align="center">
-                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#ModalMetodos" onclick="SelectURLPost(_urlPost, _urlGet)">Probar</button>
+                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#ModalMetodoMPI" onclick="SelectURLPost('localhost:80/api/MPI/', 'localhost:80/api/Get/Img/Final/MPI-')">Probar</button>
                     </div>                    
                 </div>
             </div>
@@ -513,7 +585,7 @@
                         </tbody>
                     </table>           
                     <div align="center">
-                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#ModalRecuperarGraficas">Probar</button>
+                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#ModalRecuperarGraficas" onclick="SelectURLPost('localhost:80/api/Grafica/', 'localhost:80/api/Get/HojaCalculo/Final/')">Probar</button>
                     </div>             
                 </div>
             </div>
@@ -572,6 +644,65 @@
                 var imageNameMethod = document.getElementById('imageNameMethod').value;
                 urlPost = urlPost + imageNameMethod;
                 urlGet = urlGet + imageNameMethod;
+                $( document ).ready(function() {
+                    $.get(urlPost, function(respuesta, status){
+                        if (status == 'success'){
+                            SelectURL(urlGet);
+                            $("#ModalCargaImagen").modal('hide');
+                            VisualizarImagen();                        }
+                    })
+                });
+            }
+
+            function RealizarMetodoMPI(){
+                var altura = document.getElementById('alturaMPI').value;
+                var anchura = document.getElementById('anchuraMPI').value;
+                $("#ModalCargaImagen").modal();
+                var imageNameMethod = document.getElementById('imageNameMPI').value;
+                urlPost = urlPost + imageNameMethod + "/" + altura + "/" + anchura;
+                urlGet = urlGet + imageNameMethod;
+                $( document ).ready(function() {
+                    $.get(urlPost, function(respuesta, status){
+                        if (status == 'success'){
+                            SelectURL(urlGet);
+                            $("#ModalCargaImagen").modal('hide');
+                            VisualizarImagen();                        }
+                    })
+                });
+            }
+
+            function RealizarMetodoGrafica(){
+                var elementoX = document.getElementById('ElementoXHC').value;
+                var elementoY = document.getElementById('ElementoYHC').value;
+                var tipoRepresentacion = document.getElementById('TRepresentacionHC').value;
+                var tipoGrafica = document.getElementById('TGraficaHC').value;
+
+                switch(parseInt(tipoGrafica)) {
+                    case 1:
+                        urlGet = urlGet + "Lineas-";
+                        break;
+
+                    case 2:
+                        urlGet = urlGet + "Barras-";
+                        break;
+
+                    case 3:
+                        urlGet = urlGet + "Puntos-";
+                        break;
+
+                    case 4:
+                        urlGet = urlGet + "Resumen-";
+                        break;
+                } 
+
+                $("#ModalCargaImagen").modal();
+                var imageNameMethod = document.getElementById('NombreHC').value;
+                urlPost = urlPost + imageNameMethod + "/" + elementoX + "/" + elementoY + "/" + tipoRepresentacion + "/" + tipoGrafica;
+                var  parte = imageNameMethod.split('.');
+	            imageNameMethod = parte[0] + ".png";
+                urlGet = urlGet + imageNameMethod;
+                console.log(urlPost);
+                console.log(urlGet);
                 $( document ).ready(function() {
                     $.get(urlPost, function(respuesta, status){
                         if (status == 'success'){
