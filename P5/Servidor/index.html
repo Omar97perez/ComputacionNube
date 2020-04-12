@@ -358,8 +358,32 @@
             <div class="mt-5">
                 <h2 class="font-weight-bold">2. Recuperar Archivos.</h2>
                 <div class="mt-3">
-                    <h3 class="font-weight-bold">2.1 Imágenes.</h3>
-                    <h4 class="font-weight-bold mt-3">2.1.1 Originales.</h4>
+                    <h3 class="font-weight-bold">2.1 Página Web Actual.</h3>
+                    <table class="table table-sm table-striped mt-3 mx-auto w-auto table-hover">
+                        <thead>
+                            <tr class="thead-dark">
+                                <th scope="col">Elemento</th>
+                                <th scope="col">Descripción</th>
+                            </tr>
+                        </thead>
+                        <tbody align="left">
+                            <tr>
+                                <td class="font-weight-bold">Descripción</td>
+                                <td>Método que permite descargar el código funete de la página actual. De igual forma, incorpora el código con todos los ejemplos funcionando correctamente.</td>
+                            </tr>
+                            <tr>
+                                <td class="font-weight-bold">URL</td>
+                                <td>http://IP:80</td>
+                            </tr>
+                        </tbody>
+                    </table>    
+                    <div align="center">
+                        <button type="button" class="btn btn-dark" onclick="DescargarPaginaWeb()">Probar</button>
+                    </div>                                           
+                </div>
+                <div class="mt-3">
+                    <h3 class="font-weight-bold">2.2 Imágenes.</h3>
+                    <h4 class="font-weight-bold mt-3">2.2.1 Originales.</h4>
                     <table class="table table-sm table-striped mt-3 mx-auto w-auto table-hover">
                         <thead>
                             <tr class="thead-dark">
@@ -390,7 +414,7 @@
                         <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#ModalRecuperarArchivo" onclick="SelectURL('/api/Get/Img/Original/')">Probar</button>
                     </div>                     
 
-                    <h4 class="font-weight-bold mt-3">2.1.2 Procesadas.</h4>
+                    <h4 class="font-weight-bold mt-3">2.3.2 Procesadas.</h4>
                     <table class="table table-sm table-striped mt-3 mx-auto w-auto table-hover">
                         <thead>
                             <tr class="thead-dark">
@@ -423,8 +447,8 @@
                 </div>
 
                 <div class="mt-3">
-                    <h3 class="font-weight-bold">2.2 Hojas de Cálculo.</h3>
-                    <h3 class="font-weight-bold">2.2.1 Originales.</h3>
+                    <h3 class="font-weight-bold">2.3 Hojas de Cálculo.</h3>
+                    <h3 class="font-weight-bold">2.3.1 Originales.</h3>
                     <table class="table table-sm table-striped mt-3 mx-auto w-auto table-hover">
                         <thead>
                             <tr class="thead-dark">
@@ -455,7 +479,7 @@
                         <button type="button" class="btn btn-dark" data-toggle="modal" onclick="SelectURL('api/Get/HojaCalculo/Original/')" data-target="#ModalRecuperarHC">Probar</button>
                     </div>             
 
-                    <h3 class="font-weight-bold">2.2.2 Procesadas.</h3>
+                    <h3 class="font-weight-bold">2.3.2 Procesadas.</h3>
                     <table class="table table-sm table-striped mt-3 mx-auto w-auto table-hover">
                         <thead>
                             <tr class="thead-dark">
@@ -735,6 +759,16 @@
                     }
                 });
             }
+
+            function DescargarPaginaWeb() 
+            {
+                var nameHC = document.getElementById('nameHC').value;
+                var link = document.createElement("a");
+                link.download = "servidorAPI.html";
+                link.href = "http://localhost/";
+                link.click();
+            }
+
 
             function DescargarHojaCalculo() 
             {
