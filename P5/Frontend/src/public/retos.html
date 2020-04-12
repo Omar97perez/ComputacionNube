@@ -1,0 +1,417 @@
+<html>
+
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+      <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+      <meta http-equiv="Cache-Control" content="no-cache">
+      <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+      <title>AprendeULL</title>
+      <style>
+        * {
+          margin: 0;
+        }
+        .title {
+          color: #fff;
+          padding-bottom: 20px;
+        }
+        #event-box {
+          position: absolute;
+          width: 100%;
+          max-height: 45%;
+          padding: 20px 50px;
+          background: #35485d;
+          text-align: center;
+          box-sizing: border-box;
+          overflow-y: auto;
+        }
+        .marker {
+          display: inline-block;
+          height: 30px;
+          margin: 5px 10px;
+          padding: 0 10px;
+          line-height: 28px;
+          color: #41b882;
+          font-weight: 400;
+          border: 1px solid #41b882;
+          border-radius: 15px;
+          transition: 0.1s all ease;
+        }
+        .marker.active {
+          background: #41b882;
+          color: #ffffff;
+        }
+        @media only screen and (max-width: 600px) {
+          #event-box {
+            padding: 20px 0;
+          }
+        }
+      </style>
+    </head>
+
+    <body>
+        <div id="event-box">
+          <div class="modal fade" id="FinalBuenoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header bg-success">
+                  <h2 class="modal-title" id="exampleModalLabel" align="center">
+                    ¡Enhorabuena!
+                  </h1>
+                </div>
+                <div class="modal-body" align="center">
+                    <h2>Resultado</h3>
+                  <div class="row">
+                      <div class="col-6" align="right">
+                        <h3 class="col row">Aciertos: &nbsp <div id="aciertos"> </h3>
+                      </div>
+                      <div class="col-6" align="left">
+                        <h3 class="col row">Fallos: &nbsp <div id="fallos"> </h3>
+                      </div>
+                  </div>
+                  <h3>Puntuacion Total: </h3>
+                  <h3><div id="puntuacionFinalBueno"></div></h3>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" onclick="Inicio()">Inicio</button>
+                  <button type="button" class="btn btn-primary" onclick="repetir()">Repetir</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade" id="FinalMaloModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header bg-danger">
+                  <h2 class="modal-title" id="exampleModalLabel" align="center">
+                    ¡Mala suerte!
+                  </h1>
+                </div>
+                <div class="modal-body" align="center">
+                    <h2>Resultado</h3>
+                  <div class="row">
+                      <div class="col-6" align="right">
+                        <h3 class="col row">Aciertos: &nbsp <div id="aciertos"> </h3>
+                      </div>
+                      <div class="col-6" align="left">
+                        <h3 class="col row">Fallos: &nbsp <div id="fallos2"> </h3>
+                      </div>
+                  </div>
+                  <h3>Puntuacion Total: </h3>
+                  <h3><div id="puntuacionFinalMalo"></div></h3>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" onclick="Inicio()">Inicio</button>
+                  <button type="button" class="btn btn-primary" onclick="repetir()">Repetir</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade" id="aciertoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header bg-success">
+                  <h5 class="modal-title" id="exampleModalLabel">Correcto</h5>
+                </div>
+                <div class="modal-body">
+                  <h4>Has conseguido hacerlo correctamente. ¡Sigue así!</h4>     
+                    <h4>Puntuacion:</h4>           
+                    <h4><div id="puntuacion"></div></h4>
+                    <h4>Puntuacion Total: </h4>
+                    <h4><div id="puntuacionFinal"></div></h4>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="redireccionar()">Siguiente</button>
+                  <button type="button" class="btn btn-secondary" onclick="Inicio()">Inicio</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade" id="falloModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header bg-danger">
+                  <h5 class="modal-title" id="exampleModalLabel">Fallo</h5>
+                </div>
+                <div class="modal-body" align="center">
+                  <h4>¡Tu puedes para la próxima!</h4>
+                  <h4>Puntuacion: </h4>
+                  <h4>0</h4>
+                  <h4>Puntuacion Total: </h4>
+                  <h4><div id="puntuacionFinalerror"></div></h4>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="redireccionar()">Siguiente</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal"  onclick="revisar()" >Revisar</button>
+                  <button type="button" class="btn btn-secondary" onclick="Inicio()">Inicio</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div align="center">
+            <div class="container row text-white" >
+              <h1 class="col row">Tiempo: &nbsp <div id="tiempo"></div> /<div id="tiempousar"></div>  </h1>
+              <h1 class="col row">Retos: &nbsp <div id="retosRealizados"></div> /5 </h1>
+              <h1 class="col row">Errores: &nbsp <div id="errores"></div> /5 </h1>				
+            </div>
+          </div>
+
+          <div class="mt-4" align="center">
+            <div class="container row text-white" >
+              <h3 class="col-12" align="center"><div id="fraseSeleccioanda"></div></h3>				
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6" align="right">
+              <button id="Siguiente" class="btn btn-primary" onclick="redireccionar()">Siguiente</button>
+            </div>
+
+            <div class="col-6" align="left">
+              <button id="Inicio" class="btn btn-secondary" onclick="Inicio()">Inicio</button>
+            </div>
+          </div>
+        </div>
+
+
+        <canvas id="webgl"></canvas>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
+        <script src="build/three.interaction.js"></script>
+        <script src="interaction/Interaction.js"></script>
+
+
+
+        <script type="text/javascript">
+                 document.getElementById("Siguiente").style.display = "none";
+        document.getElementById("Inicio").style.display = "none";
+
+        var resultadoFinal = false;
+        var tiempo = 0;
+        var frase = "Seleccione";
+        document.getElementById("tiempo").innerHTML = tiempo;
+
+        document.getElementById("puntuacionFinal").innerHTML = puntuacionFinal;
+
+        function IntermediarioCuentaAtras(){
+          tiempo = 0;
+          CuentaAtras();
+        }
+
+        var paramstr = window.location.search.substr(1);
+        var paramarr = paramstr.split ("?");
+        var params = {};
+
+        for ( var i = 0; i < paramarr.length; i++) {
+            var tmparr = paramarr[i].split("=");
+            params[tmparr[0]] = tmparr[1];
+        }
+
+        if(params["retosRealizados"] != -1)
+        {
+          var retosRealizados = params["retosRealizados"];
+          document.getElementById("retosRealizados").innerHTML = retosRealizados;
+        }
+        else
+        {
+          var retosRealizados = 1;
+          document.getElementById("retosRealizados").innerHTML = retosRealizados;
+        }
+
+        if(params["errores"] != -1)
+        {
+          var errores = params["errores"];
+          document.getElementById("errores").innerHTML = errores;
+        }
+        else
+        {
+          var errores = 0;
+          document.getElementById("errores").innerHTML = errores;
+        }
+
+        
+        if(params["puntuacionFinal"] != -1)
+        {
+          var puntuacionFinal = params["puntuacionFinal"];
+          puntuacionFinal++; 
+          puntuacionFinal--; 
+          document.getElementById("puntuacionFinal").innerHTML = puntuacionFinal;
+        }
+        else
+        {
+          var puntuacionFinal = 0;
+          puntuacionFinal++; 
+          puntuacionFinal--; 
+          document.getElementById("puntuacionFinal").innerHTML = puntuacionFinal;
+        }
+
+        if(params["Nombre"] != -1)
+        {
+            var Nombre = params["Nombre"];
+        }
+        else
+        {
+            var Nombre = "Error 001";
+        }
+        
+        if(params["Apellidos"] != -1)
+        {
+            var Apellidos = params["Apellidos"];
+        }
+        else
+        {
+            var Apellidos = "Error 002";
+        }
+
+        if(params["Email"] != -1)
+        {
+          var Email = params["Email"];
+        }
+        else
+        {
+            var Email = "Error 003";
+        }
+
+        if(params["nivel"] != -1)
+        {
+          var nivel = params["nivel"];
+        }
+        else
+        {
+          var nivel = 1;
+        }
+
+        if(nivel == 1)
+        {
+          var tiempousar = 10;
+        }
+        else if(nivel == 2)
+        {
+          var tiempousar = 7;
+        }
+        else{
+          var tiempousar = 5;
+        }
+
+        document.getElementById("tiempousar").innerHTML = tiempousar;
+
+        CuentaAtras();
+
+        function CuentaAtras(){
+            timout=setTimeout(function(){
+              tiempo += 1;
+              document.getElementById("tiempo").innerHTML = tiempo;
+
+              if(tiempo != tiempousar){
+                CuentaAtras();
+              }
+              else{
+                if (resultadoFinal != true){
+                  errores++;
+                  document.getElementById("errores").innerHTML = errores;
+                  $('#falloModal').modal('show'); 
+                  document.getElementById("puntuacionFinalBueno").innerHTML = puntuacionFinal;
+                  document.getElementById("puntuacionFinalMalo").innerHTML = puntuacionFinal;
+                }
+              }
+            },1000,"JavaScript");
+        }
+
+        function Inicio()
+        {
+          window.location="index.html" + "?Nombre=" + Nombre + "?Apellidos=" + Apellidos + "?Email=" + Email;
+        }
+
+        function repetir()
+        {
+          window.location="retos.html?retosRealizados=1?errores=0?puntuacionFinal="+0+"?nivel=" + nivel + "?Nombre=" + Nombre + "?Apellidos=" + Apellidos + "?Email=" + Email;
+        }
+
+        function redireccionar(){
+          if(retosRealizados != 5){
+            retosRealizados++;
+            window.location="retos.html?retosRealizados="+ retosRealizados +"?errores=" + errores + "?puntuacionFinal=" + puntuacionFinal+ "?nivel=" + nivel + "?Nombre=" + Nombre + "?Apellidos=" + Apellidos + "?Email=" + Email;
+          }
+          else{
+            var aciertos = -1 * (errores - 5);
+            document.getElementById("aciertos").innerHTML = aciertos;
+            var fallos = errores;
+            document.getElementById("fallos").innerHTML = fallos;
+            var fallos2 = errores;
+            document.getElementById("fallos2").innerHTML = fallos2;
+            if (aciertos > errores){
+              $('#FinalBuenoModal').modal('show'); 
+            }
+            else{
+              $('#FinalMaloModal').modal('show'); 
+            }
+          }
+        } 
+              
+        window.addEventListener('resize', onWindowResize, false);
+
+        var WIDTH = window.innerWidth;
+        var HEIGHT = window.innerHeight;
+        var camera = new THREE.PerspectiveCamera(120, WIDTH / HEIGHT, 0.01, 100);
+        var renderer = new THREE.WebGLRenderer({
+          canvas: document.querySelector('#webgl'),
+          antialias: true,
+        });
+        renderer.setClearColor(0x4189B8);
+        renderer.setSize(WIDTH, HEIGHT);
+        var scene = new THREE.Scene();
+
+
+
+        var interaction = new THREE.Interaction(renderer, scene, camera);
+
+        var retoRealizar = 8;
+
+        if(nivel == 1){
+          console.log("prueba");
+            retoRealizar = numero_al_azar(1,4);
+        }
+
+        if(nivel == 2){
+          console.log("prueba");
+            retoRealizar = numero_al_azar(1,6);
+        }
+
+        if(nivel == 3){
+          console.log("prueba");
+            retoRealizar = numero_al_azar(1,8);
+        }
+
+        console.log(retoRealizar);
+
+        function numero_al_azar(minimo,maximo) { 
+          return Math.floor(Math.random() * (maximo - minimo + 1) + minimo); 
+        }
+
+        function onWindowResize() {
+          camera.aspect = window.innerWidth / window.innerHeight;
+          camera.updateProjectionMatrix();
+          renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        function blink(dom) {
+          clearTimeout(dom.timer);
+          dom.className = 'marker active';
+          dom.timer = setTimeout(function(){
+            dom.className = 'marker';
+          }, 300);
+        }
+        
+
+        </script>
+
+        <script src="Ejercicios/Ejercicio1.js"></script>  
+        <script src="Ejercicios/Ejercicio2.js"></script>
+        <script src="Ejercicios/Ejercicio3.js"></script>
+        <script src="Ejercicios/Ejercicio4.js"></script>
+    </body>
+</html>
