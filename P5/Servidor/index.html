@@ -44,7 +44,7 @@
             </div>
         </div>
         
-        <!-- Modal Visualizar Datos Subida -->
+        <!-- Modal Subir Archivo -->
         <div class="modal fade bd-example-modal-lg" id="ModalSubirArchivo" role="dialog" aria-labelledby="exampleModalLabel">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
@@ -108,7 +108,7 @@
                         <img class="img-fluid mt-3" id="myimage"/>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="prueba" rel="myimage" onclick="ClickButton()">Download</button>
+                        <button type="button" class="btn btn-primary" id="prueba" rel="myimage" onclick="ClickButton()">Descargar</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
@@ -172,7 +172,7 @@
             <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                <h3 class="modal-title" id="exampleModalLabel">Recuperar Imagen Original</h3>
+                <h3 class="modal-title" id="exampleModalLabel">Recuperar Imagen Procesada</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -198,7 +198,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                    <h3 class="modal-title" id="exampleModalLabel">Recuperar Imagen Original</h3>
+                    <h3 class="modal-title" id="exampleModalLabel">Recuperar Imagen Procesada</h3>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -807,7 +807,7 @@
                             $("#ModalCargaImagen").modal('hide');
                             $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
                             $('.modal-backdrop').remove();//eliminamos el backdrop del modal
-                            VisualizarImagen();                        
+                            VisualizarImagenMetodo();                        
                         }
                     })
                 });
@@ -894,6 +894,14 @@
                 $('body').removeClass('ModalRecuperarImagenesOriginales');
                 $("#ModalVerImagen").modal();
             }
+
+            function VisualizarImagenMetodo() {
+                var URLImage = url;
+                document.getElementById('myimage').src = URLImage;
+                $('body').removeClass('ModalRecuperarImagenesOriginales');
+                $("#ModalVerImagen").modal();
+            }
+            
             function ClickButton() {
                 var nameHC = document.getElementById('myimage');
                 var link = document.createElement("a");
