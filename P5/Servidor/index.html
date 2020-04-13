@@ -105,10 +105,10 @@
                         </button>
                     </div>
                     <div class="modal-body" align="center">
-                        <img class="img-fluid" id="myimage"/>
+                        <image id="myimage"/>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" rel="myimage" class="btn btn-primary">Descargar</button>
+                        <button type="btnDownload" id="prueba" rel="myimage" onclick="ClickButton()">Download</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
@@ -894,60 +894,13 @@
                 $('body').removeClass('ModalRecuperarImagenesOriginales');
                 $("#ModalVerImagen").modal();
             }
-
-            function DownloadImage(imageURL) {
-                    var oImage = document.getElementById(imageURL);
-                    var canvas = document.createElement("canvas");
-                    document.body.appendChild(canvas);
-                    if (typeof canvas.getContext == "undefined" || !canvas.getContext) {
-                        alert("browser does not support this action, sorry");
-                        return false;
-                    }
-
-                    try {
-                        var context = canvas.getContext("2d");
-                        var width = oImage.width;
-                        var height = oImage.height;
-                        canvas.width = width;
-                        canvas.height = height;
-                        canvas.style.width = width + "px";
-                        canvas.style.height = height + "px";
-                        context.drawImage(oImage, 0, 0, width, height);
-                        var rawImageData = canvas.toDataURL("image/png;base64");
-                        rawImageData = rawImageData.replace("image/png", "image/octet-stream");
-                        document.location.href = rawImageData;
-                        document.body.removeChild(canvas);
-                    }
-                    catch (err) {
-                        document.body.removeChild(canvas);
-                        alert("Sorry, can't download");
-                    }
-
-                    return true;
-                }
-            
-            window.onload = function() {
-                var arrButtons = document.getElementsByTagName("button");
-                for (var i = 0; i < arrButtons.length; i++) {
-                    var oButton = arrButtons[i];
-                    var sRelatedImage = oButton.getAttribute("rel");
-                    if (sRelatedImage && sRelatedImage.length > 0) {
-                        oButton.onclick = function() {
-                            HandleRelatedImage(this, sRelatedImage);
-                        }
-                    }
-                }
+            function ClickButton() {
+                var nameHC = document.getElementById('myimage');
+                var link = document.createElement("a");
+                link.download = "image.png";
+                link.href = nameHC.src;
+                link.click();
             };
-
-            function HandleRelatedImage(oButton, sRelatedImage) {
-                var oImage = document.getElementById(sRelatedImage);
-                if (!oImage) {
-                    alert("related image '" + sRelatedImage + "' does not exist");
-                    return false;
-                }
-
-                return DownloadImage(sRelatedImage);
-            }
         </script>
     </body>
 </html>
