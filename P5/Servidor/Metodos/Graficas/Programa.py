@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import sys
 import Strategy as st
+import string 
 
 pedirParametros = int(sys.argv[2]) 
 
@@ -14,6 +15,7 @@ if(pedirParametros == 1):
     elementoY = input('Indique el valor del eje Y\n > ')
     tipoRepresentacion = input('Indique que tipo de representación desea hacer:\n\t 1. Suma \n\t 2. Máximo \n\t 3. Mínimo\n > ')
     tipoGrafica = input('Indique que gráfica desea ver:\n\t 1. Gráfica de Líneas.\n\t 2. Gráfica de Barras.\n\t 3. Gráfica de puntos.\n\t 4. Resumen.\n > ')
+    nombreFichero = ""
 else:
     # Pedimos los parámetros que nos van a hacer falta
     elementoX = int(sys.argv[3]) 

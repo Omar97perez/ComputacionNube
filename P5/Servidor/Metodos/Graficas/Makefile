@@ -1,5 +1,5 @@
 runTomeCanoUser:
-	python Programa.py ./Data/TomeCano.csv 1
+	python Programa.py ./Data/TomeCano.csv 1 
 runTomeCanoServer:
 	python Programa.py ./Data/TomeCano.csv 0 1 12 1 1 ./FinalImage.png
 runCoronavirusUser:
