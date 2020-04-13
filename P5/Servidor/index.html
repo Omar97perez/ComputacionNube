@@ -547,7 +547,7 @@
                         </tbody>
                     </table>                    
                     <div align="center">
-                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#ModalMetodos" onclick="SelectURLPost('localhost:80/api/Secuencial/', 'localhost:80/api/Get/Img/Final/Secuencial-')">Probar</button>
+                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#ModalMetodos" onclick="SelectURLPost('/api/Secuencial/', '/api/Get/Img/Final/Secuencial-')">Probar</button>
                     </div>    
                 </div>
                 
@@ -584,7 +584,7 @@
                         </tbody>
                     </table>   
                     <div align="center">
-                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#ModalMetodos" onclick="SelectURLPost('localhost:80/api/OpenMP/', 'localhost:80/api/Get/Img/Final/OpenMP-')">Probar</button>
+                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#ModalMetodos" onclick="SelectURLPost('/api/OpenMP/', '/api/Get/Img/Final/OpenMP-')">Probar</button>
                     </div>                     
                 </div>
 
@@ -623,7 +623,7 @@
                         </tbody>
                     </table>    
                     <div align="center">
-                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#ModalMetodoMPI" onclick="SelectURLPost('localhost:80/api/MPI/', 'localhost:80/api/Get/Img/Final/MPI-')">Probar</button>
+                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#ModalMetodoMPI" onclick="SelectURLPost('/api/MPI/', '/api/Get/Img/Final/MPI-')">Probar</button>
                     </div>                    
                 </div>
             </div>
@@ -684,7 +684,7 @@
                         </tbody>
                     </table>           
                     <div align="center">
-                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#ModalRecuperarGraficas" onclick="SelectURLPost('localhost:80/api/Grafica/', 'localhost:80/api/Get/HojaCalculo/Final/')">Probar</button>
+                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#ModalRecuperarGraficas" onclick="SelectURLPost('/api/Grafica/', '/api/Get/HojaCalculo/Final/')">Probar</button>
                     </div>             
                 </div>
             </div>
@@ -767,7 +767,7 @@
                 var nameHC = document.getElementById('nameHC').value;
                 var link = document.createElement("a");
                 link.download = "servidorAPI.html";
-                link.href = "http://localhost/";
+                link.href = "/";
                 link.click();
             }
 
@@ -879,8 +879,8 @@
             }
 
             function SelectURLPost(_urlPost, _urlGet) {
-                urlPost = "http://" + _urlPost;
-                urlGet = "http://" + _urlGet;
+                urlPost =_urlPost;
+                urlGet = _urlGet;
             }
 
             function SelectURL(urlOrigin) {
