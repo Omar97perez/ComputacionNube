@@ -752,6 +752,8 @@
                     success: function(response) {
                         document.getElementById('respuestaSubirFichero').innerHTML = JSON.stringify(response, undefined, 2);
                         $("#ModalSubirArchivo").modal('hide');
+                        $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
+                        $('.modal-backdrop').remove();//eliminamos el backdrop del modal
                         $("#ModalVisualizarDatosSubida").modal();
                     },
                     error: function(jqXHR, textStatus, errorMessage) {
@@ -768,7 +770,6 @@
                 link.href = "http://localhost/";
                 link.click();
             }
-
 
             function DescargarHojaCalculo() 
             {
@@ -804,7 +805,10 @@
                         if (status == 'success'){
                             SelectURL(urlGet);
                             $("#ModalCargaImagen").modal('hide');
-                            VisualizarImagen();                        }
+                            $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
+                            $('.modal-backdrop').remove();//eliminamos el backdrop del modal
+                            VisualizarImagen();                        
+                        }
                     })
                 });
             }
@@ -821,7 +825,10 @@
                         if (status == 'success'){
                             SelectURL(urlGet);
                             $("#ModalCargaImagen").modal('hide');
-                            VisualizarImagen();                        }
+                            $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
+                            $('.modal-backdrop').remove();//eliminamos el backdrop del modal
+                            VisualizarImagen();                        
+                        }
                     })
                 });
             }
@@ -863,7 +870,10 @@
                         if (status == 'success'){
                             SelectURL(urlGet);
                             $("#ModalCargaImagen").modal('hide');
-                            VisualizarImagen();                        }
+                            $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
+                            $('.modal-backdrop').remove();//eliminamos el backdrop del modal
+                            VisualizarImagen();                        
+                        }
                     })
                 });
             }
