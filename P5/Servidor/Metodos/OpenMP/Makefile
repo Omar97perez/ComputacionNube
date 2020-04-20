@@ -2,5 +2,5 @@ all:
 	g++ -o OpenMP_version main.cpp -fopenmp -lpng
 
 run:
-	./OpenMP_version image.png 4
+	./OpenMP_version $(file) 4 $(fileExit)
 

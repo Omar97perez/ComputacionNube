@@ -157,7 +157,7 @@ int main(int argc, char **argv)
     stringstream ss;
     ss << argv[3];
     string str = ss.str();
-    string ficheroGuardar = "./img/Final/OpenMP-" + str;
+    string ficheroGuardar = str;
 
     Image newImage = applyFilter(image, filter, atoi(argv[2]));
     saveImage(newImage, ficheroGuardar);

@@ -270,7 +270,7 @@ int main(int argc, char **argv)
         stringstream ss;
         ss << argv[4];
         string str = ss.str();
-        string ficheroGuardar = "./img/Final/MPI-" + str;
+        string ficheroGuardar = str;
 
         saveImage(finalImage, ficheroGuardar);
 
