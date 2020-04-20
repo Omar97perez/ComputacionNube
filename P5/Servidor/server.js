@@ -37,11 +37,6 @@ function executeUnzip(filename, site){
 	require('child_process').execSync('sudo unzip ' + filename + " -d " + site);
 }
 
-// Permite devolver El archivo HTML de explicación
-app.get('/', function(req, res) {
-	res.sendFile('./index.html', { root: __dirname });
-});
-
 // Permite Crear Métodos 
 app.post('/api/Upload/Method', uploadMethod.array('file', 2), (req, res) => {
 	fs.readFile("./EstructuraMetodos/" + req.files[0].filename, 'utf-8', (err, data) => {
