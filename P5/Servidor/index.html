@@ -20,154 +20,8 @@
             </div>
         </nav>
 
-        <!-- Modal Visualizar Datos Subida -->
-        <div class="modal fade" id="ModalVisualizarDatosSubida" role="dialog" aria-labelledby="exampleModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3 class="modal-title" id="exampleModalLabel">Resultado Subida Arcgivo</h3>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body" >
-                        <div align="center">
-                            <h5 class="font-weight-bold">Json Devuelto</h5>
-                        </div>
-                        <pre id="respuestaSubirFichero"></pre>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Modal Subir Archivo -->
-        <div class="modal fade bd-example-modal-lg" id="ModalSubirArchivo" role="dialog" aria-labelledby="exampleModalLabel">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3 class="modal-title" id="exampleModalLabel">Subir Archivo</h3>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body" >
-                        <form action="/RecuperarImagenesOriginales" method="POST">
-                            <label class="font-weight-bold">Subir Imagen</label>
-                        </form>
-                        <input type="file" id="file" onchange="mostrar()">
-                        <img class="img-fluid mt-3" id="img"/>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" onclick="uploadFile()">Subir</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal Cargar Imagen -->
-        <div class="modal fade bd-example-modal-lg" id="ModalCargaImagen" role="dialog" aria-labelledby="exampleModalLabel">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3 class="modal-title" id="exampleModalLabel">Visualizar Imagen</h3>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body" >
-                        <div class="d-flex justify-content-center">
-                            <div class="spinner-border" role="status">
-                              <span class="sr-only">Loading...</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal Ver Imágenes -->
-        <div class="modal fade bd-example-modal-lg" id="ModalVerImagen" role="dialog" aria-labelledby="exampleModalLabel">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3 class="modal-title" id="exampleModalLabel">Visualizar Imagen</h3>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body" align="center">
-                        <img class="img-fluid mt-3" id="myimage"/>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="prueba" rel="myimage" onclick="ClickButton()">Descargar</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal Recuperar Archivos -->
-        <div class="modal fade" id="ModalRecuperarArchivo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h3 class="modal-title" id="exampleModalLabel">Recuperar Archivo</h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                </div>
-                <div class="modal-body" align="center">
-                    <form action="/RecuperarImagenesOriginales" method="POST">
-                        <div class="form-group" align="left">
-                            <label class="font-weight-bold" for="exampleInputEmail1">Nombre Imagen</label>
-                            <input type="text" name="imageName" id="imageName" class="form-control">
-                        </div>
-                    </form>
-                </div>
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="VisualizarImagen()">Enviar</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                </div>
-            </div>
-            </div>
-        </div>
-
-        <!-- Modal Recuperar Hoja de Cálulo -->
-        <div class="modal fade" id="ModalRecuperarHC" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h3 class="modal-title" id="exampleModalLabel">Recuperar Hoja Cáculo</h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                </div>
-                <div class="modal-body" align="center">
-                    <form action="/RecuperarImagenesOriginales" method="POST">
-                        <div class="form-group" align="left">
-                            <label class="font-weight-bold" for="exampleInputEmail1">Nombre Hoja de Cáculo</label>
-                            <input type="text" name="nameHC" id="nameHC" class="form-control">
-                        </div>
-                    </form>
-                </div>
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="DescargarHojaCalculo()">Enviar</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                </div>
-            </div>
-            </div>
-        </div>
-
         <!-- Modal Métodos -->
-        <div class="modal fade" id="ModalMetodos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="SubirMetodo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -177,87 +31,22 @@
                 </button>
                 </div>
                 <div class="modal-body" align="center">
-                    <form action="/RecuperarImagenesOriginales" method="POST">
+                    <form>
                         <div class="form-group" align="left">
-                            <label class="font-weight-bold" for="exampleInputEmail1">Nombre Imagen</label>
-                            <input type="text" name="imageNameMethod" id="imageNameMethod" class="form-control">
-                        </div>
-                    </form>
-                </div>
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="RealizarMetodo()">Enviar</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                </div>
-            </div>
-            </div>
-        </div>
+                            <form>
+                                <label class="font-weight-bold">Json Methodo</label>
+                            </form>
+                            <input type="file" id="fileJSON">
 
-        <!-- Modal Métodos -->
-        <div class="modal fade" id="ModalMetodoMPI" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h3 class="modal-title" id="exampleModalLabel">Recuperar Imagen Procesada</h3>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    </div>
-                    <div class="modal-body" align="center">
-                        <form action="/RecuperarImagenesOriginales" method="POST">
-                            <div class="form-group" align="left">
-                                <label class="font-weight-bold" for="exampleInputEmail1">Nombre Imagen</label>
-                                <input type="text" name="imageNameMPI" id="imageNameMPI" class="form-control">
-                                <label class="font-weight-bold" for="exampleInputEmail1">Altura</label>
-                                <input type="number" name="alturaMPI" id="alturaMPI" class="form-control">
-                                <label class="font-weight-bold" for="exampleInputEmail1">Anchura</label>
-                                <input type="number" name="anchuraMPI" id="anchuraMPI" class="form-control">
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="RealizarMetodoMPI()">Enviar</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Modal Recuperar Gráficas -->
-        <div class="modal fade" id="ModalRecuperarGraficas" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h3 class="modal-title" id="exampleModalLabel">Gráficas</h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                </div>
-                <div class="modal-body" align="center">
-                    <form action="/IniciarSesion" method="POST">
-                        <div class="form-group" align="left">
-                            <label class="font-weight-bold" for="exampleInputEmail1">Nombre Hoja de Cáculo</label>
-                            <input type="text" name="NombreHC" id="NombreHC" placeholder="Escriba el nombre de la Hoja de Cálculo de Entrada" class="form-control">
-                        </div>
-                        <div class="form-group" align="left">
-                            <label class="font-weight-bold" for="exampleInputEmail1">Elemento eje X</label>
-                            <input type="number" name="ElementoXHC" id="ElementoXHC" placeholder="Escriba el elemento del Elemento eje X" class="form-control">
-                        </div>
-                        <div class="form-group" align="left">
-                            <label class="font-weight-bold" for="exampleInputEmail1">Elemento eje Y</label>
-                            <input type="number" name="ElementoYHC" id="ElementoYHC" placeholder="Escriba el Elemento del Eje Y" class="form-control">
-                        </div>
-                        <div class="form-group" align="left">
-                            <label class="font-weight-bold" for="exampleInputEmail1">Tipo Representación</label>
-                            <input type="number" name="TRepresentacionHC" id="TRepresentacionHC" placeholder="Escriba el tipo de representación" class="form-control">
-                        </div>
-                        <div class="form-group" align="left">
-                            <label class="font-weight-bold" for="exampleInputEmail1">Tipo Gráfica</label>
-                            <input type="number" name="TGraficaHC" id="TGraficaHC" placeholder="Escriba el tipo de Gráfica" class="form-control">
+                            <form class="mt-3">
+                                <label class="font-weight-bold">Archivo comprimido (formato .zip)</label>
+                            </form>
+                            <input type="file" id="fileMethod">
                         </div>
                     </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="RealizarMetodoGrafica()">Enviar</button>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="SubirMetodo()">Enviar</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
@@ -270,423 +59,47 @@
                     Práctica 5 Computación en la Nube
                 </h1>
             </div>
-            
+
             <div class="mt-5">
-                <h2 class="font-weight-bold">1. Subida Archivos.</h2>
-                <div class="mt-3">
-                    <h3 class="font-weight-bold">1.1 Imágenes.</h3>
-                    <table class="table table-sm table-striped mt-3 mx-auto w-auto table-hover">
-                        <thead>
-                            <tr class="thead-dark">
-                                <th scope="col">Elemento</th>
-                                <th scope="col">Descripción</th>
-                            </tr>
-                        </thead>
-                        <tbody align="left">
-                            <tr>
-                                <td class="font-weight-bold">Descripción</td>
-                                <td>Método que permite cargar una Imagen.</td>
-                            </tr>
-                            <tr>
-                                <td class="font-weight-bold">URL</td>
-                                <td>/api/Upload/Img</td>
-                            </tr>
-                            <tr>
-                                <td class="font-weight-bold">Devuelve</td>
-                                <td>
-                                    <ul>
-                                        <li>fieldname: Key de la petición POST.</li>
-                                        <li>originalname: Nombre original del archivo.</li>
-                                        <li>encoding: Tipoi de codificación.</li>
-                                        <li>mimetype: Tipo de archivo(text/jpeg,...).</li>
-                                        <li>destination: Lugar donde se va a almacenar.</li>
-                                        <li>filename: Nueno nombre del fichero. Este deberá ser utilizado posteriormente.</li>
-                                        <li>path: Lugar de Almacenamiento.</li>
-                                        <li>size: Tamaño del archivo.</li>
-                                    </ul>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>  
-                    <div align="center">
-                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#ModalSubirArchivo" onclick="SelectURL('/api/Upload/Img')">Probar</button>
-                    </div>                  
+                <div align="center">
+                    <h1>Métodos Estáticos</h1>
                 </div>
-                
-                <div class="mt-3">
-                    <h3 class="font-weight-bold">1.2 Hojas de Cálculo.</h3>
-                    <table class="table table-sm table-striped mt-3 mx-auto w-auto table-hover">
-                        <thead>
-                            <tr class="thead-dark">
-                                <th scope="col">Elemento</th>
-                                <th scope="col">Descripción</th>
-                            </tr>
-                        </thead>
-                        <tbody align="left">
-                            <tr>
-                                <td class="font-weight-bold">Descripción</td>
-                                <td>Método que permite cargar un archivo de tipo Hoja de Cálculo.</td>
-                            </tr>
-                            <tr>
-                                <td class="font-weight-bold">URL</td>
-                                <td>/api/Upload/HojaCalculo</td>
-                            </tr>
-                            <tr>
-                                <td class="font-weight-bold">Devuelve</td>
-                                <td>
-                                    <ul>
-                                        <li>fieldname: Key de la petición POST.</li>
-                                        <li>originalname: Nombre original del archivo.</li>
-                                        <li>encoding: Tipoi de codificación.</li>
-                                        <li>mimetype: Tipo de archivo(text/csv,...).</li>
-                                        <li>destination: Lugar donde se va a almacenar.</li>
-                                        <li>filename: Nueno nombre del fichero. Este deberá ser utilizado posteriormente.</li>
-                                        <li>path: Lugar de Almacenamiento.</li>
-                                        <li>size: Tamaño del archivo.</li>
-                                    </ul>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>     
-                    <div align="center">
-                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#ModalSubirArchivo" onclick="SelectURL('/api/Upload/HojaCalculo')">Probar</button>
-                    </div>                       
+                <div class="mt-5 row text-center" align="center">
+                    <div class="col-lg-3"></div>
+
+                    <div class="col-lg-3 col-s-6 card border-dark mb-4 box-shadow">
+                        <div class="card-header">
+                            <h4 class="my-0 font-weight-normal">Subir nuevo Algoritmo</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>Método que permite añadir una nuevo algoritmo (a través de un formulario) para que sea ejecutado en nuestro servidor.</p>
+                            <button type="button" class="btn btn-lg btn-block btn-dark" data-toggle="modal" data-target="#SubirMetodo" >Ejecutar</button>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-1"></div>
+
+                    <div class="col-lg-3 col-s-6 card border-dark mb-4 box-shadow">
+                        <div class="card-header">
+                          <h4 class="my-0 font-weight-normal">Descargar Página Actual</h4>
+                        </div>
+                        <div class="card-body">
+                          <p>Método que permite descargar la Página actual para que se tenga un ejemplo para el uso personal de la API.</p>
+                          <button type="button" class="btn btn-lg btn-block btn-dark" onclick="DescargarPaginaWeb()">Ejecutar</button>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
 
             <div class="mt-5">
-                <h2 class="font-weight-bold">2. Recuperar Archivos.</h2>
-                <div class="mt-3">
-                    <h3 class="font-weight-bold">2.1 Página Web Actual.</h3>
-                    <table class="table table-sm table-striped mt-3 mx-auto w-auto table-hover">
-                        <thead>
-                            <tr class="thead-dark">
-                                <th scope="col">Elemento</th>
-                                <th scope="col">Descripción</th>
-                            </tr>
-                        </thead>
-                        <tbody align="left">
-                            <tr>
-                                <td class="font-weight-bold">Descripción</td>
-                                <td>Método que permite descargar el código funete de la página actual. De igual forma, incorpora el código con todos los ejemplos funcionando correctamente.</td>
-                            </tr>
-                            <tr>
-                                <td class="font-weight-bold">URL</td>
-                                <td>http://IP:80</td>
-                            </tr>
-                        </tbody>
-                    </table>    
-                    <div align="center">
-                        <button type="button" class="btn btn-dark" onclick="DescargarPaginaWeb()">Probar</button>
-                    </div>                                           
+                <div align="center">
+                    <h1>Algoritmos</h1>
                 </div>
-                <div class="mt-3">
-                    <h3 class="font-weight-bold">2.2 Imágenes.</h3>
-                    <h4 class="font-weight-bold mt-3">2.2.1 Originales.</h4>
-                    <table class="table table-sm table-striped mt-3 mx-auto w-auto table-hover">
-                        <thead>
-                            <tr class="thead-dark">
-                                <th scope="col">Elemento</th>
-                                <th scope="col">Descripción</th>
-                            </tr>
-                        </thead>
-                        <tbody align="left">
-                            <tr>
-                                <td class="font-weight-bold">Descripción</td>
-                                <td>Método que permite recoger una Imagen subida previamente.</td>
-                            </tr>
-                            <tr>
-                                <td class="font-weight-bold">URL</td>
-                                <td>/api/Get/Img/Original/:name</td>
-                            </tr>
-                            <tr>
-                                <td class="font-weight-bold">Parámetros</td>
-                                <td>
-                                    <ul>
-                                        <li>Name: Nombre de la Imagen a recoger.</li>
-                                    </ul>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>    
-                    <div align="center">
-                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#ModalRecuperarArchivo" onclick="SelectURL('/api/Get/Img/Original/')">Probar</button>
-                    </div>                     
-
-                    <h4 class="font-weight-bold mt-3">2.3.2 Procesadas.</h4>
-                    <table class="table table-sm table-striped mt-3 mx-auto w-auto table-hover">
-                        <thead>
-                            <tr class="thead-dark">
-                                <th scope="col">Elemento</th>
-                                <th scope="col">Descripción</th>
-                            </tr>
-                        </thead>
-                        <tbody align="left">
-                            <tr>
-                                <td class="font-weight-bold">Descripción</td>
-                                <td>Método que permite recoger una Imagen procesada previamente.</td>
-                            </tr>
-                            <tr>
-                                <td class="font-weight-bold">URL</td>
-                                <td>/api/Get/Img/Final/:name</td>
-                            </tr>
-                            <tr>
-                                <td class="font-weight-bold">Parámetros</td>
-                                <td>
-                                    <ul>
-                                        <li>Name: Nombre de la Imagen a recoger.</li>
-                                    </ul>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>     
-                    <div align="center">
-                        <button type="button" class="btn btn-dark" data-toggle="modal" onclick="SelectURL('/api/Get/Img/Final/')" data-target="#ModalRecuperarArchivo">Probar</button>
-                    </div>                       
-                </div>
-
-                <div class="mt-3">
-                    <h3 class="font-weight-bold">2.3 Hojas de Cálculo.</h3>
-                    <h3 class="font-weight-bold">2.3.1 Originales.</h3>
-                    <table class="table table-sm table-striped mt-3 mx-auto w-auto table-hover">
-                        <thead>
-                            <tr class="thead-dark">
-                                <th scope="col">Elemento</th>
-                                <th scope="col">Descripción</th>
-                            </tr>
-                        </thead>
-                        <tbody align="left">
-                            <tr>
-                                <td class="font-weight-bold">Descripción</td>
-                                <td>Método que permite recoger una Imagen subida previamente.</td>
-                            </tr>
-                            <tr>
-                                <td class="font-weight-bold">URL</td>
-                                <td>/api/Get/HojaCalculo/Original/:name</td>
-                            </tr>
-                            <tr>
-                                <td class="font-weight-bold">Parámetros</td>
-                                <td>
-                                    <ul>
-                                        <li>Name: Nombre de la HojaCalculo a recoger.</li>
-                                    </ul>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>  
-                    <div align="center">
-                        <button type="button" class="btn btn-dark" data-toggle="modal" onclick="SelectURL('api/Get/HojaCalculo/Original/')" data-target="#ModalRecuperarHC">Probar</button>
-                    </div>             
-
-                    <h3 class="font-weight-bold">2.3.2 Procesadas.</h3>
-                    <table class="table table-sm table-striped mt-3 mx-auto w-auto table-hover">
-                        <thead>
-                            <tr class="thead-dark">
-                                <th scope="col">Elemento</th>
-                                <th scope="col">Descripción</th>
-                            </tr>
-                        </thead>
-                        <tbody align="left">
-                            <tr>
-                                <td class="font-weight-bold">Descripción</td>
-                                <td>Método que permite recoger una Imagen subida previamente.</td>
-                            </tr>
-                            <tr>
-                                <td class="font-weight-bold">URL</td>
-                                <td>/api/Get/Img/HojaCalculo/Final/:name</td>
-                            </tr>
-                            <tr>
-                                <td class="font-weight-bold">Parámetros</td>
-                                <td>
-                                    <ul>
-                                        <li>Name: Nombre de la Gráfica a recoger (Imagen).</li>
-                                    </ul>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>   
-                    <div align="center">
-                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#ModalRecuperarArchivo" onclick="SelectURL('/api/Get/HojaCalculo/Final/')" >Probar</button>
-                    </div>                        
+                <div id="method" class="mt-5 row text-center" align="center">
                 </div>
             </div>
 
-            <div class="mt-5">
-                <h2 class="font-weight-bold">3. Filtrado Imágenes.</h2>
-                <div class="mt-3">
-                    <h3 class="font-weight-bold">3.1 Filtrado Secuencial.</h3>
-                    <table class="table table-sm table-striped mt-3 mx-auto w-auto table-hover">
-                        <thead>
-                            <tr class="thead-dark">
-                                <th scope="col">Elemento</th>
-                                <th scope="col">Descripción</th>
-                            </tr>
-                        </thead>
-                        <tbody align="left">
-                            <tr>
-                                <td class="font-weight-bold">Descripción</td>
-                                <td>Método que permite aplicar un filtrado a una imagen subida previamente. Este filtrado usa un algoritmo secuencial.</td>
-                            </tr>
-                            <tr>
-                                <td class="font-weight-bold">URL</td>
-                                <td>/api/Secuencial/:name</td>
-                            </tr>
-                            <tr>
-                                <td class="font-weight-bold">Parámetros</td>
-                                <td>
-                                    <ul>
-                                        <li>Name: Nombre del fichero previamente subido.</li>
-                                    </ul>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="font-weight-bold">Nuevo Nombre</td>
-                                <td>Secuencial-Name</td>
-                            </tr>
-                        </tbody>
-                    </table>                    
-                    <div align="center">
-                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#ModalMetodos" onclick="SelectURLPost('/api/Secuencial/', '/api/Get/Img/Final/Secuencial-')">Probar</button>
-                    </div>    
-                </div>
-                
-                <div class="mt-3">
-                    <h3 class="font-weight-bold">3.2 Filtrado con OpenMp.</h3>
-                    <table class="table table-sm table-striped mt-3 mx-auto w-auto table-hover">
-                        <thead>
-                            <tr class="thead-dark">
-                                <th scope="col">Elemento</th>
-                                <th scope="col">Descripción</th>
-                            </tr>
-                        </thead>
-                        <tbody align="left">
-                            <tr>
-                                <td class="font-weight-bold">Descripción</td>
-                                <td>Método que permite aplicar un filtrado a una imagen subida previamente. Este filtrado usa un algoritmo paralelo.</td>
-                            </tr>
-                            <tr>
-                                <td class="font-weight-bold">URL</td>
-                                <td>/api/OpenMP/:name</td>
-                            </tr>
-                            <tr>
-                                <td class="font-weight-bold">Parámetros</td>
-                                <td>
-                                    <ul>
-                                        <li>Name: Nombre del fichero previamente subido.</li>
-                                    </ul>
-                                </td>
-                                </tr><tr>
-                                    <td class="font-weight-bold">Nuevo Nombre</td>
-                                    <td>OpenMP-Name</td>
-                                </tr>
-                            
-                        </tbody>
-                    </table>   
-                    <div align="center">
-                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#ModalMetodos" onclick="SelectURLPost('/api/OpenMP/', '/api/Get/Img/Final/OpenMP-')">Probar</button>
-                    </div>                     
-                </div>
-
-                <div class="mt-3">
-                    <h3 class="font-weight-bold">3.3 Filtrado con MPI.</h3>
-                    <table class="table table-sm table-striped mt-3 mx-auto w-auto table-hover">
-                        <thead>
-                            <tr class="thead-dark">
-                                <th scope="col">Elemento</th>
-                                <th scope="col">Descripción</th>
-                            </tr>
-                        </thead>
-                        <tbody align="left">
-                            <tr>
-                                <td class="font-weight-bold">Descripción</td>
-                                <td>Método que permite aplicar un filtrado a una imagen subida previamente. Este filtrado usa un algoritmo paralelo.</td>
-                            </tr>
-                            <tr>
-                                <td class="font-weight-bold">URL</td>
-                                <td>/api/MPI/:name/:height/:width</td>
-                            </tr>
-                            <tr>
-                                <td class="font-weight-bold">Parámetros</td>
-                                <td>
-                                    <ul>
-                                        <li>name: Nombre del fichero previamente subido.</li>
-                                        <li>height:  Altura de la imagen.</li>
-                                        <li>height:  Anchura de la imagen.</li>
-                                    </ul>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="font-weight-bold">Nuevo Nombre</td>
-                                <td>MPI-Name</td>
-                            </tr>
-                        </tbody>
-                    </table>    
-                    <div align="center">
-                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#ModalMetodoMPI" onclick="SelectURLPost('/api/MPI/', '/api/Get/Img/Final/MPI-')">Probar</button>
-                    </div>                    
-                </div>
-            </div>
-
-            <div class="mt-5">
-                <h2 class="font-weight-bold">4. Visualización de datos.</h2>
-                <div class="mt-3">
-                    <table class="table table-sm table-striped mt-3 mx-auto w-auto table-hover">
-                        <thead>
-                            <tr class="thead-dark">
-                                <th scope="col">Elemento</th>
-                                <th scope="col">Descripción</th>
-                            </tr>
-                        </thead>
-                        <tbody align="left">
-                            <tr>
-                                <td class="font-weight-bold">Descripción</td>
-                                <td>Método que permite ejecutar un código de representación de gráficas.</td>
-                            </tr>
-                            <tr>
-                                <td class="font-weight-bold">URL</td>
-                                <td>/api/Grafica/:dataEntry/:elementoX/:elementoY/:tipoRepresentacion/:tipoGrafica</td>
-                            </tr>
-                            <tr>
-                                <td class="font-weight-bold">Parámetros</td>
-                                <td>
-                                    <ul>
-                                        <li>dataEntry: Nombre del fichero previamente subido.</li>
-                                        <li>elementoX: Elemento del eje X.</li>
-                                        <li>elementoY: Elemento del eje Y.</li>
-                                        <li>tipoRepresentacion: En caso de agrupar el tipo de plateamiento que se quiere realizar.</li>
-                                            <ol>
-                                                <li>Suma.</li>
-                                                <li>Máximo.</li>
-                                                <li>Mínimo.</li>
-                                            </ol>
-                                        <li>tipoGrafica: Indicar el tipo de gráfica a devolver.</li>
-                                            <ol>
-                                                <li>Gráfica de Líneas.</li>
-                                                <li>Gráfica de Barras.</li>
-                                                <li>Gráfica de puntos.</li>
-                                                <li>Resumen.</li>
-                                            </ol>
-                                    </ul>
-                                </td>
-                                </tr><tr>
-                                    <td class="font-weight-bold">Nuevo Nombre</td>
-                                    <td>
-                                        <ul>
-                                            <li>Gráfica de Líneas: Lineas-dataEntry.</li>
-                                            <li>Gráfica de Barras: Barras-dataEntry.</li>
-                                            <li>Gráfica de Puntos: Puntos-dataEntry.</li>
-                                            <li>Resumen: Resumen-dataEntry.</li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                            
-                        </tbody>
-                    </table>           
-                    <div align="center">
-                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#ModalRecuperarGraficas" onclick="SelectURLPost('/api/Grafica/', '/api/Get/HojaCalculo/Final/')">Probar</button>
-                    </div>             
-                </div>
-            </div>
         </div> 
 
         <footer class="mt-5 page-footer font-small pt-4 bg-dark bg-dark text-white footer">
@@ -733,184 +146,50 @@
         </footer>
 
         <script>
-            var url = null;
-            var urlPost = null;
-            var urlGet = null;
 
-            function uploadFile() {
-                var blobFile = document.getElementById("file").files[0];
-                var formData = new FormData();
-                formData.append("file", blobFile);
+            CargarMetodos();
 
-                $.ajax({
-                    url: url,
-                    type: "POST",
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function(response) {
-                        document.getElementById('respuestaSubirFichero').innerHTML = JSON.stringify(response, undefined, 2);
-                        document.getElementById('file').value = null;
-                        document.getElementById('img').src = "";
-                        console.log(document.getElementById('img'));
-                        $("#ModalSubirArchivo").modal('hide');
-                        $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
-                        $('.modal-backdrop').remove();//eliminamos el backdrop del modal
-                        $("#ModalVisualizarDatosSubida").modal();
-                    },
-                    error: function(jqXHR, textStatus, errorMessage) {
-                        console.log(errorMessage); // Opcional
-                    }
+            function CargarMetodos(){
+                $( document ).ready(function() {
+                    $.get('/api/Get/Methods', function(respuesta, status){
+                        if (status == 'success'){
+                            var methods = respuesta["Methods"];
+                            document.getElementById('method').innerHTML = "";
+                            for (x=0;x<(Object.keys(methods).length);x++) { 
+                                document.getElementById('method').innerHTML += '<div class="col-lg-1"></div><div class="col-lg-3 col-s-6 card border-dark mb-4 box-shadow"><div class="card-header"><h4 class="my-0 font-weight-normal">' + methods[x]["Name"] + '</h4></div><div class="card-body"><p>' + methods[x]["Description"] +'</p><button type="button" class="btn btn-lg btn-block btn-dark">Ejecutar</button></div></div>'; 
+                            }
+                        }
+                    })
                 });
-            }
+            } 
 
             function DescargarPaginaWeb() 
             {
-                var nameHC = document.getElementById('nameHC').value;
+                console.log("Entró");
                 var link = document.createElement("a");
                 link.download = "servidorAPI.html";
                 link.href = "/";
                 link.click();
             }
 
-            function DescargarHojaCalculo() 
-            {
-                var nameHC = document.getElementById('nameHC').value;
-                var link = document.createElement("a");
-                link.download = nameHC;
-                link.href = url + nameHC;
-                link.click();
-            }
+            function SubirMetodo() {
+                var formData = new FormData();
+                formData.append("file", document.getElementById("fileJSON").files[0]);
+                formData.append("file", document.getElementById("fileMethod").files[0]);
 
-            function mostrar(){
-                var archivo = document.getElementById("file").files[0];
-                console.log(archivo.type);
-                var  parte = archivo.type.split('/');
-                if(parte[0] == "image"){
-                    var reader = new FileReader();
-                    if (file) {
-                        reader.readAsDataURL(archivo );
-                        reader.onloadend = function () {
-                            document.getElementById("img").src = reader.result;
-                        }
+                $.ajax({
+                    url: "/api/Upload/Method",
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                    },
+                    error: function(jqXHR, textStatus, errorMessage) {
+                        console.log(errorMessage); 
                     }
-                }
-            }
-
-            function RealizarMetodo(){
-                $("#ModalCargaImagen").modal();
-                var imageNameMethod = document.getElementById('imageNameMethod').value;
-                urlPost = urlPost + imageNameMethod;
-                urlGet = urlGet + imageNameMethod;
-                $( document ).ready(function() {
-                    $.get(urlPost, function(respuesta, status){
-                        if (status == 'success'){
-                            SelectURL(urlGet);
-                            $("#ModalCargaImagen").modal('hide');
-                            $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
-                            $('.modal-backdrop').remove();//eliminamos el backdrop del modal
-                            VisualizarImagenMetodo();                        
-                        }
-                    })
                 });
             }
-
-            function RealizarMetodoMPI(){
-                var altura = document.getElementById('alturaMPI').value;
-                var anchura = document.getElementById('anchuraMPI').value;
-                $("#ModalCargaImagen").modal();
-                var imageNameMethod = document.getElementById('imageNameMPI').value;
-                urlPost = urlPost + imageNameMethod + "/" + altura + "/" + anchura;
-                urlGet = urlGet + imageNameMethod;
-                $( document ).ready(function() {
-                    $.get(urlPost, function(respuesta, status){
-                        if (status == 'success'){
-                            SelectURL(urlGet);
-                            $("#ModalCargaImagen").modal('hide');
-                            $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
-                            $('.modal-backdrop').remove();//eliminamos el backdrop del modal
-                            VisualizarImagenMetodo();                        
-                        }
-                    })
-                });
-            }
-
-            function RealizarMetodoGrafica(){
-                var elementoX = document.getElementById('ElementoXHC').value;
-                var elementoY = document.getElementById('ElementoYHC').value;
-                var tipoRepresentacion = document.getElementById('TRepresentacionHC').value;
-                var tipoGrafica = document.getElementById('TGraficaHC').value;
-
-                switch(parseInt(tipoGrafica)) {
-                    case 1:
-                        urlGet = urlGet + "Lineas-";
-                        break;
-
-                    case 2:
-                        urlGet = urlGet + "Barras-";
-                        break;
-
-                    case 3:
-                        urlGet = urlGet + "Puntos-";
-                        break;
-
-                    case 4:
-                        urlGet = urlGet + "Resumen-";
-                        break;
-                } 
-
-                $("#ModalCargaImagen").modal();
-                var imageNameMethod = document.getElementById('NombreHC').value;
-                urlPost = urlPost + imageNameMethod + "/" + elementoX + "/" + elementoY + "/" + tipoRepresentacion + "/" + tipoGrafica;
-                var  parte = imageNameMethod.split('.');
-	            imageNameMethod = parte[0] + ".png";
-                urlGet = urlGet + imageNameMethod;
-                console.log(urlPost);
-                console.log(urlGet);
-                $( document ).ready(function() {
-                    $.get(urlPost, function(respuesta, status){
-                        if (status == 'success'){
-                            SelectURL(urlGet);
-                            $("#ModalCargaImagen").modal('hide');
-                            $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
-                            $('.modal-backdrop').remove();//eliminamos el backdrop del modal
-                            VisualizarImagenMetodo();                        
-                        }
-                    })
-                });
-            }
-
-            function SelectURLPost(_urlPost, _urlGet) {
-                urlPost =_urlPost;
-                urlGet = _urlGet;
-            }
-
-            function SelectURL(urlOrigin) {
-                url = urlOrigin;
-            }
-
-            function VisualizarImagen() {
-                var imageName = document.getElementById('imageName').value;
-                var URLImage = url + imageName;
-                document.getElementById('myimage').src = URLImage;
-                $('body').removeClass('ModalRecuperarImagenesOriginales');
-                $("#ModalVerImagen").modal();
-            }
-
-            function VisualizarImagenMetodo() {
-                var URLImage = url;
-                document.getElementById('myimage').src = URLImage;
-                $('body').removeClass('ModalRecuperarImagenesOriginales');
-                $("#ModalVerImagen").modal();
-            }
-            
-            function ClickButton() {
-                var nameHC = document.getElementById('myimage');
-                var link = document.createElement("a");
-                link.download = "image.png";
-                link.href = nameHC.src;
-                link.click();
-            };
         </script>
     </body>
 </html>
