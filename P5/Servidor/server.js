@@ -85,6 +85,11 @@ app.get('/api/Execute/Method/:name/:file/:fileExit/:Elements', upload.single('fi
 	});	
 })
 
+// Permite devolver El archivo con todos los Métodos
+app.get('/api/Get/Methods', function(req, res) {
+	res.sendFile('./Metodos.json', { root: __dirname });
+});
+
 // Emite el servidor por el Puerto 80
 app.listen(80, function() {
     console.log('API Computación en la Nube, escuchando el puerto 80!\n');
