@@ -1,1 +1,1 @@
-Carpeta que permite coger los datos al subir un método.
+Carèta donde se almacenan los datos para subir un método.
