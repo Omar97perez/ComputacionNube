@@ -52,6 +52,15 @@ app.post('/api/Upload/Method', uploadMethod.array('file', 2), (req, res) => {
 			fs.writeFileSync('./Metodos.json', jsonStr, { mode: 0o755 });
 			var NewMethod = JSON.parse(data);
 			executeUnzip('./EstructuraMetodos/'+ req.files[1].filename, './Metodos/' + NewMethod["Name"]);	
+
+			const exec = require('child_process').exec;
+			exec("make -C ./Metodos/" + NewMethod["Name"], (err, stdout, stderr) => {
+			if (err) {
+				console.error(`exec error: ${err}`);
+				return;
+			}
+				res.send("finalizado");
+			});
 		});		
 	});
 });
