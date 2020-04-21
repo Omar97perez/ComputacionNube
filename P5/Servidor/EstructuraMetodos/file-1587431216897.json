@@ -1,0 +1,5 @@
+{
+  "Name":"Prueba",
+  "Description": "Método que permite aplicar un filtrado una Imagen a través de un Algoritmo OpenMp. Este filtro permite poder enborronar una imagen dada previamente.",
+  "Element": []
+}

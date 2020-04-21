@@ -57,7 +57,7 @@ app.post('/api/Upload/Method', uploadMethod.array('file', 2), (req, res) => {
 })
 
 // Permite Ejecutar Métodos 
-app.get('/api/Execute/Method/:name/:file/:fileExit/:Elements', upload.single('file'), (req, res) => {
+app.post('/api/Execute/Method/:name/:Elements', upload.single('file'), (req, res) => {
 	
 	var elementsUrl = req.params.Elements.split("-");
 	var fileExit = req.file.filename.split(".");
@@ -80,7 +80,7 @@ app.get('/api/Execute/Method/:name/:file/:fileExit/:Elements', upload.single('fi
 			console.error(`exec error: ${err}`);
 			return;
 		}
-			res.sendFile('./Archivos/' + req.file.filename, { root: __dirname });
+			res.send(req.file.filename);
 		});
 	});	
 })
@@ -88,6 +88,12 @@ app.get('/api/Execute/Method/:name/:file/:fileExit/:Elements', upload.single('fi
 // Permite devolver El archivo con todos los Métodos
 app.get('/api/Get/Methods', function(req, res) {
 	res.sendFile('./Metodos.json', { root: __dirname });
+});
+
+// Permite recoger Imágenes Originales (sin modificar)
+app.get('/api/Get/file/:name',(req,res) =>
+{
+	res.sendFile('./Archivos/' + req.params.name, { root: __dirname });
 });
 
 // Emite el servidor por el Puerto 80

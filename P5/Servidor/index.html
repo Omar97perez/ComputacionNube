@@ -25,7 +25,7 @@
             <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                <h3 class="modal-title" id="exampleModalLabel">Recuperar Imagen Procesada</h3>
+                <h3 class="modal-title" id="exampleModalLabel">Subir nuevo Algoritmo</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -50,6 +50,76 @@
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
+            </div>
+        </div>
+
+        <!-- Modal Métodos -->
+        <div class="modal fade" id="ModalEjecutarMetodo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h3 class="modal-title" id="TitleMethod"></h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body" align="center">
+                    <form id="ModalMetodo"></form>
+                    <form class="mt-3" align="left">
+                        <label class="font-weight-bold">Imagen</label>
+                    </form>
+                    <input type="file" id="fileExecuteMethod">
+                </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="EjecutarAlgoritmo()">Enviar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <!-- Modal Cargar Imagen -->
+        <div class="modal fade bd-example-modal-lg" id="ModalCargaImagen" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="exampleModalLabel">Visualizar Imagen</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" >
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-border" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Ver Imágenes -->
+        <div class="modal fade bd-example-modal-lg" id="ModalVerImagen" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="exampleModalLabel">Visualizar Imagen</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" align="center">
+                        <img class="img-fluid mt-3" id="myimage"/>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="prueba" rel="myimage" onclick="ClickButton()">Descargar</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -148,24 +218,74 @@
         <script>
 
             CargarMetodos();
+            var methods = "";
+            var titleMethod = "";
 
             function CargarMetodos(){
                 $( document ).ready(function() {
                     $.get('/api/Get/Methods', function(respuesta, status){
                         if (status == 'success'){
-                            var methods = respuesta["Methods"];
+                            methods = respuesta["Methods"];
                             document.getElementById('method').innerHTML = "";
                             for (x=0;x<(Object.keys(methods).length);x++) { 
-                                document.getElementById('method').innerHTML += '<div class="col-lg-1"></div><div class="col-lg-3 col-s-6 card border-dark mb-4 box-shadow"><div class="card-header"><h4 class="my-0 font-weight-normal">' + methods[x]["Name"] + '</h4></div><div class="card-body"><p>' + methods[x]["Description"] +'</p><button type="button" class="btn btn-lg btn-block btn-dark">Ejecutar</button></div></div>'; 
+                                document.getElementById('method').innerHTML += '<div class="col-lg-1"></div><div class="col-lg-3 col-s-6 card border-dark mb-4 box-shadow"><div class="card-header"><h4 class="my-0 font-weight-normal">' + methods[x]["Name"] + '</h4></div><div class="card-body"><p>' + methods[x]["Description"] +'</p><button type="button" data-toggle="modal" data-target="#ModalEjecutarMetodo" onclick="CargarFormulario(\''+ methods[x]["Name"] +'\')" class="btn btn-lg btn-block btn-dark">Ejecutar</button></div></div>'; 
                             }
                         }
                     })
                 });
             } 
 
+            function CargarFormulario(title){
+                titleMethod = title;
+                var position = methods.findIndex(method => method.Name === title);
+                document.getElementById('TitleMethod').innerHTML = methods[position]["Name"];
+                document.getElementById('ModalMetodo').innerHTML = "";
+                for (x=0;x<(Object.keys(methods[position]["Elements"]).length);x++) { 
+                    document.getElementById('ModalMetodo').innerHTML += '<div class="mt-3" align="left"><label class="font-weight-bold" for="exampleInputEmail1">'+ methods[position]["Elements"][x][x] + '</label><input type="text" name="' + methods[position]["Elements"][x][x] + '" id="' + methods[position]["Elements"][x][x] + '" class="form-control"></div>';
+                }
+            }
+
+            function EjecutarAlgoritmo(){
+                $("#ModalCargaImagen").modal();
+                var position = methods.findIndex(method => method.Name === titleMethod);
+                var elements = "";
+                for (x=0;x<(Object.keys(methods[position]["Elements"]).length);x++) { 
+                    if(x != 0){
+                        elements +=  "-";
+                    }
+                    elements += document.getElementById(methods[position]["Elements"][x][x]).value;
+                }
+
+                var urlPostMetodo = '/api/Execute/Method/' + titleMethod + '/' + elements;
+                var formData = new FormData();
+                formData.append("file", document.getElementById("fileExecuteMethod").files[0]);
+
+                $.ajax({
+                    url: urlPostMetodo,
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        $("#ModalCargaImagen").modal('hide');
+                        $('body').removeClass('modal-open');
+                        $('.modal-backdrop').remove();
+                        VisualizarImagen(response);
+                    },
+                    error: function(jqXHR, textStatus, errorMessage) {
+                        console.log(errorMessage); 
+                    }
+                });
+            }
+
+            function VisualizarImagen(response) {
+                document.getElementById('myimage').src = '/api/Get/file/' + response;
+                $('body').removeClass('ModalCargaImagen');
+                $("#ModalVerImagen").modal();
+            }
+ 
             function DescargarPaginaWeb() 
             {
-                console.log("Entró");
                 var link = document.createElement("a");
                 link.download = "servidorAPI.html";
                 link.href = "/";
