@@ -246,7 +246,14 @@
                     elements += document.getElementById(methods[position]["Elements"][x][x]).value;
                 }
 
-                var urlPostMetodo = '/api/Execute/Method/' + titleMethod + '/' + elements;
+                var urlPostMetodo = "";
+
+                if(elements == ""){
+                    urlPostMetodo = '/api/Execute/Method/' + titleMethod + '/' + "no";
+                }
+                else{
+                    urlPostMetodo = '/api/Execute/Method/' + titleMethod + '/' + elements;
+                }
                 var formData = new FormData();
                 formData.append("file", document.getElementById("fileExecuteMethod").files[0]);
 

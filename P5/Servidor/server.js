@@ -70,8 +70,10 @@ app.post('/api/Execute/Method/:name/:Elements', upload.single('file'), (req, res
 
 		var stringFinal = "";
 
-		for(x =0; x < elementsUrl.length; x++){
-			stringFinal += " " + elements[x][x] + "=" + elementsUrl[x];
+		if (elementsUrl.length != 1){
+			for(x =0; x < elementsUrl.length; x++){
+				stringFinal += " " + elements[x][x] + "=" + elementsUrl[x];
+			}	
 		}
 
 		const exec = require('child_process').exec;
