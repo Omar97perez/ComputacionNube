@@ -1,0 +1,1 @@
+{"Name":"ADM","Description": "Método que permite recoger una gráfica a través de un fichero '.csv' dado con anteriornidad.","Elements":[{"0":"tipoGrafica"},{"1":"elementoX"},{"2":"elementoY"},{"3":"elementoAgrupar"},{"4":"tipoRepresentacion"},{"5":"elementoFiltrar"},{"6":"elementoRepresentar"}]}

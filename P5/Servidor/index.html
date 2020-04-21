@@ -276,7 +276,8 @@
             }
 
             function VisualizarImagen(response) {
-                document.getElementById('myimage').src = '/api/Get/file/' + response;
+                response = response.split(".");
+                document.getElementById('myimage').src = '/api/Get/file/' + response[0] + ".png";
                 $('body').removeClass('ModalCargaImagen');
                 $("#ModalVerImagen").modal();
             }
