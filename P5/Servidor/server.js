@@ -54,7 +54,7 @@ app.post('/api/Upload/Method', uploadMethod.array('file', 2), (req, res) => {
 			executeUnzip('./EstructuraMetodos/'+ req.files[1].filename, './Metodos/' + NewMethod["Name"]);	
 		});		
 	});
-})
+});
 
 // Permite Ejecutar Métodos 
 app.post('/api/Execute/Method/:name/:Elements', upload.single('file'), (req, res) => {
@@ -83,7 +83,7 @@ app.post('/api/Execute/Method/:name/:Elements', upload.single('file'), (req, res
 			res.send(req.file.filename);
 		});
 	});	
-})
+});
 
 // Permite devolver El archivo con todos los Métodos
 app.get('/api/Get/Methods', function(req, res) {
