@@ -1,0 +1,1 @@
+Carpeta que permite coger los datos al subir un método.
