@@ -1,1 +1,0 @@
-{"Name":"MPI","Description": "Método que permite aplicar un filtrado a una imagen a través de un Algoritmo usando la tecnología MPI. Este filtro permite poder enborronar una imagen dada previamente.","Elements":[{"0":"height"},{"1":"width"}]}
