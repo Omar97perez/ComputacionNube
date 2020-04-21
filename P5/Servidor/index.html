@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="icon" type="image/png" href="https://images.vexels.com/media/users/3/131733/isolated/preview/c1d4154810e0275e30ab53a1e81a8c47---lbum-de-fotos-icono-de-c--rculo-by-vexels.png" />  
+        <link rel="icon" type="image/png" href="https://cdn.pixabay.com/photo/2017/02/07/01/59/cloud-2044797_960_720.png" />  
         <meta charset="utf-8">
-        <title>Explicación API</title>
+        <title>CodeCloud</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -16,7 +16,9 @@
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
-                <a class="navbar-brand" href="#">API Computación en la Nube</a>
+                <a class="navbar-brand" href="#"><img src="https://cdn.pixabay.com/photo/2017/02/07/01/59/cloud-2044797_960_720.png" alt="icono" width="35" height="35"> 
+                    CodeCloud
+                </a>
             </div>
         </nav>
 
@@ -125,8 +127,8 @@
 
         <div class="container">
             <div class="mt-5" align="center">
-                <h1 class="mt-5"><img src="https://images.vexels.com/media/users/3/131733/isolated/preview/c1d4154810e0275e30ab53a1e81a8c47---lbum-de-fotos-icono-de-c--rculo-by-vexels.png" alt="icono" width="75" height="75"> 
-                    Práctica 5 Computación en la Nube
+                <h1 class="mt-5"><img src="https://cdn.pixabay.com/photo/2017/02/07/01/59/cloud-2044797_960_720.png" alt="icono" width="75" height="75"> 
+                    CodeCloud
                 </h1>
             </div>
 
@@ -177,40 +179,27 @@
             <div class="container-fluid text-center text-md-left">
                 <div class="row">
                     <div class="col-md-6 mt-md-0 mt-3">
-                    <h5 class="text-uppercase">Práctica 5</h5>
-                    <p>Práctica 5 desarrollado para la asignatura de Computación Nube.</p>
+                    <h5 class="text-uppercase"><img src="https://cdn.pixabay.com/photo/2017/02/07/01/59/cloud-2044797_960_720.png" alt="icono" width="35" height="35"> CodeCloud</h5>
+                    <p>Ejecuta tu código online (permite cualquier lenguaje).</p>
                     <h5 class="text-uppercase">Datos de contácto</h5>
                         <h6><b>Autor: </b>Omar Pérez Znakar</h6>
                         <h6><b>Correo: </b>alu0100945645@ull.edu.es</h6>
                     </div>
                     <div class="col-md-6 mb-md-0 mb-3">
-                    <h5 class="text-uppercase">API</h5>
+                    <h5 class="text-uppercase">Métodos</h5>
                     <ul class="list-unstyled">
                         
                         <li>
-                            <a style="color:white">1. Subida Archivos.</a>
+                            <a style="color:white">1. Métodos Estáticos.</a>
                         </li>
                         
                         <li>
-                            <a style="color:white">2. Recuperar Archivos.</a>
-                        </li>
-
-                        <li>
-                            <a style="color:white">3. Filtrado Imágenes.</a>
-                        </li>
-
-                        <li>
-                            <a style="color:white">4. Gráficas.</a>
-                        </li>
-                        
+                            <a style="color:white">2. Algoritmos.</a>
+                        </li>                        
                     </ul>
                     </div>
                 </div>
-                        <!-- Footer Links -->
-                <!-- Copyright -->
-                <div class="footer-copyright text-center py-3">Práctica 5 realizada por <b>Omar Pérez Znakar</b>
-                    </div>
-                    <!-- Copyright -->
+                <div class="footer-copyright text-center py-3"><img src="https://cdn.pixabay.com/photo/2017/02/07/01/59/cloud-2044797_960_720.png" alt="icono" width="25" height="25"> CodeCloud</div>
                 </div>
             </div>
         </footer>
@@ -222,6 +211,7 @@
             var titleMethod = "";
 
             function CargarMetodos(){
+                methods = "";
                 $( document ).ready(function() {
                     $.get('/api/Get/Methods', function(respuesta, status){
                         if (status == 'success'){
