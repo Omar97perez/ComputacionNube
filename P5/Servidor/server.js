@@ -55,14 +55,14 @@ app.post('/api/Upload/Method', uploadMethod.array('file', 2), (req, res) => {
 
 			const exec = require('child_process').exec;
 			exec("make -C ./Metodos/" + NewMethod["Name"], (err, stdout, stderr) => {
-			if (err) {
-				console.error(`exec error: ${err}`);
-				return;
-			}
-				res.send("finalizado");
+				if (err) {
+					console.error(`exec error: ${err}`);
+					return;
+				}
 			});
 		});		
 	});
+	res.send("Funcionó");
 });
 
 // Permite Ejecutar Métodos 

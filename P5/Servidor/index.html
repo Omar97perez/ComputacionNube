@@ -12,6 +12,19 @@
         <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
         <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <style>
+            .loading {
+                position: fixed;
+                left: 0px;
+                top: 0px;
+                width: 100%;
+                height: 100%;
+                z-index: 9999;
+                background: url('https://datacentersupport.lenovo.com/esv4/images/loading.gif') 50% 50% no-repeat rgb(249, 249, 249);
+                opacity: .8;
+            }
+        </style>
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -123,6 +136,11 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="form-group col-sm-4 col-sm-offset-4 text-center">
+            <button type="button" id="navegar" class="btn btn-primary" onclick="executeAjaxRequest();">Navegar</button>
+            <div id="loading"></div></div>
         </div>
 
         <div class="container">
@@ -302,13 +320,23 @@
                     processData: false,
                     contentType: false,
                     success: function(response) {
-                        window.location.reload(); 
-                        document.location.reload();
+                        executeAjaxRequest();
+                        var int=self.setInterval("Endrefresh()",6000);
                     },
                     error: function(jqXHR, textStatus, errorMessage) {
                         console.log(errorMessage); 
                     }
                 });
+            }
+
+            function Endrefresh()
+            {
+                document.getElementById("loading").className = "";
+                location.reload(true);
+            }
+
+            function executeAjaxRequest() {
+                document.getElementById("loading").className = "loading";
             }
 
             function DescargarImagen() {
