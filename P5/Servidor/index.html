@@ -302,6 +302,8 @@
                     processData: false,
                     contentType: false,
                     success: function(response) {
+                        window.location.reload(); 
+                        document.location.reload();
                     },
                     error: function(jqXHR, textStatus, errorMessage) {
                         console.log(errorMessage); 
