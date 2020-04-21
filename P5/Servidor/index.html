@@ -118,7 +118,7 @@
                         <img class="img-fluid mt-3" id="myimage"/>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="prueba" rel="myimage" onclick="ClickButton()">Descargar</button>
+                        <button type="button" class="btn btn-primary" id="prueba" rel="myimage" onclick="DescargarImagen()">Descargar</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
@@ -307,6 +307,14 @@
                     }
                 });
             }
+
+            function DescargarImagen() {
+                var nameHC = document.getElementById('myimage');
+                var link = document.createElement("a");
+                link.download = "image.png";
+                link.href = nameHC.src;
+                link.click();
+            };
         </script>
     </body>
 </html>
