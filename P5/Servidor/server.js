@@ -72,7 +72,7 @@ app.post('/api/Execute/Method/:name/:Elements', upload.single('file'), (req, res
 
 		if (elementsUrl.length != 1){
 			for(x =0; x < elementsUrl.length; x++){
-				stringFinal += " " + elements[x][x] + "=" + elementsUrl[x];
+				stringFinal += " " + elements[x]["Name"] + "=" + elementsUrl[x];
 			}	
 		}
 
