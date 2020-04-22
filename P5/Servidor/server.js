@@ -39,7 +39,7 @@ function executeUnzip(filename, site){
 
 
 function executeMake(nameMethod){
-	require('child_process').execSync("sudo make -C ./Metodos/" + nameMethod);
+	require('child_process').execSync("sudo make -C ./Metodos/" + nameMethod) + " all";
 }
 
 // Permite devolver El archivo HTML de explicación
