@@ -73,6 +73,7 @@ app.post('/api/Execute/Method/:name/:Elements', upload.single('file'), (req, res
 		var methods = JSON.parse(data);
 		var element = methods['Methods'].findIndex(method => method.Name === req.params.name);
 		var method = methods['Methods'][element];
+		executeMake(method["Name"]);	
 		var elements = method["Elements"];
 
 		var stringFinal = "";
