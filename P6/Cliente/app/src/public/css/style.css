@@ -24,8 +24,12 @@ a {
 }
 
 a:hover {
-  color: #1b89d8;
-  text-decoration: none;
+  color: #1b89d8 !important;
+  text-decoration: none !important;
+}
+
+.tipo-1{
+  cursor: pointer;
 }
 
 .link-two {
@@ -1666,13 +1670,12 @@ footer .credits {
 
 .btn.btn-b-n {
   background-color: #1b89d8;
-  color: #ffffff;
+  color: #ffffff !important;
   border-radius: 0;
 }
 
-.btn.btn-b-n:hover {
-  background-color: #26a356;
-  color: #ffffff;
+.btn.btn-b-n .dropdown-toggle{
+  color: #ffffff !important;
 }
 
 @media (min-width: 576px) {
@@ -1957,7 +1960,7 @@ footer .credits {
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 991px) {
   .card-box-d .card-overlay-hover {
     padding: 15px 40px 5px 35px;
   }
@@ -2070,8 +2073,6 @@ footer .credits {
   padding: 2rem 0 3rem;
 }
 
-
-
 .card {
     border: 1px solid #333;
     height: 25rem;
@@ -2103,12 +2104,14 @@ footer .credits {
 .contenedor1 {
   text-align: center; /* requerido para alineación horizontal */
 }
+
 .contenido1 {
   line-height: 3;
   display: inline-block;
   vertical-align: middle;
   text-align: left; /* requerido para volver a alinear texto izquierda */
 }
+
 .carousel-control-prev-icon {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
 }

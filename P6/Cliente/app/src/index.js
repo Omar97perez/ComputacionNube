@@ -93,7 +93,7 @@ mongoose.connect('mongodb://omar:antonio1997@cluster0-shard-00-00-svm5b.mongodb.
 
   // Permite devolver El archivo HTML de explicación
   app.get('/Get/Example', function(req, res) {
-    res.sendFile('./Server/index.html', { root: __dirname });
+    res.sendFile('./Servidor/index.html', { root: __dirname });
   });
 
   // Permite Crear Métodos 

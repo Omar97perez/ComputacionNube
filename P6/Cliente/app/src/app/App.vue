@@ -15,7 +15,7 @@
               </div>
               <div class="col-8">
                 <div class="w-header-a">
-                  <h3 class="w-title-a text-brand"><img src="img/cloud-2044797_960_720.webp"  alt="favicon"  width="15%"> Code<span class="color-b">Cloud</span></h3>
+                  <h3 class="w-title-a text-brand row"><img src="img/cloud-2044797_960_720.webp" class="mr-1"  alt="favicon"  width="15%"> Code<h class="color-b">Cloud</h></h3>
                 </div>              
               </div>
             </div>
@@ -25,15 +25,19 @@
            <div class="navbar-collapse collapse justify-content-center mostrado-movil" id="navbarDefault" align="center">
               <button type="button" class="btn btn-b-n mostrado-movil" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-expanded="false" >
                 <div class="dropdown"  v-if="loggedIn">
-                  <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white"><span class="fa fa-user" aria-hidden="true" style="color:white"></span></a>
+                  <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><span class="fa fa-user" aria-hidden="true"></span></a>
                   <div class="dropdown-menu" aria-labelledby="login" >
-                    <a class="dropdown-item" ><router-link :to="{ name: 'nuevoanuncio' }"class="navbar-toggler collapsed" data-toggle="collapse" data-target="#navbarDefault"
+                    <a class="dropdown-item" ><router-link :to="{ name: 'nuevoanuncio' }" class=" collapsed" data-toggle="collapse" data-target="#navbarDefault"
                       aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-plus"></i> Nuevo Algoritmo</router-link></a>
-                    <a class="dropdown-item" ><router-link :to="{ name: 'ModUsuario' }" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#navbarDefault"
+                    <a class="dropdown-item" ><router-link :to="{ name: 'ModUsuario' }" class=" collapsed" data-toggle="collapse" data-target="#navbarDefault"
                       aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-user"></i> Modificar Usuario</router-link></a>
-                    <a class="dropdown-item" ><router-link :to="{ name: 'perfil' }" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#navbarDefault"
+                    <a class="dropdown-item" ><router-link :to="{ name: 'perfil' }" class=" collapsed" data-toggle="collapse" data-target="#navbarDefault"
                       aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-user"></i> Perfil</router-link></a>
-                    <a class="dropdown-item" ><router-link :to="{ name: 'Logout' }" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#navbarDefault"
+
+                    <a class="dropdown-item  collapsed" @click="DescargarPaginaWeb()"><i class="fa fa-user"></i> Descargar Ejemplo Cliente</a>
+
+
+                    <a class="dropdown-item" ><router-link :to="{ name: 'Logout' }" class="collapsed" data-toggle="collapse" data-target="#navbarDefault"
                       aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation"> <i class="fas fa-sign-out-alt"></i> Cerrar Sesión</router-link></a>
                   </div>
                 </div>
@@ -81,11 +85,12 @@
 
                <button type="button" class="btn btn-b-n" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-expanded="false" >
                  <div class="dropdown"  v-if="loggedIn">
-                   <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white!important"><span class="fa fa-user" aria-hidden="true" style="color:white"></span></a>
+                   <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fa fa-user" aria-hidden="true"></span></a>
                    <div class="dropdown-menu" aria-labelledby="login" >
                      <a class="dropdown-item" ><router-link :to="{ name: 'nuevoanuncio' }" class="na-link"><i class="fa fa-plus"></i> Nuevo Algoritmo</router-link></a>
                      <a class="dropdown-item" ><router-link :to="{ name: 'ModUsuario' }" class="na-link"><i class="fa fa-user"></i> Modificar Usuario</router-link></a>
                      <a class="dropdown-item" ><router-link :to="{ name: 'perfil' }" class="na-link"><i class="fa fa-user"></i> Perfil</router-link></a>
+                      <a class="dropdown-item" @click="DescargarPaginaWeb()"><i class="fa fa-user"></i> Descargar Ejemplo Cliente</a>
                      <a class="dropdown-item" ><router-link :to="{ name: 'Logout' }" class="na-link"> <i class="fas fa-sign-out-alt"></i> Cerrar Sesión</router-link></a>
                    </div>
                  </div>
@@ -107,7 +112,7 @@
             <div class="col-sm-12 col-md-4">
               <div class="widget-a">
                 <div class="w-header-a">
-                  <h3 class="w-title-a text-brand"><img src="img/cloud-2044797_960_720.webp"  alt="favicon"  width="15%"> Code<span class="color-b">Cloud</span></h3>
+                  <h3 class="w-title-a text-brand"><img src="img/cloud-2044797_960_720.webp"  alt="favicon"  width="15%"> Code<a class="color-b">Cloud</a></h3>
                 </div>
                 <div class="w-body-a">
                   <p class="w-text-a color-a">
@@ -256,6 +261,13 @@ export default {
       console.log(invId)
       this.$store.dispatch('addToPrev', invId);
     },
+    DescargarPaginaWeb() 
+    {
+      var link = document.createElement("a");
+      link.download = "servidorAPI.html";
+      link.href = "/Get/Example";
+      link.click();
+    }
   },
 };
 </script>

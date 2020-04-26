@@ -117,31 +117,31 @@
             <nav class="pagination-a">
               <ul class="pagination justify-content-end">
                 <li class="page-item" @click="pagination(1)">
-                  <a class="page-link" href="#" tabindex="-1">
+                  <p class="page-link tipo-1" href="#" tabindex="-1">
                     <span class="ion-ios-arrow-back"></span>
                     <span class="ion-ios-arrow-back"></span>
-                  </a>
+                  </p>
                 </li>
                 <li class="page-item" @click="cambioanterior">
-                  <a class="page-link" href="#" tabindex="-1">
+                  <p class="page-link tipo-1" href="#" tabindex="-1">
                     <span class="ion-ios-arrow-back"></span>
-                  </a>
+                  </p>
                 </li>
-                <div v-for="Num in NumPaginas()" class="">
+                <div v-for="Num in NumPaginas()" >
                   <li  class="page-item">
-                      <a class="page-link" @click="pagination(Num)">{{Num}}</a>
+                      <p class="page-link tipo-1" @click="pagination(Num)">{{Num}}</p>
                   </li>
                 </div>
                 <li class="page-item" @click="cambiosiguiente">
-                  <a class="page-link" href="#">
+                  <p class="page-link tipo-1" href="#">
                     <span class="ion-ios-arrow-forward"></span>
-                  </a>
+                  </p>
                 </li>
                 <li class="page-item" @click="cambioultima">
-                  <a class="page-link" href="#">
+                  <p class="page-link tipo-1" href="#">
                     <span class="ion-ios-arrow-forward"></span>
                     <span class="ion-ios-arrow-forward"></span>
-                  </a>
+                  </p>
                 </li>
               </ul>
             </nav>

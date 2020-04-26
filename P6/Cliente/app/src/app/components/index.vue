@@ -48,7 +48,7 @@ Productos_clases<template>
                 <div class="card-box-c foo">
                   <div class="card-header-c d-flex">
                     <div class="card-box-ico">
-                      <span class="fa fa-cloud-upload"></span>
+                      <span class="fas fa-cloud-upload-alt"></span>                    
                     </div>
                     <div class="card-title-c align-self-center">
                       <h2 class="title-c">Sube</h2>
@@ -125,7 +125,7 @@ Productos_clases<template>
               <div class="item carousel-item active">
                 <div class="row">
                   <div class="col-lg-1"></div>
-                  <div v-for="Producto of Productos_clases.slice(0,3)" class="col-lg-3 col-s-6 card border-dark mb-4 box-shadow ml-4">
+                  <div v-for="Producto of Productos_clases.slice(0,3)" class="col-lg-3 col-md-4 col-s-6 card border-dark mb-4 box-shadow ml-lg-4 ml-md-2">
                     <div class="card-header">
                       <h4 class="my-0 font-weight-normal">{{Producto.Name}}</h4>
                     </div>
@@ -140,7 +140,7 @@ Productos_clases<template>
               <div class="item carousel-item">
                 <div class="row">
                   <div class="col-lg-1"></div>
-                  <div v-for="Producto of Productos_clases.slice(3,6)" class="col-lg-3 col-s-6 card border-dark mb-4 box-shadow ml-4">
+                  <div v-for="Producto of Productos_clases.slice(3,6)" class="col-lg-3 col-md-4 col-s-6 card border-dark mb-4 box-shadow ml-lg-4 ml-md-2">
                     <div class="card-header">
                       <h4 class="my-0 font-weight-normal">{{Producto.Name}}</h4>
                     </div>
@@ -154,8 +154,8 @@ Productos_clases<template>
 
               <div class="item carousel-item">
                 <div class="row">
-                  <div class="col-lg-1"></div>
-                  <div v-for="Producto of Productos_clases.slice(6,9)" class="col-md-4 col-lg-3 col-s-6 card border-dark mb-4 box-shadow ml-5">
+                  <div class="col-lg-1 col--1"></div>
+                  <div v-for="Producto of Productos_clases.slice(6,9)" class="col-md-4  col-lg-3 col-s-6 card border-dark mb-4 box-shadow ml-lg-4 ml-md-2">
                     <div class="card-header">
                       <h4 class="my-0 font-weight-normal">{{Producto.Name}}</h4>
                     </div>
