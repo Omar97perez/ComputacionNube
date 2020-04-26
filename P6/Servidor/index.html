@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="icon" type="image/png" href="https://cdn.pixabay.com/photo/2017/02/07/01/59/cloud-2044797_960_720.png" />  
+        <meta charset="utf-8">
+        <title>CodeCloud</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <meta http-equiv="Cache-Control" content="no-cache">
+        <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+        <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+        <style>
+            .loading {
+                position: fixed;
+                left: 0px;
+                top: 0px;
+                width: 100%;
+                height: 100%;
+                z-index: 9999;
+                background: url('https://datacentersupport.lenovo.com/esv4/images/loading.gif') 50% 50% no-repeat rgb(249, 249, 249);
+                opacity: .8;
+            }
+        </style>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#"><img src="https://cdn.pixabay.com/photo/2017/02/07/01/59/cloud-2044797_960_720.png" alt="icono" width="35" height="35"> 
+                    CodeCloud
+                </a>
+            </div>
+        </nav>
+
+        <!-- Modal Métodos -->
+        <div class="modal fade" id="SubirMetodo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">Subir nuevo Algoritmo</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body" align="center">
+                    <form>
+                        <div class="form-group" align="left">
+                            <form>
+                                <label class="font-weight-bold">Json Methodo</label>
+                            </form>
+                            <input type="file" id="fileJSON">
+
+                            <form class="mt-3">
+                                <label class="font-weight-bold">Archivo comprimido (formato .zip)</label>
+                            </form>
+                            <input type="file" id="fileMethod">
+                        </div>
+                    </form>
+                </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="SubirMetodo()">Enviar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <!-- Modal Métodos -->
+        <div class="modal fade" id="ModalEjecutarMetodo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h3 class="modal-title" id="TitleMethod"></h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body" align="center">
+                    <form id="ModalMetodo"></form>
+                    <form class="mt-3" align="left">
+                        <label class="font-weight-bold">Imagen</label>
+                    </form>
+                    <input type="file" id="fileExecuteMethod">
+                </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="EjecutarAlgoritmo()">Enviar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <!-- Modal Cargar Imagen -->
+        <div class="modal fade bd-example-modal-lg" id="ModalCargaImagen" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="exampleModalLabel">Visualizar Imagen</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" >
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-border" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Ver Imágenes -->
+        <div class="modal fade bd-example-modal-lg" id="ModalVerImagen" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="exampleModalLabel">Visualizar Imagen</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" align="center">
+                        <img class="img-fluid mt-3" id="myimage"/>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="prueba" rel="myimage" onclick="DescargarImagen()">Descargar</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group col-sm-4 col-sm-offset-4 text-center">
+            <div id="loading"></div></div>
+        </div>
+
+        <div class="container">
+            <div class="mt-5" align="center">
+                <h1 class="mt-5"><img src="https://cdn.pixabay.com/photo/2017/02/07/01/59/cloud-2044797_960_720.png" alt="icono" width="75" height="75"> 
+                    CodeCloud
+                </h1>
+            </div>
+
+            <div class="mt-5">
+                <div align="center">
+                    <h1>Métodos Estáticos</h1>
+                </div>
+                <div class="mt-5 row text-center" align="center">
+                    <div class="col-lg-3"></div>
+
+                    <div class="col-lg-3 col-s-6 card border-dark mb-4 box-shadow">
+                        <div class="card-header">
+                            <h4 class="my-0 font-weight-normal">Subir nuevo Algoritmo</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>Método que permite añadir una nuevo algoritmo (a través de un formulario) para que sea ejecutado en nuestro servidor.</p>
+                            <button type="button" class="btn btn-lg btn-block btn-dark" data-toggle="modal" data-target="#SubirMetodo" >Ejecutar</button>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-1"></div>
+
+                    <div class="col-lg-3 col-s-6 card border-dark mb-4 box-shadow">
+                        <div class="card-header">
+                          <h4 class="my-0 font-weight-normal">Descargar Página Actual</h4>
+                        </div>
+                        <div class="card-body">
+                          <p>Método que permite descargar la Página actual para que se tenga un ejemplo para el uso personal de la API.</p>
+                          <button type="button" class="btn btn-lg btn-block btn-dark" onclick="DescargarPaginaWeb()">Ejecutar</button>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="mt-5">
+                <div align="center">
+                    <h1>Algoritmos</h1>
+                </div>
+                <div id="method" class="mt-5 row text-center" align="center">
+                </div>
+            </div>
+
+        </div> 
+
+        <footer class="mt-5 page-footer font-small pt-4 bg-dark bg-dark text-white footer">
+            <div class="container">
+            <div class="container-fluid text-center text-md-left">
+                <div class="row">
+                    <div class="col-md-6 mt-md-0 mt-3">
+                    <h5 class="text-uppercase"><img src="https://cdn.pixabay.com/photo/2017/02/07/01/59/cloud-2044797_960_720.png" alt="icono" width="35" height="35"> CodeCloud</h5>
+                    <p>Ejecuta tu código online (permite cualquier lenguaje).</p>
+                    <h5 class="text-uppercase">Datos de contácto</h5>
+                        <h6><b>Autor: </b>Omar Pérez Znakar</h6>
+                        <h6><b>Correo: </b>alu0100945645@ull.edu.es</h6>
+                    </div>
+                    <div class="col-md-6 mb-md-0 mb-3">
+                    <h5 class="text-uppercase">Métodos</h5>
+                    <ul class="list-unstyled">
+                        
+                        <li>
+                            <a style="color:white">1. Métodos Estáticos.</a>
+                        </li>
+                        
+                        <li>
+                            <a style="color:white">2. Algoritmos.</a>
+                        </li>                        
+                    </ul>
+                    </div>
+                </div>
+                <div class="footer-copyright text-center py-3"><img src="https://cdn.pixabay.com/photo/2017/02/07/01/59/cloud-2044797_960_720.png" alt="icono" width="25" height="25"> CodeCloud</div>
+                </div>
+            </div>
+        </footer>
+
+        <script>
+
+            CargarMetodos();
+            var methods = "";
+            var titleMethod = "";
+
+            function CargarMetodos(){
+                methods = "";
+                $( document ).ready(function() {
+                    $.get('/api/Get/Methods', function(respuesta, status){
+                        if (status == 'success'){
+                            methods = respuesta["Methods"];
+                            document.getElementById('method').innerHTML = "";
+                            for (x=0;x<(Object.keys(methods).length);x++) { 
+                                document.getElementById('method').innerHTML += '<div class="col-lg-1"></div><div class="col-lg-3 col-s-6 card border-dark mb-4 box-shadow"><div class="card-header"><h4 class="my-0 font-weight-normal">' + methods[x]["Name"] + '</h4></div><div class="card-body"><p>' + methods[x]["Description"] +'</p><button type="button" data-toggle="modal" data-target="#ModalEjecutarMetodo" onclick="CargarFormulario(\''+ methods[x]["Name"] +'\')" class="btn btn-lg btn-block btn-dark">Ejecutar</button></div></div>'; 
+                            }
+                        }
+                    })
+                });
+            } 
+
+            function CargarFormulario(title){
+                titleMethod = title;
+                var position = methods.findIndex(method => method.Name === title);
+                document.getElementById('TitleMethod').innerHTML = methods[position]["Name"];
+                document.getElementById('ModalMetodo').innerHTML = "";
+                for (x=0;x<(Object.keys(methods[position]["Elements"]).length);x++) { 
+                    document.getElementById('ModalMetodo').innerHTML += '<div class="mt-3 form-group" align="left"><label class="font-weight-bold" for="exampleInputEmail1">'+ methods[position]["Elements"][x]["Name"] + '</label><input type="text" name="' + methods[position]["Elements"][x]["Name"] + '" id="' + methods[position]["Elements"][x]["Name"] + '" class="form-control">    <small id="emailHelp" class="form-text text-muted">'+ methods[position]["Elements"][x]["Description"] +'</small></div>';
+                }
+            }
+
+            function EjecutarAlgoritmo(){
+                $("#ModalCargaImagen").modal();
+                var position = methods.findIndex(method => method.Name === titleMethod);
+                var elements = "";
+                for (x=0;x<(Object.keys(methods[position]["Elements"]).length);x++) { 
+                    if(x != 0){
+                        elements +=  "-";
+                    }
+                    elements += document.getElementById(methods[position]["Elements"][x]["Name"]).value;
+                }
+
+                var urlPostMetodo = "";
+
+                if(elements == ""){
+                    urlPostMetodo = '/api/Execute/Method/' + titleMethod + '/' + "no";
+                }
+                else{
+                    urlPostMetodo = '/api/Execute/Method/' + titleMethod + '/' + elements;
+                }
+                var formData = new FormData();
+                formData.append("file", document.getElementById("fileExecuteMethod").files[0]);
+
+                $.ajax({
+                    url: urlPostMetodo,
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        $("#ModalCargaImagen").modal('hide');
+                        $('body').removeClass('modal-open');
+                        $('.modal-backdrop').remove();
+                        VisualizarImagen(response);
+                    },
+                    error: function(jqXHR, textStatus, errorMessage) {
+                        console.log(errorMessage); 
+                    }
+                });
+            }
+
+            function VisualizarImagen(response) {
+                response = response.split(".");
+                document.getElementById('myimage').src = '/api/Get/file/' + response[0] + ".png";
+                $('body').removeClass('ModalCargaImagen');
+                $("#ModalVerImagen").modal();
+            }
+ 
+            function DescargarPaginaWeb() 
+            {
+                var link = document.createElement("a");
+                link.download = "servidorAPI.html";
+                link.href = "/";
+                link.click();
+            }
+
+            function SubirMetodo() {
+                var formData = new FormData();
+                formData.append("file", document.getElementById("fileJSON").files[0]);
+                formData.append("file", document.getElementById("fileMethod").files[0]);
+
+                $.ajax({
+                    url: "/api/Upload/Method",
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        executeAjaxRequest();
+                        var int=self.setInterval("Endrefresh()",6000);
+                    },
+                    error: function(jqXHR, textStatus, errorMessage) {
+                        console.log(errorMessage); 
+                    }
+                });
+            }
+
+            function Endrefresh()
+            {
+                document.getElementById("loading").className = "";
+                location.reload(true);
+            }
+
+            function executeAjaxRequest() {
+                document.getElementById("loading").className = "loading";
+            }
+
+            function DescargarImagen() {
+                var nameHC = document.getElementById('myimage');
+                var link = document.createElement("a");
+                link.download = "image.png";
+                link.href = nameHC.src;
+                link.click();
+            };
+        </script>
+    </body>
+</html>
