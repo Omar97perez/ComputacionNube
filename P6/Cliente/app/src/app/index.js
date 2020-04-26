@@ -11,10 +11,10 @@ Vue.use(VueAxios, axios);
 
 import App from './App.vue';
 import Index from './components/index.vue';
-import Clases from './components/productos/clases_particulares.vue'
+import EjecutarAlgoritmo from './components/productos/EjecutarAlgoritmos.vue'
 import Contacto from './components/contacto.vue'
 import Perfil from './components/usuario/perfil.vue'
-import Nuevo_Anuncio from './components/productos/nuevo_anuncio.vue'
+import NuevoAlgoritmo from './components/productos/NuevoAlgoritmo.vue'
 import store from './js/store';
 import Login from './components/usuario/Login.vue';
 import Logout from './components/usuario/Logout.vue';
@@ -31,9 +31,9 @@ const routes = [
     }
   },
   {
-  path: '/ClasesParticulares',
-  name: 'clases',
-  component: Clases,
+  path: '/Ejecutar/Algoritmos',
+  name: 'ejecutarAlgoritmo',
+  component: EjecutarAlgoritmo,
   meta: {
     isPublic: true
   }
@@ -55,9 +55,9 @@ const routes = [
   }
 },
 {
-  path: '/NuevoAnuncio',
-  name: 'nuevoanuncio',
-  component: Nuevo_Anuncio,
+  path: '/Nuevo/Algoritmo',
+  name: 'nuevoAlgoritmo',
+  component: NuevoAlgoritmo,
   meta: {
     isPublic: true
   }

@@ -27,7 +27,7 @@
                 <div class="dropdown"  v-if="loggedIn">
                   <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><span class="fa fa-user" aria-hidden="true"></span></a>
                   <div class="dropdown-menu" aria-labelledby="login" >
-                    <a class="dropdown-item" ><router-link :to="{ name: 'nuevoanuncio' }" class=" collapsed" data-toggle="collapse" data-target="#navbarDefault"
+                    <a class="dropdown-item" ><router-link :to="{ name: 'nuevoAlgoritmo' }" class=" collapsed" data-toggle="collapse" data-target="#navbarDefault"
                       aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-plus"></i> Nuevo Algoritmo</router-link></a>
                     <a class="dropdown-item" ><router-link :to="{ name: 'ModUsuario' }" class=" collapsed" data-toggle="collapse" data-target="#navbarDefault"
                       aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-user"></i> Modificar Usuario</router-link></a>
@@ -53,7 +53,7 @@
                     aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation"><a class="nav-link">Inicio</a></router-link>
                 </li>
                 <li class="nav-item">
-                  <router-link :to="{ name: 'clases' }" class="nav-link navbar-toggler collapsed" data-toggle="collapse" data-target="#navbarDefault"
+                  <router-link :to="{ name: 'ejecutarAlgoritmo' }" class="nav-link navbar-toggler collapsed" data-toggle="collapse" data-target="#navbarDefault"
                     aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation"><a class="nav-link">Algoritmos</a></router-link>
                 </li>
                 <li class="nav-item">
@@ -73,7 +73,7 @@
                   <router-link :to="{ name: 'index' }" class="nav-link contenido1"><h2 class="text-brand"><img src="img/cloud-2044797_960_720.webp"  alt="favicon"  width="10%"> Code<span class="color-b">Cloud</span></h2></router-link>
                 </li>
                 <li class="nav-item contenedor1">
-                  <router-link :to="{ name: 'clases' }" class="nav-link contenido1"><a class="nav-link">Algoritmos</a></router-link>
+                  <router-link :to="{ name: 'ejecutarAlgoritmo' }" class="nav-link contenido1"><a class="nav-link">Algoritmos</a></router-link>
                 </li>
                 <li class="nav-item contenedor1">
                     <router-link :to="{ name: 'contacto' }" class="nav-link contenido1"><a class="nav-link">Contacto</a></router-link>
@@ -87,7 +87,7 @@
                  <div class="dropdown"  v-if="loggedIn">
                    <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fa fa-user" aria-hidden="true"></span></a>
                    <div class="dropdown-menu" aria-labelledby="login" >
-                     <a class="dropdown-item" ><router-link :to="{ name: 'nuevoanuncio' }" class="na-link"><i class="fa fa-plus"></i> Nuevo Algoritmo</router-link></a>
+                     <a class="dropdown-item" ><router-link :to="{ name: 'nuevoAlgoritmo' }" class="na-link"><i class="fa fa-plus"></i> Nuevo Algoritmo</router-link></a>
                      <a class="dropdown-item" ><router-link :to="{ name: 'ModUsuario' }" class="na-link"><i class="fa fa-user"></i> Modificar Usuario</router-link></a>
                      <a class="dropdown-item" ><router-link :to="{ name: 'perfil' }" class="na-link"><i class="fa fa-user"></i> Perfil</router-link></a>
                       <a class="dropdown-item" @click="DescargarPaginaWeb()"><i class="fa fa-user"></i> Descargar Ejemplo Cliente</a>
@@ -156,7 +156,7 @@
                       <i class="fa fa-angle-right"></i><router-link :to="{ name: 'index' }" class="na-link">Inicio</router-link>
                     </li>
                     <li class="item-list-a">
-                      <i class="fa fa-angle-right"></i><router-link :to="{ name: 'clases' }" class="na-link">Algoritmos</router-link>
+                      <i class="fa fa-angle-right"></i><router-link :to="{ name: 'ejecutarAlgoritmo' }" class="na-link">Algoritmos</router-link>
                     </li>
                     <li class="item-list-a">
                       <i class="fa fa-angle-right"></i><router-link :to="{ name: 'contacto' }" class="na-link">Contacto</router-link>
