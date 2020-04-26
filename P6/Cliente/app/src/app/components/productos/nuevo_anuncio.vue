@@ -10,19 +10,26 @@
             </div>
           </div>
         </div>
+          <div id="alert">
+          </div>
       </div>
-    </section>
-    <!--/ Intro Single End /-->
+    
+        <div class="form-group col-sm-4 col-sm-offset-4 text-center">
+          <div id="loading"></div>
+        </div>
 
-    <!--/ Property Grid Star /-->
-      <section class="property-grid grid">
-        <div class="container" align="center">
+        <div class="container mt-5" align="center">
             <h3 class="font-weight-bold">Json Methodo</h3>
             <input type="file" id="fileJSON">
             <h3 class="font-weight-bold mt-4">Archivo comprimido (formato .zip)</h3>
             <input type="file" id="fileMethod">
-            <div class="col-12 mt-5" align="center">
-              <button type="button" class="btn btn-primary" @click="SubirMetodo()">Enviar</button>
+            <div class="row">
+              <div class="col-6 mt-5" align="right">
+                <button type="button" class="btn btn-primary" @click="SubirMetodo()">Enviar</button>
+              </div>
+              <div class="col-6 mt-5" align="left">
+                <router-link :to="{ name: 'index' }"><button type="button" class="btn btn-danger">Cancelar</button></router-link>
+              </div>
             </div>
         </div>
       </section>
@@ -44,6 +51,7 @@ export default {
 
   methods: {
     SubirMetodo() {
+      this.executeAjaxRequest();
       var formData = new FormData();
       formData.append("file", document.getElementById("fileJSON").files[0]);
       formData.append("file", document.getElementById("fileMethod").files[0]);
@@ -55,46 +63,19 @@ export default {
           processData: false,
           contentType: false,
           success: function(response) {
-              executeAjaxRequest();
-              var int=self.setInterval("Endrefresh()",6000);
+            var int=self.setInterval("document.getElementById('loading').className = '';document.getElementById('alert').className= 'alert alert-success mt-3';document.getElementById('alert').innerHTML= 'El Algoritmo se ha subido correctamente'",6000);
           },
           error: function(jqXHR, textStatus, errorMessage) {
               console.log(errorMessage); 
           }
       });
     },
-    readURL(input) {
-      var input2 =  document.getElementById("fileJSON").files[0];
-      console.log(input2);
-      if (input.files && input.files[0]) {
-
-          var reader = new FileReader();
-
-          reader.onload = function(e) {
-            $('.image-upload-wrap').hide();
-
-            $('.file-upload-image').attr('src', e.target.result);
-            $('.file-upload-content').show();
-
-            $('.image-title').html(input.files[0].name);
-          };
-
-          reader.readAsDataURL(input.files[0]);
-
-        } else {
-          removeUpload();
-        }
+    executeAjaxRequest() {
+      document.getElementById("loading").className = "loading";
     },
-    removeUpload() {
-        $('.file-upload-input').replaceWith($('.file-upload-input').clone());
-        $('.file-upload-content').hide();
-        $('.image-upload-wrap').show();
-        $('.image-upload-wrap').bind('dragover', function () {
-        $('.image-upload-wrap').addClass('image-dropping');
-        });
-        $('.image-upload-wrap').bind('dragleave', function () {
-          $('.image-upload-wrap').removeClass('image-dropping');
-        });
+    Endrefresh()
+    {
+        document.getElementById("loading").className = "";
     }
   },
   computed:  {
