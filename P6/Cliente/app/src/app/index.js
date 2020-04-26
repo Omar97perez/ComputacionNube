@@ -12,21 +12,14 @@ Vue.use(VueAxios, axios);
 import App from './App.vue';
 import Index from './components/index.vue';
 import Clases from './components/productos/clases_particulares.vue'
-import Apuntes from './components/productos/apuntes.vue'
-import Noticias from './components/productos/noticias.vue'
 import Contacto from './components/contacto.vue'
 import Perfil from './components/usuario/perfil.vue'
-import Administrador from './components/productos/Administrador.vue';
 import Nuevo_Anuncio from './components/productos/nuevo_anuncio.vue'
-import Anuncio from './components/productos/anuncio.vue'
-import Anuncio_noticia from './components/productos/anuncio_noticia.vue'
 import store from './js/store';
 import Login from './components/usuario/Login.vue';
 import Logout from './components/usuario/Logout.vue';
 import Registro from './components/usuario/Registro.vue';
 import ModUsuario from './components/usuario/ModUsuario.vue';
-import Buscador_productos from './components/productos/buscador_productos.vue';
-import Perfil_anuncio from './components/usuario/perfil_anuncio.vue';
 
 const routes = [
   {
@@ -41,22 +34,6 @@ const routes = [
   path: '/ClasesParticulares',
   name: 'clases',
   component: Clases,
-  meta: {
-    isPublic: true
-  }
-},
-{
-  path: '/Apuntes',
-  name: 'apuntes',
-  component: Apuntes,
-  meta: {
-    isPublic: true
-  }
-},
-{
-  path: '/Noticias',
-  name: 'noticias',
-  component: Noticias,
   meta: {
     isPublic: true
   }
@@ -78,33 +55,9 @@ const routes = [
   }
 },
 {
-  path: '/Administrador',
-  name: 'administrador',
-  component: Administrador,
-  meta: {
-    isPublic: true
-  }
-},
-{
   path: '/NuevoAnuncio',
   name: 'nuevoanuncio',
   component: Nuevo_Anuncio,
-  meta: {
-    isPublic: true
-  }
-},
-{
-  path: '/Anuncio',
-  name: 'anuncio',
-  component: Anuncio,
-  meta: {
-    isPublic: true
-  }
-},
-{
-  path: '/AnuncioNoticia',
-  name: 'anuncio_noticia',
-  component: Anuncio_noticia,
   meta: {
     isPublic: true
   }
@@ -136,16 +89,6 @@ const routes = [
   name: 'ModUsuario',
   path: '/Usuario/ModUsuario',
   component: ModUsuario,
-},
-{
-  name: 'Buscador_productos',
-  path: '/Buscador/productos',
-  component: Buscador_productos,
-},
-{
-  name: 'Perfil_anuncio',
-  path: '/Perfil/anuncio',
-  component: Perfil_anuncio,
 },
 ];
 
