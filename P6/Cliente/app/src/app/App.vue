@@ -14,10 +14,11 @@
                 <span class="span1"></span>
               </div>
               <div class="col-8">
-                <a class="navbar-brand text-brand"><img src="img/cloud-2044797_960_720.webp" alt="favicon"  width="25%">Code<a style="color:#1b89d8">Cloud</a></a>
+                <div class="w-header-a">
+                  <h3 class="w-title-a text-brand"><img src="img/cloud-2044797_960_720.webp"  alt="favicon"  width="15%"> Code<span class="color-b">Cloud</span></h3>
+                </div>              
               </div>
             </div>
-
           </button>
 
 
@@ -33,13 +34,14 @@
                     <a class="dropdown-item" ><router-link :to="{ name: 'perfil' }" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#navbarDefault"
                       aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-user"></i> Perfil</router-link></a>
                     <a class="dropdown-item" ><router-link :to="{ name: 'Logout' }" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#navbarDefault"
-                      aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation"> <i class="fa fa-sign-out"></i> Logout</router-link></a>
+                      aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation"> <i class="fas fa-sign-out-alt"></i> Cerrar Sesión</router-link></a>
                   </div>
                 </div>
                 <router-link v-else :to="{ name: 'Login' }"  data-toggle="collapse" data-target="#navbarDefault"
                   aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation"><nav class="fa fa-user" aria-hidden="true" style="color:white"></nav></router-link>
               </button>
             </div>
+            
            <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
               <ul class="navbar-nav">
                 <li class="nav-item">
@@ -63,14 +65,14 @@
           <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
 
               <ul class="navbar-nav ocultar-en-escritorio">
-                <li class="nav-item ">
-                  <router-link :to="{ name: 'index' }" class="nav-link"><a class="navbar-brand text-brand"><img src="img/cloud-2044797_960_720.webp"  alt="favicon"  width="10%"> Code<span class="color-b">Cloud</span></a></router-link>
+                <li class="nav-item contenedor1">
+                  <router-link :to="{ name: 'index' }" class="nav-link contenido1"><h2 class="text-brand"><img src="img/cloud-2044797_960_720.webp"  alt="favicon"  width="10%"> Code<span class="color-b">Cloud</span></h2></router-link>
                 </li>
-                <li class="nav-item">
-                  <router-link :to="{ name: 'clases' }" class="nav-link"><a class="nav-link">Algoritmos</a></router-link>
+                <li class="nav-item contenedor1">
+                  <router-link :to="{ name: 'clases' }" class="nav-link contenido1"><a class="nav-link">Algoritmos</a></router-link>
                 </li>
-                <li class="nav-item">
-                    <router-link :to="{ name: 'contacto' }" class="nav-link"><a class="nav-link">Contacto</a></router-link>
+                <li class="nav-item contenedor1">
+                    <router-link :to="{ name: 'contacto' }" class="nav-link contenido1"><a class="nav-link">Contacto</a></router-link>
                 </li>
               </ul>
 
@@ -79,12 +81,12 @@
 
                <button type="button" class="btn btn-b-n" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-expanded="false" >
                  <div class="dropdown"  v-if="loggedIn">
-                   <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"style="color:white"><span class="fa fa-user" aria-hidden="true" style="color:white"></span></a>
+                   <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white!important"><span class="fa fa-user" aria-hidden="true" style="color:white"></span></a>
                    <div class="dropdown-menu" aria-labelledby="login" >
                      <a class="dropdown-item" ><router-link :to="{ name: 'nuevoanuncio' }" class="na-link"><i class="fa fa-plus"></i> Nuevo Algoritmo</router-link></a>
                      <a class="dropdown-item" ><router-link :to="{ name: 'ModUsuario' }" class="na-link"><i class="fa fa-user"></i> Modificar Usuario</router-link></a>
                      <a class="dropdown-item" ><router-link :to="{ name: 'perfil' }" class="na-link"><i class="fa fa-user"></i> Perfil</router-link></a>
-                     <a class="dropdown-item" ><router-link :to="{ name: 'Logout' }" class="na-link"> <i class="fa fa-sign-out"></i> Logout</router-link></a>
+                     <a class="dropdown-item" ><router-link :to="{ name: 'Logout' }" class="na-link"> <i class="fas fa-sign-out-alt"></i> Cerrar Sesión</router-link></a>
                    </div>
                  </div>
                  <router-link v-else :to="{ name: 'Login' }"><span class="fa fa-user" aria-hidden="true" style="color:white"></span></router-link>
@@ -109,16 +111,15 @@
                 </div>
                 <div class="w-body-a">
                   <p class="w-text-a color-a">
-                    CosasDeClase consiste en una aplicación web basada en la idea de ayudar
-                    a los alumnos de cualquier curso académico.
+                    CodeCloud nos permite subir algortimos, ejecutarlos y ver el resultado final.
                   </p>
                 </div>
                 <div class="w-footer-a">
                   <ul class="list-unstyled">
                     <li class="color-text-a">
-                      <span class="color-a">Email:</span> cosasdeclase@gmail.com</li>
+                      <span class="color-a">Email:</span> codecloud@gmail.com</li>
                     <li class="color-text-a">
-                      <span class="color-a">Teléfono:</span> +54 356 945234</li>
+                      <span class="color-a">Teléfono:</span> 999 999 999</li>
                   </ul>
                 </div>
               </div>
@@ -132,16 +133,7 @@
                   <div class="w-body-a">
                     <ul class="list-unstyled">
                       <li class="item-list-a">
-                        <i class="fa fa-angle-right"></i><router-link :to="{ name: 'contacto' }" class="na-link">Mapa</router-link>
-                      </li>
-                      <li class="item-list-a">
                         <i class="fa fa-angle-right"></i><router-link :to="{ name: 'contacto' }" class="na-link">Contacto</router-link>
-                      </li>
-                      <li class="item-list-a">
-                        <i class="fa fa-angle-right"></i><router-link :to="{ name: 'contacto' }" class="na-link">Afiliados</router-link>
-                      </li>
-                      <li class="item-list-a">
-                        <i class="fa fa-angle-right"></i><router-link :to="{ name: 'contacto' }" class="na-link">Política de privacidad</router-link>
                       </li>
                     </ul>
                   </div>
@@ -159,13 +151,7 @@
                       <i class="fa fa-angle-right"></i><router-link :to="{ name: 'index' }" class="na-link">Inicio</router-link>
                     </li>
                     <li class="item-list-a">
-                      <i class="fa fa-angle-right"></i><router-link :to="{ name: 'clases' }" class="na-link">Clases Particulares</router-link>
-                    </li>
-                    <li class="item-list-a">
-                      <i class="fa fa-angle-right"></i><router-link :to="{ name: 'apuntes' }" class="na-link">Apuntes</router-link>
-                    </li>
-                    <li class="item-list-a">
-                      <i class="fa fa-angle-right"></i><router-link :to="{ name: 'noticias' }" class="na-link">Noticias</router-link>
+                      <i class="fa fa-angle-right"></i><router-link :to="{ name: 'clases' }" class="na-link">Algoritmos</router-link>
                     </li>
                     <li class="item-list-a">
                       <i class="fa fa-angle-right"></i><router-link :to="{ name: 'contacto' }" class="na-link">Contacto</router-link>
@@ -185,27 +171,17 @@
                 <ul class="list-inline">
                   <li class="list-inline-item">
                     <a href="#">
-                      <i class="fa fa-facebook" aria-hidden="true"></i>
+                      <i class="fab fa-facebook" aria-hidden="true"></i>
                     </a>
                   </li>
                   <li class="list-inline-item">
                     <a href="#">
-                      <i class="fa fa-twitter" aria-hidden="true"></i>
+                      <i class="fab fa-twitter"></i>                    
                     </a>
                   </li>
                   <li class="list-inline-item">
                     <a href="#">
-                      <i class="fa fa-instagram" aria-hidden="true"></i>
-                    </a>
-                  </li>
-                  <li class="list-inline-item">
-                    <a href="#">
-                      <i class="fa fa-pinterest-p" aria-hidden="true"></i>
-                    </a>
-                  </li>
-                  <li class="list-inline-item">
-                    <a href="#">
-                      <i class="fa fa-dribbble" aria-hidden="true"></i>
+                      <i class="fab fa-instagram" aria-hidden="true"></i>
                     </a>
                   </li>
                 </ul>

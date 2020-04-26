@@ -115,55 +115,23 @@ Productos_clases<template>
             </div>
             <div id="carouselclases" class="carousel slide" data-ride="carousel">
             <!-- Indicador del carousel -->
-            <ol class="carousel-indicators">
-              <li data-target="#carouselclases" data-slide-to="0" class="active"></li>
-              <li data-target="#carouselclases" data-slide-to="1"></li>
-              <li data-target="#carouselclases" data-slide-to="2"></li>
+            <ol class="carousel-indicators" style="margin-bottom: 0rem!important;">
+              <li data-target="#carouselclases" data-slide-to="0" class="active" style="background-color: black!important;"></li>
+              <li data-target="#carouselclases" data-slide-to="1" style="background-color: black!important;"></li>
+              <li data-target="#carouselclases" data-slide-to="2" style="background-color: black!important;"></li>
             </ol>
             <!-- Objetos del carousel -->
             <div class="carousel-inner">
               <div class="item carousel-item active">
                 <div class="row">
-                  <div v-for="Producto of Productos_clases.slice(0,3)" class="col-md-4">
-                    <div class="card-box-a card-shadow">
-                        <div class="img-box-a">
-                          <img v-bind:src="Producto.foto"  class="img-a img-fluid"></img>
-                        </div>
-                        <div class="card-overlay">
-                          <div class="card-overlay-a-content">
-                            <div class="card-header-a">
-                              <h2 class="card-title-a">
-                                <a>{{Producto.titulo}}</a>
-                              </h2>
-                            </div>
-                            <div class="card-body-a">
-                              <div class="price-box d-flex">
-                                <span class="price-a">{{Producto.precio}} €/hora</span>
-                              </div>
-                              <router-link :to="{ name: 'anuncio' }" class="link-a" ><a @click="addToPrev(Producto._id)">Ver anuncio<span class="ion-ios-arrow-forward"></span></a></router-link>
-                            </div>
-                            <div class="card-footer-a">
-                              <ul class="card-info d-flex justify-content-around">
-                                <li>
-                                  <h4 class="card-info-title">Nivel</h4>
-                                  <span>{{Producto.nivel}}</span>
-                                </li>
-                                <li>
-                                  <h4 class="card-info-title">Localidad</h4>
-                                  <span>{{Producto.localidad}}</span>
-                                </li>
-                                <li>
-                                  <h4 class="card-info-title">Provincia</h4>
-                                  <span>{{Producto.provincia}}</span>
-                                </li>
-                                <li>
-                                  <h4 class="card-info-title">Fecha</h4>
-                                  <span>{{Producto.fecha}}</span>
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
+                  <div class="col-lg-1"></div>
+                  <div v-for="Producto of Productos_clases.slice(0,3)" class="col-lg-3 col-s-6 card border-dark mb-4 box-shadow ml-4">
+                    <div class="card-header">
+                      <h4 class="my-0 font-weight-normal">{{Producto.Name}}</h4>
+                    </div>
+                    <div class="card-body">
+                      <p>{{Producto.Description}}</p>
+                      <button type="button" data-toggle="modal" data-target="#ModalEjecutarMetodo" class="btn btn-lg btn-block btn-dark">Ejecutar</button>
                     </div>
                   </div>
                 </div>
@@ -171,46 +139,14 @@ Productos_clases<template>
 
               <div class="item carousel-item">
                 <div class="row">
-                  <div v-for="Producto of Productos_clases.slice(3,6)" class="col-md-4">
-                    <div class="card-box-a card-shadow">
-                        <div class="img-box-a">
-                          <img v-bind:src="Producto.foto"  class="img-a img-fluid"></img>
-                        </div>
-                        <div class="card-overlay">
-                          <div class="card-overlay-a-content">
-                            <div class="card-header-a">
-                              <h2 class="card-title-a">
-                                <a>{{Producto.titulo}}</a>
-                              </h2>
-                            </div>
-                            <div class="card-body-a">
-                              <div class="price-box d-flex">
-                                <span class="price-a">{{Producto.precio}} €/hora</span>
-                              </div>
-                              <router-link :to="{ name: 'anuncio' }" class="link-a" ><a @click="addToPrev(Producto._id)">Ver anuncio<span class="ion-ios-arrow-forward"></span></a></router-link>
-                            </div>
-                            <div class="card-footer-a">
-                              <ul class="card-info d-flex justify-content-around">
-                                <li>
-                                  <h4 class="card-info-title">Nivel</h4>
-                                  <span>{{Producto.nivel}}</span>
-                                </li>
-                                <li>
-                                  <h4 class="card-info-title">Localidad</h4>
-                                  <span>{{Producto.localidad}}</span>
-                                </li>
-                                <li>
-                                  <h4 class="card-info-title">Provincia</h4>
-                                  <span>{{Producto.provincia}}</span>
-                                </li>
-                                <li>
-                                  <h4 class="card-info-title">Fecha</h4>
-                                  <span>{{Producto.fecha}}</span>
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
+                  <div class="col-lg-1"></div>
+                  <div v-for="Producto of Productos_clases.slice(3,6)" class="col-lg-3 col-s-6 card border-dark mb-4 box-shadow ml-4">
+                    <div class="card-header">
+                      <h4 class="my-0 font-weight-normal">{{Producto.Name}}</h4>
+                    </div>
+                    <div class="card-body">
+                      <p>{{Producto.Description}}</p>
+                      <button type="button" data-toggle="modal" data-target="#ModalEjecutarMetodo" class="btn btn-lg btn-block btn-dark">Ejecutar</button>
                     </div>
                   </div>
                 </div>
@@ -218,59 +154,26 @@ Productos_clases<template>
 
               <div class="item carousel-item">
                 <div class="row">
-                  <div v-for="Producto of Productos_clases.slice(6,9)" class="col-md-4">
-                    <div class="card-box-a card-shadow">
-                        <div class="img-box-a">
-                          <img v-bind:src="Producto.foto"  class="img-a img-fluid"></img>
-                        </div>
-                        <div class="card-overlay">
-                          <div class="card-overlay-a-content">
-                            <div class="card-header-a">
-                              <h2 class="card-title-a">
-                                <a>{{Producto.titulo}}</a>
-                              </h2>
-                            </div>
-                            <div class="card-body-a">
-                              <div class="price-box d-flex">
-                                <span class="price-a">{{Producto.precio}} €/hora</span>
-                              </div>
-                              <router-link :to="{ name: 'anuncio' }" class="link-a" ><a @click="addToPrev(Producto._id)">Ver anuncio<span class="ion-ios-arrow-forward"></span></a></router-link>
-                            </div>
-                            <div class="card-footer-a">
-                              <ul class="card-info d-flex justify-content-around">
-                                <li>
-                                  <h4 class="card-info-title">Nivel</h4>
-                                  <span>{{Producto.nivel}}</span>
-                                </li>
-                                <li>
-                                  <h4 class="card-info-title">Localidad</h4>
-                                  <span>{{Producto.localidad}}</span>
-                                </li>
-                                <li>
-                                  <h4 class="card-info-title">Provincia</h4>
-                                  <span>{{Producto.provincia}}</span>
-                                </li>
-                                <li>
-                                  <h4 class="card-info-title">Fecha</h4>
-                                  <span>{{Producto.fecha}}</span>
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
+                  <div class="col-lg-1"></div>
+                  <div v-for="Producto of Productos_clases.slice(6,9)" class="col-md-4 col-lg-3 col-s-6 card border-dark mb-4 box-shadow ml-5">
+                    <div class="card-header">
+                      <h4 class="my-0 font-weight-normal">{{Producto.Name}}</h4>
+                    </div>
+                    <div class="card-body">
+                      <p>{{Producto.Description}}</p>
+                      <button type="button" data-toggle="modal" data-target="#ModalEjecutarMetodo" class="btn btn-lg btn-block btn-dark">Ejecutar</button>
                     </div>
                   </div>
                 </div>
               </div>
 
             </div>
-            <!-- Control del carousel -->
-            <a class="carousel-control-prev" href="#carouselclases" role="button" data-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <a class="carousel-control-prev" href="#carouselclases" role="button" data-slide="prev" align="ledt">
+              <i class="fas fa-less-than"></i>              
               <span class="sr-only">Previous</span>
             </a>
             <a class="carousel-control-next" href="#carouselclases" role="button" data-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <i class="fas fa-greater-than"></i>              
               <span class="sr-only">Next</span>
             </a>
             </div>
@@ -291,30 +194,14 @@ Productos_clases<template>
       }
     },
     created() {
-      this.getProductos_noticias();
       this.getProductos_clases();
-      this.getProductos_apuntes();
     },
     methods: {
       getProductos_clases() {
-        fetch('/api/CosasDeClase/Producto/')
+        fetch('/api/Get/Methods')
           .then(res => res.json())
           .then(data => {
-            this.Productos_clases = data.filter(data =>  data.tipo == 'clases');
-          });
-      },
-      getProductos_noticias() {
-        fetch('/api/CosasDeClase/Producto/')
-          .then(res => res.json())
-          .then(data => {
-            this.Productos_noticias = data.filter(data => data.tipo == 'noticias');
-          });
-      },
-      getProductos_apuntes() {
-        fetch('/api/CosasDeClase/Producto/')
-          .then(res => res.json())
-          .then(data => {
-            this.Productos_apuntes = data.filter(data => data.tipo == 'apuntes');
+            this.Productos_clases = data["Methods"];
           });
       },
       addToPrev(invId) {

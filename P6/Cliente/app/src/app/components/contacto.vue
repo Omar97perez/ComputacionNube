@@ -37,10 +37,10 @@
                     </div>
                     <div class="icon-box-content">
                       <p class="mb-1">Email.
-                        <span class="color-a">cosasdeclase@gmail.com</span>
+                        <span class="color-a">codecloud@gmail.com</span>
                       </p>
                       <p class="mb-1">Phone.
-                        <span class="color-a">+54 356 945234</span>
+                        <span class="color-a">999 999 999</span>
                       </p>
                     </div>
                   </div>
@@ -74,27 +74,17 @@
                         <ul class="list-inline">
                           <li class="list-inline-item">
                             <a href="#" class="link-one">
-                              <i class="fa fa-facebook" aria-hidden="true"></i>
+                              <i class="fab fa-facebook" aria-hidden="true"></i>
                             </a>
                           </li>
                           <li class="list-inline-item">
                             <a href="#" class="link-one">
-                              <i class="fa fa-twitter" aria-hidden="true"></i>
+                              <i class="fab fa-twitter" aria-hidden="true"></i>
                             </a>
                           </li>
                           <li class="list-inline-item">
                             <a href="#" class="link-one">
-                              <i class="fa fa-instagram" aria-hidden="true"></i>
-                            </a>
-                          </li>
-                          <li class="list-inline-item">
-                            <a href="#" class="link-one">
-                              <i class="fa fa-pinterest-p" aria-hidden="true"></i>
-                            </a>
-                          </li>
-                          <li class="list-inline-item">
-                            <a href="#" class="link-one">
-                              <i class="fa fa-dribbble" aria-hidden="true"></i>
+                              <i class="fab fa-instagram" aria-hidden="true"></i>
                             </a>
                           </li>
                         </ul>

@@ -54,27 +54,17 @@
                     <ul class="list-inline">
                       <li class="list-inline-item">
                         <a href="#" class="link-one">
-                          <i class="fa fa-facebook" aria-hidden="true"></i>
+                          <i class="fab fa-facebook" aria-hidden="true"></i>
                         </a>
                       </li>
                       <li class="list-inline-item">
                         <a href="#" class="link-one">
-                          <i class="fa fa-twitter" aria-hidden="true"></i>
+                          <i class="fab fa-twitter" aria-hidden="true"></i>
                         </a>
                       </li>
                       <li class="list-inline-item">
                         <a href="#" class="link-one">
-                          <i class="fa fa-instagram" aria-hidden="true"></i>
-                        </a>
-                      </li>
-                      <li class="list-inline-item">
-                        <a href="#" class="link-one">
-                          <i class="fa fa-pinterest-p" aria-hidden="true"></i>
-                        </a>
-                      </li>
-                      <li class="list-inline-item">
-                        <a href="#" class="link-one">
-                          <i class="fa fa-dribbble" aria-hidden="true"></i>
+                          <i class="fab fa-instagram" aria-hidden="true"></i>
                         </a>
                       </li>
                     </ul>
@@ -82,120 +72,6 @@
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-md-12 section-t8">
-            <div class="title-box-d">
-              <h3 class="title-d">Mis anuncios</h3>
-            </div>
-          </div>
-        </div>
-        <div class="row property-grid grid">
-          <div class="col-sm-12">
-            <div class="grid-option">
-              <form>
-                <select class="custom-select" id="city" v-model="tipo" value=""  @change="buscarProducto" v-on:click="resetpag">
-                  <option value="" >Todas las ciudades</option>
-                  <option value="clases">Clases Particulares</option>
-                  <option value="apuntes">Apuntes</option>
-                  <option value="noticias">Noticias</option>
-                </select>
-              </form>
-            </div>
-          </div>
-          <div  v-for="Producto of Productos" class="col-md-4">
-            <div v-if="Producto.tipo =='clases' || Producto.tipo =='apuntes' "  class="card-box-a card-shadow">
-                <div class="img-box-a">
-                  <img v-bind:src="Producto.foto"  class="img-a img-fluid"></img>
-                </div>
-                <div class="card-overlay">
-                  <div class="card-overlay-a-content">
-                    <div class="card-header-a">
-                      <h2 class="card-title-a">
-                        <a>{{Producto.titulo}}</a>
-                      </h2>
-                    </div>
-                    <div class="card-body-a">
-                      <div class="price-box d-flex">
-                        <span class="price-a">{{Producto.precio}} €/hora</span>
-                      </div>
-                      <router-link :to="{ name: 'anuncio' }" class="link-a" ><a @click="addToPrev(Producto._id)">Ver anuncio<span class="ion-ios-arrow-forward"></span></a></router-link>
-                    </div>
-                    <div class="card-footer-a">
-                      <ul class="card-info d-flex justify-content-around">
-                        <li>
-                          <h4 class="card-info-title">Nivel</h4>
-                          <span>{{Producto.nivel}}</span>
-                        </li>
-                        <li>
-                          <h4 class="card-info-title">Localidad</h4>
-                          <span>{{Producto.localidad}}</span>
-                        </li>
-                        <li>
-                          <h4 class="card-info-title">Provincia</h4>
-                          <span>{{Producto.provincia}}</span>
-                        </li>
-                        <li>
-                          <h4 class="card-info-title">Fecha</h4>
-                          <span>{{Producto.fecha}}</span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-            </div>
-            <div v-if="Producto.tipo =='noticias'" class="card-box-b card-shadow news-box">
-              <div class="img-box-b">
-                <img v-bind:src="Producto.foto"  class="img-a img-fluid"></img>
-              </div>
-              <div class="card-overlay">
-                <div class="card-header-b">
-                  <div class="card-title-b">
-                    <h2 class="title-2">
-                      <a>{{Producto.titulo}}</a>
-                    </h2>
-                  </div>
-                  <div class="card-date">
-                    <span class="date-b">{{Producto.fecha}}</span>
-                  </div>
-                    <router-link :to="{ name: 'anuncio_noticia' }" class="link-a" ><a @click="addToPrev(Producto._id)">Ver noticia<span class="ion-ios-arrow-forward"></span></a></router-link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-12">
-            <nav class="pagination-a">
-              <ul class="pagination justify-content-end">
-                <li class="page-item" @click="cambioprimera">
-                  <a class="page-link" href="#" tabindex="-1">
-                    <span class="ion-ios-arrow-back"></span>
-                    <span class="ion-ios-arrow-back"></span>
-                  </a>
-                </li>
-                <li class="page-item" @click="cambioanterior">
-                  <a class="page-link" href="#" tabindex="-1">
-                    <span class="ion-ios-arrow-back"></span>
-                  </a>
-                </li>
-                <div v-for="Num in NumPaginas()" class="">
-                  <li  class="page-item">
-                      <a class="page-link" @click="pagination(Num)">{{Num}}</a>
-                  </li>
-                </div>
-                <li class="page-item" @click="cambiosiguiente">
-                  <a class="page-link" href="#">
-                    <span class="ion-ios-arrow-forward"></span>
-                  </a>
-                </li>
-                <li class="page-item" @click="cambioultima">
-                  <a class="page-link" href="#">
-                    <span class="ion-ios-arrow-forward"></span>
-                    <span class="ion-ios-arrow-forward"></span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
           </div>
         </div>
       </div>
