@@ -48,19 +48,21 @@ app.get('/', function(req, res) {
 });
 
 // Permite Crear Métodos 
-app.post('/api/Upload/Method', uploadMethod.array('file', 2), (req, res) => {
-	fs.readFile("./EstructuraMetodos/" + req.files[0].filename, 'utf-8', (err, data) => {
-		fs.readFile("./Metodos.json", 'utf-8', (err2, data2) => {
-			var obj = JSON.parse(data2);
-			obj['Methods'].push(JSON.parse(data));
-			jsonStr = JSON.stringify(obj);
-			fs.writeFileSync('./Metodos.json', jsonStr, { mode: 0o755 });
-			var NewMethod = JSON.parse(data);
-			executeUnzip('./EstructuraMetodos/'+ req.files[1].filename, './Metodos/' + NewMethod["Name"]);	
-			executeMake(NewMethod["Name"]);	
-		});		
-	});
-	res.send("Funcionó");
+// app.post('/api/Upload/Method/:email/:passwd', uploadMethod.array('file', 2), (req, res) => {
+	console.log(req.params.email);
+	console.log(req.params.passwd);
+	// fs.readFile("./EstructuraMetodos/" + req.files[0].filename, 'utf-8', (err, data) => {
+	// 	fs.readFile("./Metodos.json", 'utf-8', (err2, data2) => {
+	// 		var obj = JSON.parse(data2);
+	// 		obj['Methods'].push(JSON.parse(data));
+	// 		jsonStr = JSON.stringify(obj);
+	// 		fs.writeFileSync('./Metodos.json', jsonStr, { mode: 0o755 });
+	// 		var NewMethod = JSON.parse(data);
+	// 		executeUnzip('./EstructuraMetodos/'+ req.files[1].filename, './Metodos/' + NewMethod["Name"]);	
+	// 		executeMake(NewMethod["Name"]);	
+	// 	});		
+	// });
+	res.send(req.params.email);
 });
 
 // Permite Ejecutar Métodos 

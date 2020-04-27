@@ -55,9 +55,6 @@ function update(req, res, next) {
     const token = req.headers.authorization
     jwt.decodeToken(token)
     .then(response => {
-        // console.log("faksdjfs")
-        // console.log(response)
-        // console.log(req.params.id)
         if((response != req.params.id) && (response.email != "root@root.com")) {
             return res.status(403).send({ message: 'No tienes autorización' })
         }

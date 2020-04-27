@@ -9,6 +9,10 @@ const errorHandler = require('./authentication/backend/_services/error-handler')
 const path = require('path');
 const multer = require('multer');
 let fs = require('fs');
+var request = require('request');
+const axios = require('axios')
+const userService = require('./authentication/backend/users/user-service.js')
+
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -96,8 +100,7 @@ mongoose.connect('mongodb://omar:antonio1997@cluster0-shard-00-00-svm5b.mongodb.
     res.sendFile('./Servidor/index.html', { root: __dirname });
   });
 
-  // Permite Crear Métodos 
-  app.post('/api/Upload/Method', uploadMethod.array('file', 2), (req, res) => {
+  function SubirMetodo(req){
     fs.readFile("./app/src/Servidor/EstructuraMetodos/" + req.files[0].filename, 'utf-8', (err, data) => {
       fs.readFile("./app/src/Servidor/Metodos.json", 'utf-8', (err2, data2) => {
         var obj = JSON.parse(data2);
@@ -109,7 +112,53 @@ mongoose.connect('mongodb://omar:antonio1997@cluster0-shard-00-00-svm5b.mongodb.
         executeMake(NewMethod["Name"]);	
       });		
     });
-    res.send("Funcionó");
+  }
+
+  // Permite Autentificarte
+  app.post('/api/authenticate/:email/:passwd', (req, res) => {
+    axios.post('/users/authenticate', {
+      "email": req.params.email, 
+      "password": req.params.passwd
+    })
+    .then((res2) => {
+      var json = '{"Token":"' + res2.data.token + '"}';
+      fs.readFile("./app/src/Servidor/Token.json", 'utf-8', (err2, data) => {
+        var obj = JSON.parse(data);
+        obj['Tokens'].push(JSON.parse(json));
+        jsonStr = JSON.stringify(obj);
+        fs.writeFileSync('./app/src/Servidor/Token.json', jsonStr, { mode: 0o755 });
+      });	
+      res.send(res2.data.token);
+    })
+    .catch((error) => {
+      res.send(false);
+    })
+  });
+
+  // Permite Crear Métodos 
+  app.post('/api/Upload/Method/:token', uploadMethod.array('file', 2), (req, res) => {
+    fs.readFile("./app/src/Servidor/Token.json", 'utf-8', (err, data) => {
+      var obj = JSON.parse(data);
+      var position = obj["Tokens"].findIndex(element => element.Token === req.params.token);
+
+      if(position == -1){
+        res.send(false);
+      }
+      else{
+        fs.readFile("./app/src/Servidor/EstructuraMetodos/" + req.files[0].filename, 'utf-8', (err, data) => {
+          fs.readFile("./app/src/Servidor/Metodos.json", 'utf-8', (err2, data2) => {
+            var obj = JSON.parse(data2);
+            obj['Methods'].push(JSON.parse(data));
+            jsonStr = JSON.stringify(obj);
+            fs.writeFileSync('./app/src/Servidor/Metodos.json', jsonStr, { mode: 0o755 });
+            var NewMethod = JSON.parse(data);
+            executeUnzip('./app/src/Servidor/EstructuraMetodos/'+ req.files[1].filename, './app/src/Servidor/Metodos/' + NewMethod["Name"]);	
+            executeMake(NewMethod["Name"]);	
+          });		
+        });
+        res.send(true);
+      }
+    });
   });
 
   // Permite Ejecutar Métodos 
