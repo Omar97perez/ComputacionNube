@@ -21,9 +21,9 @@
           <h3 class="font-weight-bold">Seguridad</h3>
           <p>Para obtener mayor seguridad. Por favor, escriba su email y contraseña nuevamente.</p>
           <h4 class="mt-3">Email</h4>
-          <input type="email" v-model="email" class="form-control col-md-6 col-xs-12" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+          <input type="email" v-model="email" class="form-control col-md-6 col-xs-12" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="escriba su email">
           <h4 class="mt-3">Contraseña</h4>
-          <input type="password" v-model="password" class="form-control col-md-6 col-xs-12" id="exampleInputEmail1" aria-describedby="emailHelp">
+          <input type="password" v-model="password" class="form-control col-md-6 col-xs-12" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="escriba su contraseña">
 
           <h3 class="font-weight-bold mt-5">Archivos Métodos</h3>
           <h4 class="mt-3">Json Methodo</h4>

@@ -62,19 +62,6 @@
       </div>
 
       <div class="form-group" align="center">
-        <label for="price">Subir Nueva Imagen</label>
-        </br>
-        <label for="Texto">Si no visualiza la imagen recarga la página</label>
-          <div class="card">
-            <img  class="card-Foto" id="img-preview">
-            <div class="card-footer">
-                <input  type="file" id="img-uploader">
-                <progress id="img-upload-bar" value="0" max="100" style="width:100%"></progress>
-            </div>
-        </div>
-      </div>
-
-      <div class="form-group" align="center">
           <button type="submit" class="btn btn-outline-success" value="guardar" >Guardar datos</button>
       </div>
 
@@ -94,7 +81,6 @@ export default {
       name: '',
       surname: '',
       paragraph: '',
-      image: '',
       telephone: '',
       email: '',
       password: '',
@@ -150,7 +136,6 @@ export default {
         name: this.name,
         surname: this.surname,
         paragraph: this.paragraph,
-        image: document.getElementById('img-preview').src,
         telephone: this.telephone,
         email: this.email,
         password: this.password,
