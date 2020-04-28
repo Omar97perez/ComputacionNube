@@ -24,10 +24,11 @@ function authenticate(req, res, next) {
 function register(req, res, next) {
     // console.log(req.body)
     // console.log("function register")
+    console.log(req.body);
     userService.create(req.body)
         .then(() =>  res.status(201).send({}))
         .catch(err => {
-            //console.log(err)
+            console.log(err)
             next(err)
             
         });

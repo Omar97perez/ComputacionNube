@@ -89,7 +89,6 @@ export default {
       name: '',
       surname: '',
       paragraph: '',
-      image: '',
       telephone: '',
       email: '',
       password: '',
@@ -104,7 +103,6 @@ export default {
         name: this.name,
         surname: this.surname,
         paragraph: this.paragraph,
-        image: document.getElementById('img-preview').src,
         telephone: this.telephone,
         email: this.email,
         password: this.password,
@@ -115,14 +113,14 @@ export default {
         this.$router.push({ name: 'Login' })
       })
       .catch(error => {
-        $('#m_error_r').empty()
-        $('#m_error_r').append(`
-            <br>
-            <div class="alert alert-danger" role="alert">
-              El email introducido está en uso
-            </div>
-          `)
-        //resolve(error)
+        // $('#m_error_r').empty()
+        // $('#m_error_r').append(`
+        //     <br>
+        //     <div class="alert alert-danger" role="alert">
+        //       El email introducido está en uso
+        //     </div>
+        //   `)
+        console.log(error);
       })
     }
   }

@@ -58,7 +58,7 @@ function executeMake(nameMethod){
 }
 
 //Conexión con la base de datos, cuando se despliegue en servidor  se tendrá que cambiar la dirección
-mongoose.connect('mongodb://omar:antonio1997@cluster0-shard-00-00-svm5b.mongodb.net:27017,cluster0-shard-00-01-svm5b.mongodb.net:27017,cluster0-shard-00-02-svm5b.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true')
+mongoose.connect('mongodb://localhost:27017/codecloud')
   .then(db => console.log('DB conectada')) //Imprimir DB conectada en caso de que todo vaya bien
   .catch(err => console.error(err)); //Imprime error si no se puedo conectar
 
