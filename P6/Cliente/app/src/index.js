@@ -181,6 +181,7 @@ mongoose.connect('mongodb://localhost:27017/codecloud')
         }	
       }
 
+      console.log("make -C ./app/src/Servidor/Metodos/" + req.params.name + " file=../../Archivos/"+ req.file.filename + " fileExit=../../Archivos/" + fileExit[0] + ".png " + stringFinal + " run");
       const exec = require('child_process').exec;
       exec("make -C ./app/src/Servidor/Metodos/" + req.params.name + " file=../../Archivos/"+ req.file.filename + " fileExit=../../Archivos/" + fileExit[0] + ".png " + stringFinal + " run", (err, stdout, stderr) => {
         res.send(req.file.filename);

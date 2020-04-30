@@ -10,16 +10,39 @@ import sys
 
 pedirParametros = int(sys.argv[2]) 
 
+#Cargamos los datos de un fichero csv
+file = sys.argv[1] 
+fichero = os.path.splitext(file)
+fichero = fichero[0] + ".csv"
+
+if file.endswith('.csv'):
+    fileSelected = sf.Csv(file, fichero)
+    df = fileSelected.collect()
+elif file.endswith('.json'):
+    fileSelected= sf.Json(file, fichero)
+    df = fileSelected.collect()
+elif file.endswith('.xlsx'):
+    fileSelected= sf.Xlsx(file, fichero)
+    df = fileSelected.collect()
+else:
+    print("Formato no soportado")
+    sys.exit()
+
 if(pedirParametros == 1):
     # Pedimos los parámetros que nos van a hacer falta
-    tipoGrafica = int(input('Indique que gráfica desea ver:\n\t 1. Gráfica de Líneas.\n\t 2. Gráfica de Barras.\n\t 3. Gráfica de puntos.\n\t 4. Gráfico Circular.\n\t 5. Gráfico de Escaleras.\n\t 6. Gráfico de Dispersión. \n\t 7. Poligono de Frecuencia. \n\t 8. Resumen.\n > '))
+    tipoGrafica = int(input('Indique que gráfica desea ver:\n\t 1. Gráfica de Líneas.\n\t 2. Gráfica de Barras.\n\t 3. Gráfica de puntos.\n\t 4. Gráfico Circular.\n\t 5. Gráfico de Escaleras.\n\t 6. Gráfico de Dispersión. \n\t 7. Poligono de Frecuencia.\n\t 8. Histograma Único. \n\t 9. Histograma Mútiple. \n\t 10. Cajas y Bigotes. \n\t 10. Resumen.\n > '))
+    print("Los valores a seleccionar para los ejes son:\n")
+    print(list(df.columns))
     if tipoGrafica != 1:
-        elementoX = int(input('Indique el valor del eje X\n > '))
-        elementoY = int(input('Indique el valor del eje Y\n > '))
+        elementoX = int(input('\nIndique el valor numérico del eje X\n > '))
+        elementoY = int(input('Indique el valor numérico del eje Y\n > '))
     else:
         elementoX = input('Indique los valores del eje X a representar separados por comas.\n > ')
-    elementoAgrupar = input('Indique el elemento por el que desea agrupar. Si no desea agrupar clicke enter \n > ')
-    if elementoAgrupar:
+    if tipoGrafica != 10:
+        elementoAgrupar = input('Indique el elemento por el que desea agrupar. Si no desea agrupar clicke enter \n > ')
+    else:
+        elementoAgrupar = "\n"
+    if elementoAgrupar and tipoGrafica != 10:
         tipoRepresentacion = int(input('En caso de colisión de datos similares al agrupar ¿Que desea hacer?:\n\t 1. Suma. \n\t 2. Máximo. \n\t 3. Mínimo. \n\t 4. Ninguno. \n  > '))
     else:
         tipoRepresentacion = 4
@@ -39,26 +62,6 @@ else:
     elementoFiltrar = int(sys.argv[8])
     elementoRepresentar = sys.argv[9]
     nombreFichero = sys.argv[10]
-
-#Cargamos los datos de un fichero csv
-file = sys.argv[1] 
-fichero = os.path.splitext(file)
-fichero = fichero[0] + ".csv"
-
-if file.endswith('.csv'):
-    fileSelected = sf.Csv(file, fichero)
-    df = fileSelected.collect()
-elif file.endswith('.json'):
-    fileSelected= sf.Json(file, fichero)
-    df = fileSelected.collect()
-elif file.endswith('.xlsx'):
-    fileSelected= sf.Xlsx(file, fichero)
-    df = fileSelected.collect()
-else:
-    print("Formato no soportado")
-    sys.exit()
-
-print(df)
 
 if tipoGrafica != 1:
     nombreElementoX = df.columns[elementoX]
@@ -108,6 +111,15 @@ elif tipoGrafica == 6:
 elif tipoGrafica == 7:
     graficaFinal= st.PoligonoFrecuencia(X,Y,nombreElementoX,nombreElementoY,nombreFichero)
     graficaFinal.grafica()
+elif tipoGrafica == 8:
+    graficaFinal= st.HistogramaUnico(X,Y,nombreElementoX,nombreElementoY,nombreFichero)
+    graficaFinal.grafica(df)
+elif tipoGrafica == 9:
+    graficaFinal= st.HistogramaMultiple(X,Y,nombreElementoX,nombreElementoY,nombreFichero)
+    graficaFinal.grafica(df)
+elif tipoGrafica == 10:
+    graficaFinal= st.Cajas(X,Y,nombreElementoX,nombreElementoY,nombreFichero)
+    graficaFinal.grafica(df)
 else:
     graficaFinal= st.Resumen(X,Y,nombreElementoX,nombreElementoY,nombreFichero)
     graficaFinal.grafica()

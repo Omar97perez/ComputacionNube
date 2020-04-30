@@ -91,6 +91,58 @@ class PoligonoFrecuencia(Grafica):
     else:
       plt.show()
 
+class HistogramaUnico(Grafica):
+  def grafica(self, df):
+    fig = plt.figure()
+    fig.suptitle('Histograma Unico')
+    plt.ylabel(self.nombreElementoY)
+    plt.hist(self.Y, density=True, bins=30, alpha=1, edgecolor = 'black',  linewidth=1)  
+    if self.nombreFichero:
+      plt.savefig(self.nombreFichero)
+    else:
+      plt.show()
+
+class HistogramaMultiple(Grafica):
+  def grafica(self, df):
+    fig = plt.figure()
+    fig.suptitle('Histograma')
+    plt.xlabel(self.nombreElementoX)
+    plt.ylabel(self.nombreElementoY)
+    listFinal = list()
+    listProvisional = list()
+    elements = dict.fromkeys(self.X).keys()
+    for element in elements:
+      listProvisional.append(element)
+      elementosEjeX = df[self.nombreElementoX].isin(listProvisional)
+      listFinal.append(df[elementosEjeX].loc[:,self.nombreElementoY])
+      listProvisional = list()
+    plt.hist(listFinal, density=True, bins=30, label=elements)  
+    plt.legend()
+    if self.nombreFichero:
+      plt.savefig(self.nombreFichero)
+    else:
+      plt.show()
+
+class Cajas(Grafica):
+  def grafica(self, df):
+    fig = plt.figure()
+    fig.suptitle('Cajas y Bigotes')
+    plt.xlabel(self.nombreElementoX)
+    plt.ylabel(self.nombreElementoY)
+    listFinal = list()
+    listProvisional = list()
+    elements = dict.fromkeys(self.X).keys()
+    for element in elements:
+      listProvisional.append(element)
+      elementosEjeX = df[self.nombreElementoX].isin(listProvisional)
+      listFinal.append(df[elementosEjeX].loc[:,self.nombreElementoY])
+      listProvisional = list()
+    plt.boxplot(listFinal, notch=True, sym="o", labels=elements)
+    if self.nombreFichero:
+      plt.savefig(self.nombreFichero)
+    else:
+      plt.show()
+
 class Resumen(Grafica):
   def grafica(self):
     plt.figure(figsize=(9, 3))

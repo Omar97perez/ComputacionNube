@@ -18,6 +18,7 @@
                   <input type="file" id="fileExecuteMethod">
               </div>
                   <div class="modal-footer">
+                  <button type="button" class="btn btn-dark" @click="DescargarFicheroPrueba()">Descargar Archivo Prueba</button>
                   <button type="button" class="btn btn-primary" data-dismiss="modal" @click="EjecutarAlgoritmo()">Enviar</button>
                   <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
               </div>
@@ -237,7 +238,7 @@ export default {
       document.getElementById('TitleMethod').innerHTML = this.Paginacion[position].Name;
       document.getElementById('ModalMetodo').innerHTML = "";
       for (var x=0;x<(Object.keys(this.Paginacion[position].Elements).length);x++) { 
-          document.getElementById('ModalMetodo').innerHTML += '<div class="mt-3 form-group" align="left"><label class="font-weight-bold" for="exampleInputEmail1">'+ this.Paginacion[position].Elements[x].Name + '</label><input type="text" name="' + this.Paginacion[position].Elements[x].Name + '" id="' + this.Paginacion[position].Elements[x].Name + '" class="form-control">    <small id="emailHelp" class="form-text text-muted">'+ this.Paginacion[position].Elements[x].Description +'</small></div>';
+          document.getElementById('ModalMetodo').innerHTML += '<div class="mt-3 form-group" align="left"><label class="font-weight-bold" for="exampleInputEmail1">'+ this.Paginacion[position].Elements[x].Name + '</label><input type="text" name="' + this.Paginacion[position].Elements[x].Name + '" id="' + this.Paginacion[position].Elements[x].Name + '" value="' + this.Paginacion[position].Elements[x].value + '" class="form-control">    <small id="emailHelp" class="form-text text-muted">'+ this.Paginacion[position].Elements[x].Description +'</small></div>';
       }
     },
     Endrefresh()
@@ -294,6 +295,14 @@ export default {
         link.href = nameHC.src;
         link.click();
     },
+    DescargarFicheroPrueba() 
+    {
+      var link = document.createElement("a");
+      var position = this.Paginacion.findIndex(method => method.Name === this.titleMethod);
+      link.download = this.Paginacion[position].file;
+      link.href = "/api/Get/file/" + this.Paginacion[position].file;
+      link.click();
+    }
   },
 };
 </script>
