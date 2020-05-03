@@ -1,6 +1,7 @@
 #-*- coding: utf-8-*-
 import matplotlib.pyplot as plt
 import pandas as pd
+import seaborn as sns
 import sys
 import StrategyGraph as st
 import StrategyFile as sf
@@ -30,7 +31,7 @@ else:
 
 if(pedirParametros == 1):
     # Pedimos los parámetros que nos van a hacer falta
-    tipoGrafica = int(input('Indique que gráfica desea ver:\n\t 1. Gráfica de Líneas.\n\t 2. Gráfica de Barras.\n\t 3. Gráfica de puntos.\n\t 4. Gráfico Circular.\n\t 5. Gráfico de Escaleras.\n\t 6. Gráfico de Dispersión. \n\t 7. Poligono de Frecuencia.\n\t 8. Histograma Único. \n\t 9. Histograma Mútiple. \n\t 10. Cajas y Bigotes. \n\t 10. Resumen.\n > '))
+    tipoGrafica = int(input('Indique que gráfica desea ver:\n\t 1. Gráfica de Líneas.\n\t 2. Gráfica de Barras.\n\t 3. Gráfica de puntos.\n\t 4. Gráfico Circular.\n\t 5. Gráfico de Escaleras.\n\t 6. Gráfico de Dispersión. \n\t 7. Poligono de Frecuencia.\n\t 8. Histograma Único. \n\t 9. Histograma Mútiple.  \n\t 10. Histograma (Seaborn). \n\t 11. Cajas y Bigotes (Matplotlin). \n\t 12. Cajas y Bigotes (Seaborn). \n\t 13. Violín. \n\t 14. Resumen.\n > '))
     print("Los valores a seleccionar para los ejes son:\n")
     print(list(df.columns))
     if tipoGrafica != 1:
@@ -118,7 +119,16 @@ elif tipoGrafica == 9:
     graficaFinal= st.HistogramaMultiple(X,Y,nombreElementoX,nombreElementoY,nombreFichero)
     graficaFinal.grafica(df)
 elif tipoGrafica == 10:
+    graficaFinal= st.HistogramaSeaborn(X,Y,nombreElementoX,nombreElementoY,nombreFichero)
+    graficaFinal.grafica(df)
+elif tipoGrafica == 11:
     graficaFinal= st.Cajas(X,Y,nombreElementoX,nombreElementoY,nombreFichero)
+    graficaFinal.grafica(df)
+elif tipoGrafica == 12:
+    graficaFinal= st.CajasSeaborn(X,Y,nombreElementoX,nombreElementoY,nombreFichero)
+    graficaFinal.grafica(df)
+elif tipoGrafica == 13:
+    graficaFinal= st.ViolinSeaborn(X,Y,nombreElementoX,nombreElementoY,nombreFichero)
     graficaFinal.grafica(df)
 else:
     graficaFinal= st.Resumen(X,Y,nombreElementoX,nombreElementoY,nombreFichero)

@@ -1,6 +1,8 @@
 #-*- coding: utf-8-*-
 import matplotlib.pyplot as plt
 import numpy as np
+import seaborn as sns
+
 
 class Grafica:
     def __init__(self,X, Y, nombreElementoX, nombreElementoY, nombreFichero):
@@ -138,6 +140,36 @@ class Cajas(Grafica):
       listFinal.append(df[elementosEjeX].loc[:,self.nombreElementoY])
       listProvisional = list()
     plt.boxplot(listFinal, notch=True, sym="o", labels=elements)
+    if self.nombreFichero:
+      plt.savefig(self.nombreFichero)
+    else:
+      plt.show()
+    
+class HistogramaSeaborn(Grafica):
+  def grafica(self, df):
+    sns.set()
+    fig = plt.figure()
+    fig.suptitle('Histograma')
+    x = np.random.randn(100)
+    sns.distplot(df.loc[:,self.nombreElementoY])
+    if self.nombreFichero:
+      plt.savefig(self.nombreFichero)
+    else:
+      plt.show()
+
+class CajasSeaborn(Grafica):
+  def grafica(self, df):
+    sns.catplot(x = self.nombreElementoX, y = self.nombreElementoY, data=df, kind = "box").set(title = 'Diagrama de Cajas y Bigotes (Seaborn)')
+    if self.nombreFichero:
+      plt.savefig(self.nombreFichero)
+    else:
+      plt.show()
+
+class ViolinSeaborn(Grafica):
+  def grafica(self, df):
+    fig = plt.figure()
+    fig.suptitle('Gráfica de Violín')
+    sns.violinplot(x = self.nombreElementoX, y = self.nombreElementoY, data=df)
     if self.nombreFichero:
       plt.savefig(self.nombreFichero)
     else:
