@@ -154,6 +154,7 @@
   </div>
 </template>
 
+
 <script>
 import axios from 'axios';
 class Buscador {
@@ -238,7 +239,7 @@ export default {
       document.getElementById('TitleMethod').innerHTML = this.Paginacion[position].Name;
       document.getElementById('ModalMetodo').innerHTML = "";
       for (var x=0;x<(Object.keys(this.Paginacion[position].Elements).length);x++) { 
-          document.getElementById('ModalMetodo').innerHTML += '<div class="mt-3 form-group" align="left"><label class="font-weight-bold" for="exampleInputEmail1">'+ this.Paginacion[position].Elements[x].Name + '</label><input type="text" name="' + this.Paginacion[position].Elements[x].Name + '" id="' + this.Paginacion[position].Elements[x].Name + '" value="' + this.Paginacion[position].Elements[x].value + '" class="form-control">    <small id="emailHelp" class="form-text text-muted">'+ this.Paginacion[position].Elements[x].Description +'</small></div>';
+          document.getElementById('ModalMetodo').innerHTML += '<div class="mt-3 form-group" align="left"><label class="font-weight-bold" for="exampleInputEmail1">'+ this.Paginacion[position].Elements[x].Name + "2" + '</label><div class="input-group mb-3"><input type="text" name="' + this.Paginacion[position].Elements[x].Name + '" id="' + this.Paginacion[position].Elements[x].Name + "2" + '" value="' + this.Paginacion[position].Elements[x].value + '" class="form-control"> <div class="input-group-append"><button class="btn btn-outline-primary" type="button" data-toggle="collapse" href="#'+ this.Paginacion[position].Elements[x].Name +'" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-question-circle" aria-hidden="true"></i></button></div></div><small id="emailHelp" class="form-text text-muted">'+ this.Paginacion[position].Elements[x].DescriptionShort +'</small></div> <div class="collapse" id="' + this.Paginacion[position].Elements[x].Name +'"><div class="card card-body">'+ this.Paginacion[position].Elements[x].DescriptionLong +'</div></div>';
       }
     },
     Endrefresh()
@@ -254,7 +255,7 @@ export default {
           if(x != 0){
               elements +=  "-";
           }
-          elements += document.getElementById(this.Paginacion[position].Elements[x]["Name"]).value;
+          elements += document.getElementById(this.Paginacion[position].Elements[x]["Name"] + "2").value;
       }
 
       var urlPostMetodo = "";

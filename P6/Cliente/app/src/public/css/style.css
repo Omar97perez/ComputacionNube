@@ -2073,12 +2073,12 @@ footer .credits {
   padding: 2rem 0 3rem;
 }
 
-.card {
+/* .card {
     border: 1px solid #333;
     height: 25rem;
     width: 25rem;
     position: relative;
-}
+} */
 
 .card-Foto {
     border: 1px solid #333;
@@ -2128,4 +2128,9 @@ footer .credits {
   z-index: 9999;
   background: url('https://datacentersupport.lenovo.com/esv4/images/loading.gif') 50% 50% no-repeat rgb(249, 249, 249);
   opacity: .8;
+}
+
+.select-1{
+    width: 100px;
+    text-overflow: ellipsis;
 }
