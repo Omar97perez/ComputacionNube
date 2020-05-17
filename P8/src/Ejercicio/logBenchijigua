@@ -1,0 +1,21 @@
+/opt/spark/python/lib/pyspark.zip/pyspark/context.py:219: DeprecationWarning: Support for Python 2 and Python 3 prior to version 3.6 is deprecated as of Spark 3.0. See also the plan for dropping Python 2 support at https://spark.apache.org/news/plan-for-dropping-python-2-support.html.
+  DeprecationWarning)
+-------------------------------------------
+Time: 2020-05-18 00:56:00
+-------------------------------------------
+
+-------------------------------------------
+Time: 2020-05-18 00:56:05
+-------------------------------------------
+
+Traceback (most recent call last):
+  File "/home/omar/Escritorio/CN/ComputacionNube/P8/src/Ejercicio/Benchijigua.py", line 16, in <module>
+    ssc.awaitTermination()  
+  File "/opt/spark/python/lib/pyspark.zip/pyspark/streaming/context.py", line 189, in awaitTermination
+  File "/opt/spark/python/lib/py4j-0.10.8.1-src.zip/py4j/java_gateway.py", line 1284, in __call__
+  File "/opt/spark/python/lib/py4j-0.10.8.1-src.zip/py4j/java_gateway.py", line 1014, in send_command
+  File "/opt/spark/python/lib/py4j-0.10.8.1-src.zip/py4j/java_gateway.py", line 1181, in send_command
+  File "/usr/lib/python2.7/socket.py", line 451, in readline
+    data = self._sock.recv(self._rbufsize)
+  File "/opt/spark/python/lib/pyspark.zip/pyspark/context.py", line 273, in signal_handler
+KeyboardInterrupt
