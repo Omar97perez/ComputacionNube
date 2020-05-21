@@ -1,0 +1,25 @@
+{
+  "Name":"MachineLearning",
+  "file": "natalidad.geojson",
+  "Description": "Método que permite aplicar funciones de Machine Learning determinadas.",
+  "Elements": [
+	{
+		"Name":"tipoGrafica",
+		"value":"2",
+		"DescriptionShort":"Campo que nos permite elegir la gráfica deseada.",
+		"DescriptionLong":"Valores entre 1-3 ()."
+	},
+	{
+		"Name":"columnaSeleccionadaInicial",
+		"value":"4",
+		"DescriptionShort":"Campo que nos permite elegir la columna inicial deseada.",
+		"DescriptionLong":"Valor númerico empezando por 0 de la columna desea para nuestra representación gráfica."
+	},
+	{
+		"Name":"columnaSeleccionada",
+		"value":"6",
+		"DescriptionShort":"Campo que nos permite elegir la columna final deseada.",
+		"DescriptionLong":"Valor númerico empezando por 0 de la columna desea para nuestra representación gráfica."
+	},
+   ]
+}
