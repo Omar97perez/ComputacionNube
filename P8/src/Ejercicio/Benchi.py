@@ -1,7 +1,6 @@
 from pyspark import SparkContext
 from pyspark.streaming import StreamingContext
 
-
 def functionToCreateContext():
     sc = SparkContext("local[2]", "Boats")
     ssc = StreamingContext(sc, 5)

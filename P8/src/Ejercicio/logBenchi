@@ -1,27 +1,48 @@
 /opt/spark/python/lib/pyspark.zip/pyspark/context.py:219: DeprecationWarning: Support for Python 2 and Python 3 prior to version 3.6 is deprecated as of Spark 3.0. See also the plan for dropping Python 2 support at https://spark.apache.org/news/plan-for-dropping-python-2-support.html.
   DeprecationWarning)
 -------------------------------------------
-Time: 2020-05-18 00:57:15
+Time: 2020-05-18 02:23:15
 -------------------------------------------
 
 -------------------------------------------
-Time: 2020-05-18 00:57:20
+Time: 2020-05-18 02:23:20
 -------------------------------------------
 
 -------------------------------------------
-Time: 2020-05-18 00:57:25
+Time: 2020-05-18 02:23:25
+-------------------------------------------
+{ "Temperatura_M1" : "39", "Temperatura_M2" : "37"}
+
+-------------------------------------------
+Time: 2020-05-18 02:23:30
 -------------------------------------------
 
 -------------------------------------------
-Time: 2020-05-18 00:57:30
+Time: 2020-05-18 02:23:35
 -------------------------------------------
 
 -------------------------------------------
-Time: 2020-05-18 00:57:35
+Time: 2020-05-18 02:23:40
 -------------------------------------------
+
+-------------------------------------------
+Time: 2020-05-18 02:23:45
+-------------------------------------------
+
+-------------------------------------------
+Time: 2020-05-18 02:23:50
+-------------------------------------------
+
+-------------------------------------------
+Time: 2020-05-18 02:23:55
+-------------------------------------------
+{ "Temperatura_M1" : "39", "Temperatura_M2" : "37"}
+{ "Temperatura_M1" : "39", "Temperatura_M2" : "37"}
+{ "Temperatura_M1" : "39", "Temperatura_M2" : "37"}
+{ "Temperatura_M1" : "39", "Temperatura_M2" : "37"}
 
 Traceback (most recent call last):
-  File "/home/omar/Escritorio/CN/ComputacionNube/P8/src/Ejercicio/Betancuria.py", line 16, in <module>
+  File "/home/omar/Escritorio/CN/ComputacionNube/P8/src/Ejercicio/Benchi.py", line 16, in <module>
     ssc.awaitTermination()  
   File "/opt/spark/python/lib/pyspark.zip/pyspark/streaming/context.py", line 189, in awaitTermination
   File "/opt/spark/python/lib/py4j-0.10.8.1-src.zip/py4j/java_gateway.py", line 1284, in __call__

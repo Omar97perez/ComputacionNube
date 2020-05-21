@@ -2,7 +2,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
-
+import geopandas as gpd
 
 class Grafica:
     def __init__(self,X, Y, nombreElementoX, nombreElementoY, nombreFichero):
@@ -170,6 +170,37 @@ class ViolinSeaborn(Grafica):
     fig = plt.figure()
     fig.suptitle('Gráfica de Violín')
     sns.violinplot(x = self.nombreElementoX, y = self.nombreElementoY, data=df)
+    if self.nombreFichero:
+      plt.savefig(self.nombreFichero)
+    else:
+      plt.show()
+  
+class GeographicMap(Grafica):
+  def grafica(self, map_data):
+
+    fig, ax = plt.subplots(1, 1, figsize=(10, 10))
+    
+    # Control del encuadre (área geográfica) del mapa
+    ax.axis([-20, 5, 26, 46])
+    
+    # Control del título y los ejes
+    ax.set_title('Mapas Geográficos', pad = 20, fontdict={'fontsize':20, 'color': '#4873ab'})
+    ax.set_xlabel('Longitud')
+    ax.set_ylabel('Latitud')
+    
+    # Añadir la leyenda separada del mapa
+    from mpl_toolkits.axes_grid1 import make_axes_locatable
+    divider = make_axes_locatable(ax)
+    cax = divider.append_axes("right", size="5%", pad=0.2)
+    
+    # Generar y cargar el mapa
+    map_data.plot(column=self.nombreElementoX, cmap='plasma', ax=ax,legend=True, cax=cax, zorder=5)
+    
+    # # Cargar un mapa base con contornos de países
+    oceanos = "../../Archivos/ne_50m_ocean.shp"
+    map_oceanos = gpd.read_file(oceanos)
+    map_oceanos.plot(ax=ax, color='#89c0e8', zorder=0)
+
     if self.nombreFichero:
       plt.savefig(self.nombreFichero)
     else:
