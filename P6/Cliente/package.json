@@ -35,7 +35,7 @@
     "firebase-tools": "^6.2.2",
     "jest": "^23.6.0",
     "jest-fetch-mock": "^2.1.0",
-    "jsonwebtoken": "^8.4.0",
+    "jsonwebtoken": "^9.0.0",
     "jwt-simple": "^0.5.5",
     "mocha": "^5.2.0",
     "moment": "^2.22.2",
